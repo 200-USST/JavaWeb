@@ -26,15 +26,6 @@ public class TestConn {
             System.out.println("fail");
         }
 
-        var bol = userDao.modify(user);
-        if (bol) {
-            System.out.println("success");
-        } else {
-            System.out.println("fail");
-        }
-
-
-
     }
 
 
