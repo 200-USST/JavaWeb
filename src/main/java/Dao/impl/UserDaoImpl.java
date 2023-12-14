@@ -83,7 +83,7 @@ public class UserDaoImpl implements UserDao {
         return true;
     }
 
-    private boolean isNameExist(String name) throws SQLException, ClassNotFoundException {
+    public boolean isNameExist(String name) throws SQLException, ClassNotFoundException {
         initConn();
 
         String sql;
@@ -95,7 +95,7 @@ public class UserDaoImpl implements UserDao {
         return result.next();
 
     }
-    private boolean isNameExist(Integer id, String name) throws SQLException, ClassNotFoundException {
+    public boolean isNameExist(Integer id, String name) throws SQLException, ClassNotFoundException {
         initConn();
 
         var sql = "select * from user where binary userName = ? and userID != ?";
