@@ -3,6 +3,7 @@ package servlet;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import pojo.User;
 
 import java.io.IOException;
 
