@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
         }
     }
     @Override
-    public boolean login(User user) throws SQLException, ClassNotFoundException {
+    public User login(User user) throws SQLException, ClassNotFoundException {
         initConn();
         var name = user.getUserName();
         var pass = user.getUserPassword();
@@ -32,7 +32,18 @@ public class UserDaoImpl implements UserDao {
         statement.setString(2, pass);
         var result = statement.executeQuery();
 
-        return result.next();
+        if (result.next()) {
+            return new User(
+                    result.getString(1),
+                    result.getString(2),
+                    result.getString(3),
+                    result.getString(4),
+                    result.getString(5),
+                    result.getString(6)
+            );
+        } else {
+            return null;
+        }
     }
 
     public boolean register(User user) throws SQLException, ClassNotFoundException {

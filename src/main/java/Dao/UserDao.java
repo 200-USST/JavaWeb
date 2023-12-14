@@ -7,7 +7,7 @@ import java.util.List;
 import pojo.User;
 
 public interface UserDao {
-    boolean login(User user) throws SQLException, ClassNotFoundException;
+    User login(User user) throws SQLException, ClassNotFoundException;
     boolean register(User user) throws SQLException, ClassNotFoundException;
 }
 
