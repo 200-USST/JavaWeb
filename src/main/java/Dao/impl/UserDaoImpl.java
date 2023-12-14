@@ -26,7 +26,7 @@ public class UserDaoImpl implements UserDao {
         var name = user.getUserName();
         var pass = user.getUserPassword();
 
-        var sql = "select * from user where userName = ? and userPassword = ?";
+        var sql = "select * from user where binary userName = ? and binary userPassword = ?";
         var statement = connection.prepareStatement(sql);
         statement.setString(1, name);
         statement.setString(2, pass);
@@ -45,6 +45,7 @@ public class UserDaoImpl implements UserDao {
             return null;
         }
     }
+    // 改了吗
 
     public boolean register(User user) throws SQLException, ClassNotFoundException {
         initConn();
