@@ -48,9 +48,7 @@ public class UserDaoImpl implements UserDao {
     }
     // 改了吗
 
-    public boolean register(User user) throws SQLException, ClassNotFoundException {
-        if (isNameExist(user.getUserName())) return false;
-
+    public void register(User user) throws SQLException, ClassNotFoundException {
         initConn();
 
         var sql1 = "insert into user (userName, userPassword, userIdentity, userGender, userAge) values (?, ?, ?, ?, ?)";
@@ -61,13 +59,9 @@ public class UserDaoImpl implements UserDao {
         statement1.setString(4, user.getUserGender());
         statement1.setString(5, user.getUserAge());
         statement1.executeUpdate();
-
-        return true;
     }
 
-    public boolean modify(User user) throws SQLException, ClassNotFoundException {
-        if (isNameExist(user.getId(), user.getUserName())) return false;
-
+    public void modify(User user) throws SQLException, ClassNotFoundException {
         initConn();
 
         var sql = "update user set userName = ?, userPassword = ?, userIdentity = ?, userGender = ?, userAge = ? where userID = ?";
@@ -79,8 +73,6 @@ public class UserDaoImpl implements UserDao {
         statement.setString(5, user.getUserAge());
         statement.setInt(6, user.getId());
         statement.executeUpdate();
-
-        return true;
     }
 
     public boolean isNameExist(String name) throws SQLException, ClassNotFoundException {
