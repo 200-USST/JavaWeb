@@ -15,11 +15,13 @@ public class TestConn {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        var user = new User(null, "rlagofla", "12345", "student", "male", "18");
+        var user = new User(null, "admin", "123456", "root", "male", "18");
 
         userDao = new UserDaoImpl();
-        if(userDao.login(user)) {
+        var us = userDao.login(user);
+        if(us != null) {
             System.out.println("success");
+            System.out.println(us.getId());
         } else {
             System.out.println("fail");
         }
