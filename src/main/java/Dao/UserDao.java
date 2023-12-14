@@ -9,6 +9,7 @@ import pojo.User;
 public interface UserDao {
     User login(User user) throws SQLException, ClassNotFoundException;
     boolean register(User user) throws SQLException, ClassNotFoundException;
+    boolean modify(User user) throws SQLException, ClassNotFoundException;
 }
 
 
