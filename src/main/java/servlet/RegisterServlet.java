@@ -8,8 +8,12 @@ import java.io.IOException;
 
 @WebServlet(name = "registerServlet", value = "/register.do")
 public class RegisterServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("userPassword");
+        String passwordRe = request.getParameter("userPasswordRepeat");
 
     }
 

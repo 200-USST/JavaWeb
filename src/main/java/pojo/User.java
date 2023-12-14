@@ -3,7 +3,7 @@ package pojo;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private String id;
+    private Integer id;
     private String userName;
     private String userPassword;
     private String userIdentity;
@@ -13,7 +13,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String id, String userName, String userPassword, String userIdentity, String userGender, String userAge) {
+    public User(Integer id, String userName, String userPassword, String userIdentity, String userGender, String userAge) {
         this.id = id;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -22,11 +22,11 @@ public class User implements Serializable {
         this.userAge = userAge;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

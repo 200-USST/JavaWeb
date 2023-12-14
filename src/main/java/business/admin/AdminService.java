@@ -1,5 +1,7 @@
 package business.admin;
 
-public interface AdminService {
+import pojo.User;
 
+public interface AdminService {
+    String distributeCanteenAdmin(User user);
 }

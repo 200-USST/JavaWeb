@@ -20,7 +20,13 @@ public class SharedServiceImpl implements SharedService{
     }
 
     @Override
-    public Boolean modifyPassword(String oldPsw, String newPsw) {
-        return null;
+    public String modifyPassword(User user, String oldPsw, String newPsw, String newPswRe) {
+        if(!user.getUserPassword().equals(oldPsw)){
+            return "修改失败,旧密码输入错误！";
+        }
+        else if(!newPsw.equals(newPswRe)){
+            return "修改失败,两次新密码输入不一致！";
+        }
+        return "adad";
     }
 }

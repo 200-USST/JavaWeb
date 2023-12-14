@@ -8,10 +8,10 @@
 <body>
 <div id="login-box">
     <h1>新用户注册</h1>
-    <form action="${pageContext.request.contextPath}/" method="post" >
-        <input type="text" id="username" name="username" placeholder="请输入注册账号" required>
-        <input type="password" id="password1" name="password" placeholder="请输入注册密码" required>
-        <input type="password" id="password2" name="passwordRepeat" placeholder="请再次输入注册密码" required>
+    <form action="${pageContext.request.contextPath}/register.do" method="get" >
+        <input type="text" id="username" name="userName" placeholder="请输入注册账号" required>
+        <input type="password" id="password1" name="userPassword" placeholder="请输入注册密码" required>
+        <input type="password" id="password2" name="userPasswordRepeat" placeholder="请再次输入注册密码" required>
 
         <input type="submit" id="registerbutton" value="确认">
     </form>
