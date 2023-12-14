@@ -83,23 +83,27 @@ public class UserDaoImpl implements UserDao {
         return true;
     }
 
-    private boolean isNameExist(Integer id, String name) throws SQLException, ClassNotFoundException {
+    private boolean isNameExist(String name) throws SQLException, ClassNotFoundException {
         initConn();
 
         String sql;
-        if (id == null) {
-            sql = "select * from user where binary userName = ?";
-            var statement = connection.prepareStatement(sql);
-            statement.setString(1, name);
-            var result = statement.executeQuery();
-            return result.next();
-        } else {
-            sql = "select * from user where binary userName = ? and userID != ?";
-            var statement = connection.prepareStatement(sql);
-            statement.setString(1, name);
-            statement.setInt(2, id);
-            var result = statement.executeQuery();
-            return result.next();
-        }
+        sql = "select * from user where binary userName = ?";
+        var statement = connection.prepareStatement(sql);
+        statement.setString(1, name);
+        var result = statement.executeQuery();
+
+        return result.next();
+
+    }
+    private boolean isNameExist(Integer id, String name) throws SQLException, ClassNotFoundException {
+        initConn();
+
+        var sql = "select * from user where binary userName = ? and userID != ?";
+        var statement = connection.prepareStatement(sql);
+        statement.setString(1, name);
+        statement.setInt(2, id);
+        var result = statement.executeQuery();
+
+        return result.next();
     }
 }
