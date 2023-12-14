@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao {
     // 改了吗
 
     public boolean register(User user) throws SQLException, ClassNotFoundException {
-        if (isNameExist(null, user.getUserName())) return false;
+        if (isNameExist(user.getUserName())) return false;
 
         initConn();
 
