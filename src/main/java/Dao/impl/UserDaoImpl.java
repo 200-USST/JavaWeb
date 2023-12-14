@@ -48,14 +48,9 @@ public class UserDaoImpl implements UserDao {
     // 改了吗
 
     public boolean register(User user) throws SQLException, ClassNotFoundException {
-        initConn();
-        var name = user.getUserName();
+        if (isNameExist(user.getUserName())) return false;
 
-        var sql = "select * from user where userName = ?";
-        var statement = connection.prepareStatement(sql);
-        statement.setString(1, name);
-        var result = statement.executeQuery();
-        if (result.next()) return false;
+        initConn();
 
         var sql1 = "insert into user (userName, userPassword, userIdentity, userGender, userAge) values (?, ?, ?, ?, ?)";
         var statement1 = connection.prepareStatement(sql1);
@@ -67,5 +62,34 @@ public class UserDaoImpl implements UserDao {
         statement1.executeUpdate();
 
         return true;
+    }
+
+    public boolean modify(User user) throws SQLException, ClassNotFoundException {
+        if (isNameExist(user.getUserName())) return false;
+
+        initConn();
+
+        var sql = "update user userName = ?, userPassword = ?, userIdentity = ?, userGender = ?, userAge = ? where userID = ?";
+        var statement = connection.prepareStatement(sql);
+        statement.setString(1, user.getUserName());
+        statement.setString(2, user.getUserPassword());
+        statement.setString(3, user.getUserIdentity());
+        statement.setString(4, user.getUserGender());
+        statement.setString(5, user.getUserAge());
+        statement.setString(6, user.getId());
+        statement.executeUpdate();
+
+        return true;
+    }
+
+    private boolean isNameExist(String name) throws SQLException, ClassNotFoundException {
+        initConn();
+
+        var sql = "select * from user where binary userName = ?";
+        var statement = connection.prepareStatement(sql);
+        statement.setString(1, name);
+        var result = statement.executeQuery();
+
+        return result.next();
     }
 }

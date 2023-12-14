@@ -15,7 +15,7 @@ public class TestConn {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        var user = new User(null, "admin", "123456", "root", "male", "18");
+        var user = new User("1", "rlagofla", "123456", "student", "male", "18");
 
         userDao = new UserDaoImpl();
         var us = userDao.login(user);
@@ -26,11 +26,14 @@ public class TestConn {
             System.out.println("fail");
         }
 
-        if(userDao.register(user)) {
+        var bol = userDao.modify(user);
+        if (bol) {
             System.out.println("success");
         } else {
             System.out.println("fail");
         }
+
+
 
     }
 
