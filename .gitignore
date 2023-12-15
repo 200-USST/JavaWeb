@@ -1,4 +1,4 @@
-src/main/java/dao/TestConn.java
+src/main/java/test/
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
