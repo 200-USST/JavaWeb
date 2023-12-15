@@ -36,7 +36,6 @@ public class DatabaseHelper {
 
     public List<List<Object>> query(String sql, Object ... args) {
         try {
-            System.out.println("in");
             open();
 
             var stmt = conn.prepareStatement(sql);
@@ -61,7 +60,6 @@ public class DatabaseHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("here");
         return null;
     }
 
