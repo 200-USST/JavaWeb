@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService{
                     return Validator.isValidPassword(userPsw);
                 }
                 else {
-                    userDao.register(new User(null,userName,userPsw,null,null,null));
+                    userDao.register(new User(null,userName,userPsw,"user",null,null));
                     return new Info(true,"Register Successfully");
                 }
             }

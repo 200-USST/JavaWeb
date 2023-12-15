@@ -12,6 +12,7 @@ public interface UserDao {
     void modify(User user) throws SQLException, ClassNotFoundException;
     boolean isNameExist(String name) throws SQLException, ClassNotFoundException;
     boolean isNameExist(Integer id, String name) throws SQLException, ClassNotFoundException;
+    void addManagerToCanteen(String managerName,String canteenName);//添加管理员和食堂的关系
 }
 
 

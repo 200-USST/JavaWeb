@@ -98,4 +98,10 @@ public class UserDaoImpl implements UserDao {
 
         return result.next();
     }
+
+    @Override
+    public void addManagerToCanteen(String managerName, String canteenName) {
+
+    }
+
 }
