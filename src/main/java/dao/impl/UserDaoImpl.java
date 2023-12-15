@@ -1,7 +1,6 @@
 package dao.impl;
 
 import dao.UserDao;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import pojo.User;
 
 import java.sql.Connection;

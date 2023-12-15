@@ -1,4 +1,17 @@
 package dao.impl;
 
-public class CanteenDaoImpl {
+import dao.CanteenDao;
+import pojo.Canteen;
+import pojo.User;
+
+public class CanteenDaoImpl implements CanteenDao {
+    @Override
+    public Canteen newCanteen(Canteen canteen) {
+        return null;
+    }
+
+    @Override
+    public String findCanteenName(User user) {
+        return null;
+    }
 }
