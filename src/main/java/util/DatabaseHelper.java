@@ -12,9 +12,15 @@ public class DatabaseHelper {
     final static String USER_NAME = "root";
     final static String PASSWORD = "123456";
 
-    private void open() {
+    public DatabaseHelper() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void open() {
+        try {
             conn = DriverManager.getConnection("jdbc:mysql://" + HOST + "/" + DB_NAME, USER_NAME, PASSWORD);
         } catch (Exception e) {
             e.printStackTrace();
