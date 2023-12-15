@@ -12,8 +12,9 @@
         <input type="text" id="username" name="userName" placeholder="请输入注册账号" required>
         <input type="password" id="password1" name="userPassword" placeholder="请输入注册密码" required>
         <input type="password" id="password2" name="userPasswordRepeat" placeholder="请再次输入注册密码" required>
-
-        <input type="submit" id="registerbutton" value="确认">
+        <input type="hidden" name="type" value="user">
+        <input type="submit" value="确认">
+        <input type="reset" value="重置">
     </form>
     <p><a href="Login.jsp">返回</a></p>
 </div>
