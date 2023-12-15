@@ -2,8 +2,8 @@ package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper {
     private Connection conn = null;
@@ -12,41 +12,68 @@ public class DatabaseHelper {
     final static String USER_NAME = "root";
     final static String PASSWORD = "123456";
 
-    public DatabaseHelper() throws ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-    }
-    private void open() throws SQLException {
-        conn = DriverManager.getConnection("jdbc:mysql://" + HOST + "/" + DB_NAME, USER_NAME, PASSWORD);
-    }
-    private void close() throws SQLException {
-        conn.close();
-    }
-
-    public ResultSet query(String sql, Object ... args) throws SQLException {
-        open();
-
-        var stmt = conn.prepareStatement(sql);
-        for (int i = 0; i < args.length; ++i) {
-            stmt.setObject(i+1, args[i]);
+    private void open() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://" + HOST + "/" + DB_NAME, USER_NAME, PASSWORD);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        var result = stmt.executeQuery();
-
-        close();
-        return result;
+    }
+    private void close() {
+        try {
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void update(String sql, Object ... args) throws SQLException {
-        open();
+    public List<List<Object>> query(String sql, Object ... args) {
+        try {
+            System.out.println("in");
+            open();
 
-        var stmt = conn.prepareStatement(sql);
-        for (int i = 0; i < args.length; ++i) {
-            stmt.setObject(i+1, args[i]);
+            var stmt = conn.prepareStatement(sql);
+            for (int i = 0; i < args.length; ++i) {
+                stmt.setObject(i + 1, args[i]);
+            }
+
+            var res = stmt.executeQuery();
+            var meta = res.getMetaData();
+
+            List<List<Object>> result = new ArrayList<>();
+            while (res.next()) {
+                List<Object> row = new ArrayList<>();
+                for (int i = 1; i <= meta.getColumnCount(); ++i) {
+                    row.add(res.getObject(i));
+                }
+                result.add(row);
+            }
+
+            close();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        System.out.println("here");
+        return null;
+    }
 
-        stmt.executeUpdate();
+    public void update(String sql, Object ... args) {
+        try {
+            open();
 
-        close();
+            var stmt = conn.prepareStatement(sql);
+            for (int i = 0; i < args.length; ++i) {
+                stmt.setObject(i + 1, args[i]);
+            }
+
+            stmt.executeUpdate();
+
+            close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

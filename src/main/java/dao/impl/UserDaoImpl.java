@@ -2,44 +2,26 @@ package dao.impl;
 
 import dao.UserDao;
 import pojo.User;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import util.DatabaseHelper;
 
 public class UserDaoImpl implements UserDao {
-    private Connection connection = null;
-    final static String HOST = "10.100.164.43";
-    final static String DB_NAME = "JavaWeb";
-    final static String USER_NAME = "root";
-    final static String PASSWORD = "123456";
-
-    private void initConn() throws ClassNotFoundException, SQLException {
-        if (connection == null) {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://" + HOST + "/" + DB_NAME, USER_NAME, PASSWORD);
-        }
-    }
+    private final DatabaseHelper DbHelper = new DatabaseHelper();
     @Override
-    public User login(User user) throws SQLException, ClassNotFoundException {
-        initConn();
-        var name = user.getUserName();
-        var pass = user.getUserPassword();
+    public User login(User user) {
+        var result = DbHelper.query(
+                "select * from user where binary userName = ? and binary userPassword = ?",
+                user.getUserName(),
+                user.getUserPassword()
+        );
 
-        var sql = "select * from user where binary userName = ? and binary userPassword = ?";
-        var statement = connection.prepareStatement(sql);
-        statement.setString(1, name);
-        statement.setString(2, pass);
-        var result = statement.executeQuery();
-
-        if (result.next()) {
+        if (!result.isEmpty()) {
             return new User(
-                    result.getInt(1),
-                    result.getString(2),
-                    result.getString(3),
-                    result.getString(4),
-                    result.getString(5),
-                    result.getString(6)
+                    (Integer) result.get(0).get(0),
+                    (String) result.get(0).get(1),
+                    (String) result.get(0).get(2),
+                    (String) result.get(0).get(3),
+                    (String) result.get(0).get(4),
+                    (String) result.get(0).get(5)
             );
         } else {
             return null;
@@ -47,65 +29,52 @@ public class UserDaoImpl implements UserDao {
     }
     // 改了吗
 
-    public void register(User user) throws SQLException, ClassNotFoundException {
-        initConn();
-
-        var sql = "insert into user (userName, userPassword, userIdentity, userGender, userAge) values (?, ?, ?, ?, ?)";
-        var statement = connection.prepareStatement(sql);
-        statement.setString(1, user.getUserName());
-        statement.setString(2, user.getUserPassword());
-        statement.setString(3, user.getUserIdentity());
-        statement.setString(4, user.getUserGender());
-        statement.setString(5, user.getUserAge());
-        statement.executeUpdate();
+    public void register(User user) {
+        DbHelper.update(
+                "insert into user (userName, userPassword, userIdentity, userGender, userAge) values (?, ?, ?, ?, ?)",
+                user.getUserName(),
+                user.getUserPassword(),
+                user.getUserIdentity(),
+                user.getUserGender(),
+                user.getUserAge()
+        );
     }
 
-    public void modify(User user) throws SQLException, ClassNotFoundException {
-        initConn();
-
-        var sql = "update user set userName = ?, userPassword = ?, userIdentity = ?, userGender = ?, userAge = ? where userID = ?";
-        var statement = connection.prepareStatement(sql);
-        statement.setString(1, user.getUserName());
-        statement.setString(2, user.getUserPassword());
-        statement.setString(3, user.getUserIdentity());
-        statement.setString(4, user.getUserGender());
-        statement.setString(5, user.getUserAge());
-        statement.setInt(6, user.getId());
-        statement.executeUpdate();
+    public void modify(User user) {
+        DbHelper.update(
+                "update user set userName = ?, userPassword = ?, userIdentity = ?, userGender = ?, userAge = ? where userID = ?",
+                user.getUserName(),
+                user.getUserPassword(),
+                user.getUserIdentity(),
+                user.getUserGender(),
+                user.getUserAge(),
+                user.getId()
+        );
     }
 
-    public boolean isNameExist(String name) throws SQLException, ClassNotFoundException {
-        initConn();
+    public boolean isNameExist(String name) {
+        var result = DbHelper.query(
+                "select * from user where binary userName = ?",
+                name
+        );
 
-        String sql;
-        sql = "select * from user where binary userName = ?";
-        var statement = connection.prepareStatement(sql);
-        statement.setString(1, name);
-        var result = statement.executeQuery();
-
-        return result.next();
+        return !result.isEmpty();
 
     }
-    public boolean isNameExist(Integer id, String name) throws SQLException, ClassNotFoundException {
-        initConn();
+    public boolean isNameExist(Integer id, String name) {
+        var result = DbHelper.query(
+                "select * from user where binary userName = ? and userID != ?",
+                name, id
+        );
 
-        var sql = "select * from user where binary userName = ? and userID != ?";
-        var statement = connection.prepareStatement(sql);
-        statement.setString(1, name);
-        statement.setInt(2, id);
-        var result = statement.executeQuery();
-
-        return result.next();
+        return !result.isEmpty();
     }
 
     @Override
-    public void addManagerToCanteen(String managerName, String canteenName) throws SQLException, ClassNotFoundException {
-        initConn();
-
-        var sql = "insert into canteen_manager (canteenName, managerName) values (?, ?)";
-        var stmt = connection.prepareStatement(sql);
-        stmt.setString(1, canteenName);
-        stmt.setString(2, managerName);
-        stmt.executeUpdate();
+    public void addManagerToCanteen(String managerName, String canteenName) {
+        DbHelper.update(
+                "insert into canteen_manager (canteenName, managerName) values (?, ?)",
+                canteenName, managerName
+        );
     }
 }
