@@ -14,4 +14,9 @@ public class CanteenDaoImpl implements CanteenDao {
     public String findCanteenName(User user) {
         return null;
     }
+
+    @Override
+    public boolean isNameExist(String canteenName) {
+        return false;
+    }
 }

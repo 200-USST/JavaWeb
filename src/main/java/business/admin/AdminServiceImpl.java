@@ -1,8 +1,11 @@
 package business.admin;
 
 import business.util.Validator;
+import dao.CanteenDao;
 import dao.UserDao;
+import dao.impl.CanteenDaoImpl;
 import dao.impl.UserDaoImpl;
+import pojo.Canteen;
 import pojo.Info;
 import pojo.User;
 
@@ -10,6 +13,7 @@ import java.sql.SQLException;
 
 public class AdminServiceImpl implements AdminService{
     private UserDao userDao = new UserDaoImpl();
+    private CanteenDao canteenDao =new CanteenDaoImpl();
 
     @Override
     public Info distributeCanteenAdmin(String userName, String userPsw, String userPswRe,String canteenName) {
@@ -34,5 +38,16 @@ public class AdminServiceImpl implements AdminService{
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+    public Info newCanteen(String canteenName,String canteenLocation,String canteenAbstract){
+        if(canteenDao.isNameExist(canteenName)){
+            return new Info(false,"The canteen name already exists");
+        }
+        else if(!Validator.isValidCanteenName(canteenName).getFlag()) return Validator.isValidCanteenName(canteenName);
+        else {
+            canteenDao.newCanteen(new Canteen(null,canteenName,canteenLocation,canteenAbstract));
+            return new Info(true,"Found canteen successfully");
+        }
+
     }
 }

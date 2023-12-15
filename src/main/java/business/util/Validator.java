@@ -46,4 +46,15 @@ public class Validator {
             else return new Info(false,"The character class in the password does not meet the requirements");
         }
     }
+
+    public static Info isValidCanteenName(String canteenName) {
+
+        if (canteenName == null) {
+            return new Info(false,"The username is null");
+        }
+
+        int length = canteenName.length();
+        if(length >= 5 && length <= 12) return new Info(true,"Legal canteen name");
+        else return new Info(false,"The canteen name length does not meet the requirements");
+    }
 }
