@@ -101,7 +101,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addManagerToCanteen(String managerName, String canteenName) {
-
     }
 
 }
