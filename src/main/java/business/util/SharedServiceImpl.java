@@ -27,6 +27,6 @@ public class SharedServiceImpl implements SharedService{
         else if(!newPsw.equals(newPswRe)){
             return "修改失败,两次新密码输入不一致！";
         }
-        return "adad";
+        return "";
     }
 }

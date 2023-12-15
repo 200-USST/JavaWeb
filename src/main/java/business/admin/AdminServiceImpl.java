@@ -8,8 +8,9 @@ import java.sql.SQLException;
 
 public class AdminServiceImpl implements AdminService{
     private UserDao userDao = new UserDaoImpl();
-    @Override
-    public String distributeCanteenAdmin(String userName,String userPsw,String userPswRe) {
 
+    @Override
+    public String distributeCanteenAdmin(User user) {
+        return null;
     }
 }
