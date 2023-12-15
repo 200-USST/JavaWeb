@@ -5,6 +5,7 @@ import business.user.UserServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import pojo.Info;
 import pojo.User;
 
 import java.io.IOException;
@@ -17,9 +18,10 @@ public class RegisterServlet extends HttpServlet {
         String userName = request.getParameter("userName");
         String password = request.getParameter("userPassword");
         String passwordRe = request.getParameter("userPasswordRepeat");
-        System.out.println(userService.register(userName,password,passwordRe));
-    }
+        Info info = userService.register(userName,password,passwordRe);
+        System.out.println(info.getFlag()+" "+info.getDescription());
 
+    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
