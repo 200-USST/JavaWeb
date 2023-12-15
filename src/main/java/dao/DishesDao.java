@@ -8,5 +8,4 @@ import java.util.List;
 
 public interface DishesDao {
     List<Dish> selectCanteen(Integer canteenID) throws SQLException, ClassNotFoundException;
-    List<Dish> selectPrice(Double )
 }

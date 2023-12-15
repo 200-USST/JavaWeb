@@ -1,11 +1,9 @@
 package dao;
 
 import pojo.Canteen;
-
-import java.sql.SQLException;
-import java.util.List;
+import pojo.User;
 
 public interface CanteenDao {
-    List<Canteen> getAll() throws SQLException, ClassNotFoundException;
-
+    Canteen newCanteen(Canteen canteen);//创建新食堂，将新食堂信息填入到食堂数据库
+    String findCanteenName(User user);//根据管理者找到他所管理的食堂的名字
 }
