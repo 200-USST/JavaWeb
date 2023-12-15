@@ -51,14 +51,14 @@ public class UserDaoImpl implements UserDao {
     public void register(User user) throws SQLException, ClassNotFoundException {
         initConn();
 
-        var sql1 = "insert into user (userName, userPassword, userIdentity, userGender, userAge) values (?, ?, ?, ?, ?)";
-        var statement1 = connection.prepareStatement(sql1);
-        statement1.setString(1, user.getUserName());
-        statement1.setString(2, user.getUserPassword());
-        statement1.setString(3, user.getUserIdentity());
-        statement1.setString(4, user.getUserGender());
-        statement1.setString(5, user.getUserAge());
-        statement1.executeUpdate();
+        var sql = "insert into user (userName, userPassword, userIdentity, userGender, userAge) values (?, ?, ?, ?, ?)";
+        var statement = connection.prepareStatement(sql);
+        statement.setString(1, user.getUserName());
+        statement.setString(2, user.getUserPassword());
+        statement.setString(3, user.getUserIdentity());
+        statement.setString(4, user.getUserGender());
+        statement.setString(5, user.getUserAge());
+        statement.executeUpdate();
     }
 
     public void modify(User user) throws SQLException, ClassNotFoundException {
@@ -100,8 +100,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addManagerToCanteen(String managerName, String canteenName) {
+    public void addManagerToCanteen(String managerName, String canteenName) throws SQLException, ClassNotFoundException {
+        initConn();
 
+        var sql = "insert into canteen_manager (canteenName, managerName) values (?, ?)";
+        var stmt = connection.prepareStatement(sql);
+        stmt.setString(1, canteenName);
+        stmt.setString(2, managerName);
+        stmt.executeUpdate();
     }
-
 }
