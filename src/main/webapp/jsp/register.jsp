@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Register Page</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Register.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/register.css">
 </head>
 <body>
 <div id="login-box">
@@ -16,7 +16,7 @@
         <input type="submit" value="确认">
         <input type="reset" value="重置">
     </form>
-    <p><a href="Login.jsp">返回</a></p>
+    <p><a href="login.jsp">返回</a></p>
 </div>
 </body>
 </html>

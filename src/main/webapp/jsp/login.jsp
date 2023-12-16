@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Login Page</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/Login.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css">
 </head>
 <body>
 <div id="login-box">
@@ -17,7 +17,7 @@
 
         <input type="submit" id="loginbutton" value="登录">
     </form>
-    <p><a href="Register.jsp">新用户注册</a></p>
+    <p><a href="register.jsp">新用户注册</a></p>
 </div>
 </body>
 </html>
