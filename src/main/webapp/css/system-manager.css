@@ -12,7 +12,7 @@ body {
     height: 19.75%; /* 你想要的高度 */
     border: 2px solid rgb(128, 128, 128);
     background-color: #f2f2f2;
-    background-image: url('../Image/registerbackground.png'); /* 替换成你的背景图片路径 */
+    background-image: url('../img/registerbackground.png'); /* 替换成你的背景图片路径 */
     background-size: cover; /* 使背景图片覆盖整个屏幕 */
     background-position: center; /* 将背景图片居中 */
     background-repeat: no-repeat; /* 禁止背景图片重复 */
@@ -62,7 +62,7 @@ body {
     height: 80%;
     border: 2px solid rgb(128, 128, 128);
     background-color: #f2f2f2;
-    background-image: url('../Image/registerbackground.png'); /* 替换成你的背景图片路径 */
+    background-image: url('../img/registerbackground.png'); /* 替换成你的背景图片路径 */
     background-size: cover; /* 使背景图片覆盖整个屏幕 */
     background-position: center; /* 将背景图片居中 */
     background-repeat: no-repeat; /* 禁止背景图片重复 */
@@ -228,7 +228,7 @@ body {
     width: 90%;
     height: 80%;
     background-color: #f2f2f2;
-    background-image: url('../Image/registerbackground.png'); /* 替换成你的背景图片路径 */
+    background-image: url('../img/registerbackground.png'); /* 替换成你的背景图片路径 */
     background-size: cover; /* 使背景图片覆盖整个屏幕 */
     background-position: center; /* 将背景图片居中 */
     background-repeat: no-repeat; /* 禁止背景图片重复 */
@@ -289,7 +289,7 @@ body {
     text-align: center;
     border: 2px solid rgb(128, 128, 128);
     background-color: #f2f2f2;
-    background-image: url('../Image/registerbackground.png'); /* 替换成你的背景图片路径 */
+    background-image: url('../img/registerbackground.png'); /* 替换成你的背景图片路径 */
     background-size: cover; /* 使背景图片覆盖整个屏幕 */
     background-position: center; /* 将背景图片居中 */
     background-repeat: no-repeat; /* 禁止背景图片重复 */
