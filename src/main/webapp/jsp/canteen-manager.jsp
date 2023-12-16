@@ -3,14 +3,14 @@
 <html>
 <head>
     <title>SystemManagerPage</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/CanteenManager.css">
+    <link rel="stylesheet" type="text/css" href="../css/canteen-manager.css">
 
 </head>
 <body>
 <div id="top">
     <div id="middle-photo">
         <a>
-            <img src="../Image/admin-logo.png" alt="Welcome Image">
+            <img src="../img/admin-logo.png" alt="Welcome Image">
         </a>
         <p>欢迎您, ${username}</p>
     </div>
@@ -46,14 +46,14 @@
     <div class="tooltip" id="personalInformationdiv" style="display:none;">
         <div id="personalInformationdivfunc1">
             <a href="#" class="tooltip-link" id="searchinfo-link">
-                <img class="tooltip-func1" id="searchinfo-png" src="../Image/search.png" alt="Search Image">
+                <img class="tooltip-func1" id="searchinfo-png" src="../img/search.png" alt="Search Image">
             </a>
             <p class="tooltip-text">个人信息查询</p>
         </div>
 
         <div id="personalInformationdivfunc2">
             <a href="#" class="tooltip-link" id="modifyinfo-link">
-                <img class="tooltip-func1" id="modifyinfo-png" src="../Image/modifyinfo.png" alt="Modify Image">
+                <img class="tooltip-func1" id="modifyinfo-png" src="../img/modifyinfo.png" alt="Modify Image">
             </a>
             <p class="tooltip-text">个人信息修改</p>
         </div>
@@ -63,14 +63,14 @@
     <div class="tooltip" id="canteenManagediv" style="display:none;">
         <div id="canteenManagedivfunc1">
             <a href="#" class="tooltip-link" id="searchcanteen-link">
-                <img class="tooltip-func1" id="searchcanteen-png" src="../Image/search.png" alt="Search Image">
+                <img class="tooltip-func1" id="searchcanteen-png" src="../img/search.png" alt="Search Image">
             </a>
             <p class="tooltip-text">查询食堂信息</p>
         </div>
 
         <div id="canteenManagedivfunc2">
             <a href="#" class="tooltip-link" id="modifycanteen-link">
-                <img class="tooltip-func1" id="modifycanteen-png" src="../Image/modifyinfo.png" alt="Modify Image">
+                <img class="tooltip-func1" id="modifycanteen-png" src="../img/modifyinfo.png" alt="Modify Image">
             </a>
             <p class="tooltip-text">修改食堂信息</p>
         </div>
@@ -79,19 +79,19 @@
     <div class="tooltip" id="maintainDishdiv" style="display:none;">
         <div id="maintainDishdivfunc1">
             <a href="#" class="tooltip-link" id="adddish-link">
-                <img class="tooltip-func1" id="adddish-png" src="../Image/add.png" alt="Add Image">
+                <img class="tooltip-func1" id="adddish-png" src="../img/add.png" alt="Add Image">
             </a>
             <p class="tooltip-text">添加菜品</p>
         </div>
         <div id="maintainDishdivfunc2">
             <a href="#" class="tooltip-link" id="deletedish-link">
-                <img class="tooltip-func1" id="deletedish-png" src="../Image/delete.png" alt="Delete Image">
+                <img class="tooltip-func1" id="deletedish-png" src="${pageContext.request.contextPath}/img/delete.png" alt="Delete Image">
             </a>
             <p class="tooltip-text">删除菜品</p>
         </div>
         <div id="maintainDishdivfunc3">
             <a href="#" class="tooltip-link" id="modifydish-link">
-                <img class="tooltip-func1" id="modifydish-png" src="../Image/modifyinfo.png" alt="Modify Image">
+                <img class="tooltip-func1" id="modifydish-png" src="${pageContext.request.contextPath}/img/modifyinfo.png" alt="Modify Image">
             </a>
             <p class="tooltip-text">修改菜品</p>
         </div>
@@ -99,7 +99,7 @@
     <div class="tooltip" id="communityManagediv" style="display:none;">
         <div id="communityManagedivfunc1">
             <a href="#" class="tooltip-link" id="checkcomment-link">
-                <img class="tooltip-func1" id="checkcomment-png" src="../Image/search.png" alt="Check Image">
+                <img class="tooltip-func1" id="checkcomment-png" src="${pageContext.request.contextPath}/img/search.png" alt="Check Image">
             </a>
             <p class="tooltip-text">查看并回复评论</p>
         </div>
@@ -111,6 +111,6 @@
     <p>上海理工大学食堂交流评价社区</p>
 </div>
 
-<script src="../JS/CanteenManager.js"></script>
+<script src="${pageContext.request.contextPath}/js/canteen-manager.js"></script>
 </body>
 </html>
