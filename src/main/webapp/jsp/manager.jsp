@@ -112,5 +112,6 @@
 </div>
 
 <script src="${pageContext.request.contextPath}/js/manager.js"></script>
+
 </body>
 </html>
