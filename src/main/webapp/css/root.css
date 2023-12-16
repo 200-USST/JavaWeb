@@ -1,0 +1,297 @@
+body {
+    margin: 0;
+    padding: 0;
+    width:fit-content;
+    height: fit-content;
+
+}
+#top {
+    position: absolute; /* 设置为绝对定位 */
+    top: 0; /* 距离上边界的距离为 0 */
+    width: 100%; /* 宽度占满父容器（body） */
+    height: 19.75%; /* 你想要的高度 */
+    border: 2px solid rgb(128, 128, 128);
+    background-color: #f2f2f2;
+    background-image: url('../img/registerbackground.png'); /* 替换成你的背景图片路径 */
+    background-size: cover; /* 使背景图片覆盖整个屏幕 */
+    background-position: center; /* 将背景图片居中 */
+    background-repeat: no-repeat; /* 禁止背景图片重复 */
+}
+
+#middle-photo{
+    position: absolute;
+    top: 0;
+    left: 35%;
+    width: 30%;
+    height: 100%;
+    text-align: center;
+}
+
+#middle-photo img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+}
+
+
+#topbut{
+    position: absolute;
+    top:0;
+    right: 0;
+    width: 8%;
+    height: 16%;
+
+}
+
+#topbutton{
+    position: absolute;
+    top:0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#middle-left{
+    position: absolute;
+    left: 0;
+    top: 20%;
+    width: 9.75%;
+    height: 80%;
+    border: 2px solid rgb(128, 128, 128);
+    background-color: #f2f2f2;
+    background-image: url('../img/registerbackground.png'); /* 替换成你的背景图片路径 */
+    background-size: cover; /* 使背景图片覆盖整个屏幕 */
+    background-position: center; /* 将背景图片居中 */
+    background-repeat: no-repeat; /* 禁止背景图片重复 */
+}
+
+
+#function{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 15%;
+    top:0;
+
+}
+
+/*功能列表按钮的格式*/
+.funcbutt {
+    text-align: center;
+    text-size-adjust: auto;
+    background-color: #3498db; /* 设置按钮背景颜色 */
+    color: #fff; /* 设置按钮文字颜色 */
+    border: none; /* 移除按钮边框 */
+    cursor: pointer; /* 鼠标样式设置为手型 */
+    transition: background-color 0.3s; /* 添加过渡效果 */
+    /* 鼠标移动时的特效 */
+    &:hover {
+        background-color: #2980b9;
+    }
+}
+
+/*个人信息查询按键定义*/
+#personalInformation {
+    position: absolute;
+    top: 15%;
+    width: 100%;
+    height: 10%;
+
+}
+
+#personalInformationdivfunc1{
+    position: absolute;
+    top: 15%;
+    left: 0;
+    width: 30%;
+    height: 35%;
+    text-align: center;
+}
+
+#personalInformationdivfunc2{
+    position: absolute;
+    top: 15%;
+    left: 35%;
+    width: 30%;
+    height: 35%;
+    text-align: center;
+}
+
+/*食堂管理按键定义*/
+#canteenManage{
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    height: 10%;
+}
+
+#canteenManagedivfunc1{
+    position: absolute;
+    top: 15%;
+    left: 0;
+    width: 30%;
+    height: 35%;
+    text-align: center;
+}
+
+#canteenManagedivfunc2{
+    position: absolute;
+    top: 15%;
+    left: 35%;
+    width: 30%;
+    height: 35%;
+    text-align: center;
+}
+
+#canteenManagedivfunc3{
+    position: absolute;
+    top: 15%;
+    left: 70%;
+    width: 30%;
+    height: 35%;
+    text-align: center;
+}
+
+
+/*账户管理定义*/
+#accountManage{
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    height: 10%;
+}
+
+#accountManagedivfunc1{
+    position: absolute;
+    top: 15%;
+    left: 0;
+    width: 30%;
+    height: 35%;
+    text-align: center;
+}
+
+#accountManagedivfunc2{
+    position: absolute;
+    top: 15%;
+    left: 35%;
+    width: 30%;
+    height: 35%;
+    text-align: center;
+}
+
+#accountManagedivfunc3{
+    position: absolute;
+    top: 15%;
+    left: 70%;
+    width: 30%;
+    height: 35%;
+    text-align: center;
+}
+
+
+/*评价社区按键*/
+#communityManage{
+    position: absolute;
+    top: 45%;
+    width: 100%;
+    height: 10%;
+}
+
+#communityManagedivfunc1{
+    position: absolute;
+    top: 15%;
+    left: 0;
+    width: 30%;
+    height: 35%;
+    text-align: center;
+}
+
+
+#communityManagedivfunc2{
+    position: absolute;
+    top: 15%;
+    left: 35%;
+    width: 30%;
+    height: 35%;
+    text-align: center;
+}
+
+#middle-right{
+    position: absolute;
+    top: 20%;
+    right: 0;
+    width: 90%;
+    height: 80%;
+    background-color: #f2f2f2;
+    background-image: url('../img/registerbackground.png'); /* 替换成你的背景图片路径 */
+    background-size: cover; /* 使背景图片覆盖整个屏幕 */
+    background-position: center; /* 将背景图片居中 */
+    background-repeat: no-repeat; /* 禁止背景图片重复 */
+}
+
+/*这里是对于整个图片格式的定义*/
+.tooltip {
+    position: absolute;
+    background-color: #f9f9f9;
+    height: 100%;
+    width: 100%;
+}
+
+
+.tooltip-func1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    transition: transform 0.5s ease;
+}
+
+
+.tooltip-text {
+    text-align: center;
+    margin-top: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+.tooltip-func1:hover img {
+    transform: translateY(-15px); /* 图片在鼠标悬停时的动态效果 */
+}
+
+.tooltip-text {
+    text-align: center;
+    margin-top: 5px;
+    font-family: 'Helvetica Neue', sans-serif; /* 更改字体 */
+    font-size: 20px; /* 调整文字大小 */
+    color: #555; /* 调整文字颜色 */
+    transition: color 0.3s; /* 添加颜色渐变效果 */
+}
+
+.tooltip-func1:hover .tooltip-text {
+    color: #333; /* 鼠标悬停时的文字颜色 */
+}
+
+
+/*对于底部格式的定义*/
+#bottom{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 4.75%;
+    text-align: center;
+    border: 2px solid rgb(128, 128, 128);
+    background-color: #f2f2f2;
+    background-image: url('../img/registerbackground.png'); /* 替换成你的背景图片路径 */
+    background-size: cover; /* 使背景图片覆盖整个屏幕 */
+    background-position: center; /* 将背景图片居中 */
+    background-repeat: no-repeat; /* 禁止背景图片重复 */
+}
+

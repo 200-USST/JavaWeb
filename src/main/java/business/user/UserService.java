@@ -1,5 +1,7 @@
 package business.user;
 
+import pojo.Info;
+
 public interface UserService {
-    public String register(String userName,String userPsw,String userPswRe);
+    public Info register(String userName, String userPsw, String userPswRe);
 }

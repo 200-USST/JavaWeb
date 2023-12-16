@@ -8,6 +8,12 @@
 <h1><%= "Hello World 我修改了" %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+
+<p><a href="${pageContext.request.contextPath}/jsp/login.jsp">login.jsp</a></p>
+<p><a href="${pageContext.request.contextPath}/jsp/user.jsp">user.jsp</a></p>
+<p><a href="${pageContext.request.contextPath}/jsp/manager.jsp">manager.jsp</a></p>
+<p><a href="${pageContext.request.contextPath}/jsp/root.jsp">root.jsp</a></p>
+<p><a href="${pageContext.request.contextPath}/jsp/register.jsp">register.jsp</a></p>
+
 </body>
 </html>

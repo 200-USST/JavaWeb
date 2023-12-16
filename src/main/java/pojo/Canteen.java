@@ -3,12 +3,12 @@ package pojo;
 import java.io.Serializable;
 
 public class Canteen implements Serializable {
-    private String canteenId;
+    private Integer canteenId;
     private String canteenName;
     private String canteenLocation;
     private String canteenAbstract;
 
-    public Canteen(String canteenId, String canteenName, String canteenLocation, String canteenAbstract) {
+    public Canteen(Integer canteenId, String canteenName, String canteenLocation, String canteenAbstract) {
         this.canteenId = canteenId;
         this.canteenName = canteenName;
         this.canteenLocation = canteenLocation;
@@ -18,11 +18,11 @@ public class Canteen implements Serializable {
     public Canteen() {
     }
 
-    public String getCanteenId() {
+    public Integer getCanteenId() {
         return canteenId;
     }
 
-    public void setCanteenId(String canteenId) {
+    public void setCanteenId(Integer canteenId) {
         this.canteenId = canteenId;
     }
 
