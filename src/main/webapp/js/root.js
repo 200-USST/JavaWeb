@@ -51,3 +51,21 @@ function fadeIn(element, duration) {
 
     window.requestAnimationFrame(step);
 }
+
+
+
+//////////
+
+
+let tooltip_func = document.querySelectorAll(".tooltip-func1")
+tooltip_func.forEach((func) => {
+    func.addEventListener("click", () => {
+        let tooltips = document.querySelectorAll(".tooltip")
+        tooltips.forEach((e) => {
+            e.style.display = "none";
+        })
+        let new_id = func.id + "div"
+        let item = document.getElementById(new_id)
+        item.style.display = "block";
+    })
+})
