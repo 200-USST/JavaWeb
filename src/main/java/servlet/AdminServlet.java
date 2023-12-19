@@ -26,6 +26,7 @@ public class AdminServlet extends HttpServlet {
             Info info=adminService.newCanteen(canteenName,canteenLocation,canteenAbstract);
             request.getSession().setAttribute("info",info);
             System.out.println(info.getDescription());
+            request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
             response.sendRedirect("/200web/dashboard");
         }
     }

@@ -137,7 +137,7 @@
         <main id="personal-info-main">
             <h1>个人信息</h1>
             <div class="function">
-                <form action="${pageContext.request.contextPath}/modifyProfile" method="post" class="personal-info-profile">
+                <form action="${pageContext.request.contextPath}/modifyProfile?activeBar=personal-info" method="post" class="personal-info-profile">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -171,7 +171,7 @@
             <h2>修改密码</h2>
 
             <div class="function">
-                <form action="${pageContext.request.contextPath}/modifyPsw" method="post">
+                <form action="${pageContext.request.contextPath}/modifyPsw?activeBar=personal-info" method="post">
                     <div class="two-split">
                         <div class="split">
                             <p>
@@ -224,7 +224,7 @@
 
             <h2>添加食堂</h2>
             <div class="function">
-                <form action="${pageContext.request.contextPath}/adminServlet?addCanteen=true" method="post">
+                <form action="${pageContext.request.contextPath}/adminServlet?addCanteen=true&activeBar=canteen-info" method="post">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -356,6 +356,11 @@
 </div>
 
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
+
+<script>
+    active ( document.getElementById("${empty activeBar ? 'dashboard' : activeBar}") )
+</script>
+
 </body>
 
 </html>

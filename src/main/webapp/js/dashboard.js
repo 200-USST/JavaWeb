@@ -60,10 +60,6 @@ function active (a) {
     // main.style.display = "block"
     main.style.visibility = "visible"
     main.style.opacity = "1"
-
-    localStorage.setItem("last", a.id)
-    console.log(localStorage.getItem("last"));
-    console.log('1231');
 }
 
 item.forEach((a) => {
@@ -71,8 +67,6 @@ item.forEach((a) => {
         active(a)
     })
 })
-
-// 自动回到上一次打开的界面
 
 // personal-info
 // 设置可编辑
@@ -93,6 +87,7 @@ modify_butt.addEventListener("click", () => {
 submit_butt.addEventListener("click", (event) => {
     modify_butt.style.display = "inline"
     submit_butt.style.display = "none"
+
     all_input.forEach((e) => {
         e.setAttribute("readonly", true)
     })

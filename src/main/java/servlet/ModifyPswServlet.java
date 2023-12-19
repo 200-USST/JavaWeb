@@ -33,6 +33,7 @@ public class ModifyPswServlet extends HttpServlet {
         Info info=sharedService.modifyPassword(user,oldPsw,newPsw,newPswRepeat);
         request.getSession().setAttribute("user",user);
         request.getSession().setAttribute("info",info);
+        request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
         response.sendRedirect("/200web/dashboard");
     }
 }
