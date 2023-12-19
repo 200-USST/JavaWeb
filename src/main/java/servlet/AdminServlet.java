@@ -14,15 +14,19 @@ public class AdminServlet extends HttpServlet {
     AdminService adminService=new AdminServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getParameter("type").equals("newCanteen")){
-            String canteenName=request.getParameter("canteenName");
-            String canteenLocation=request.getParameter("canteenLocation");
-            String canteenAbstract=request.getParameter("canteenAbstract");
-            Info info=adminService.newCanteen(canteenName,canteenLocation,canteenAbstract);
-        }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getParameter("addCanteen")!=null){
+            String canteenName=request.getParameter("canteenName");
+            String canteenLocation=request.getParameter("canteenLocation");
+            String canteenAbstract=request.getParameter("canteenAbstract");
+            Info info=adminService.newCanteen(canteenName,canteenLocation,canteenAbstract);
+            request.getSession().setAttribute("info",info);
+            System.out.println(info.getDescription());
+            response.sendRedirect("/200web/dashboard");
+        }
     }
 }
