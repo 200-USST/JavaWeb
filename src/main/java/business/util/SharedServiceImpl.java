@@ -24,10 +24,24 @@ public class SharedServiceImpl implements SharedService{
             return new Info(false,"Failed to modify, two new password input is inconsistent!");
         }
         else if(!Validator.isValidPassword(newPsw).getFlag()){
-            return new Info(false,"Failed to modify, the new password does not meet specifications");
+            return Validator.isValidPassword(newPsw);
         }
         else  {
             user.setUserPassword(newPsw);
+            userDao.modify(user);
+            return new Info(true,"Modify successfully");
+        }
+    }
+
+    @Override
+    public Info modifyProfile(User user,String userName,String age,String gender) {
+        if(!Validator.isValidUsername(userName).getFlag()){
+            return Validator.isValidUsername(userName);
+        }
+        else{
+            user.setUserName(userName);
+            user.setUserAge(age);
+            user.setUserGender(gender);
             userDao.modify(user);
             return new Info(true,"Modify successfully");
         }

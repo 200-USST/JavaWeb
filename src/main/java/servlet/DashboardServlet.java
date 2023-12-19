@@ -21,10 +21,9 @@ public class DashboardServlet extends HttpServlet {
                 session.removeAttribute("info");
                 System.out.println(info.getFlag());
                 System.out.println(info.getDescription());
-
             }
             var user_identity=user.getUserIdentity();
-            request.getRequestDispatcher("/WEB-INF/jsp/"+user_identity+".jsp").forward(request,response);
+            request.getRequestDispatcher("/WEB-INF/jsp/dashboard.jsp").forward(request,response);
         }
         else {
             response.sendRedirect("/200web/login.do");

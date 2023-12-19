@@ -66,7 +66,7 @@
                     </span>
                 <h3>社区管理</h3>
             </a>
-            <a href="#" id="logout">
+            <a href="logout" id="logout">
                     <span class="material-icons-sharp">
                         logout
                     </span>
@@ -83,7 +83,7 @@
         <main id="personal-info-main">
             <h1>个人信息</h1>
             <div class="function">
-                <form>
+                <form action="${pageContext.request.contextPath}/modifyProfile" method="post" class="personal-info-profile">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -103,7 +103,7 @@
                             </p>
                             <p>
                             <h3>年龄</h3>
-                            <input type="text" name="userAge" placeholder="用户名" value="${user.userAge}" readonly>
+                            <input type="text" name="userAge" placeholder="年龄" value="${user.userAge}" readonly>
                             </p>
 
                         </div>

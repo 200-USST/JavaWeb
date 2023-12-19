@@ -89,7 +89,4 @@ submit_butt.addEventListener("click", (event) => {
     })
 })
 
-document.querySelector("button.submit").addEventListener("click", (event) => {
-    event.preventDefault()
-})
 
