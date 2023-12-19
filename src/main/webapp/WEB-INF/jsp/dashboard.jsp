@@ -17,7 +17,17 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <title>Dashboard</title>
 </head>
-
+<script>
+    window.onload = () => {
+        let which_a = localStorage.getItem('last');
+        console.log(which_a);
+        console.log(123123);
+        if (which_a) {
+            active ( document.getElementById(which_a) )
+            // localStorage.removeItem('last')
+        }
+    };
+</script>
 <body>
 
 <div class="container">
