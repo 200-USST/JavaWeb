@@ -3,7 +3,9 @@ package dao.impl;
 import dao.CanteenDao;
 import pojo.Canteen;
 import pojo.User;
-import util.DatabaseHelper;
+import dao.util.DatabaseHelper;
+
+import java.util.ArrayList;
 
 public class CanteenDaoImpl implements CanteenDao {
     private final DatabaseHelper DbHelper = new DatabaseHelper();
@@ -29,6 +31,11 @@ public class CanteenDaoImpl implements CanteenDao {
     }
 
     @Override
+    public Canteen findCanteen(User user) {
+        return null;
+    }
+
+    @Override
     public boolean isNameExist(String canteenName) {
         var result = DbHelper.query(
                 "select * from canteen where binary canteenName = ?",
@@ -36,5 +43,24 @@ public class CanteenDaoImpl implements CanteenDao {
         );
 
         return !result.isEmpty();
+    }
+
+    @Override
+    public void modify(Canteen canteen) {
+
+    }
+
+    @Override
+    public ArrayList<Canteen> queryAllCanteens() {//返回所有食堂信息列表
+        var result = DbHelper.query(
+                "select * from canteen"
+        );
+        ArrayList<Canteen> canteens =new ArrayList<>();
+        for (var can : result) {
+            canteens.add(new Canteen(
+                    (Integer) can.get(0), (String) can.get(1), (String) can.get(2), (String) can.get(3)
+            ));
+        }
+        return canteens;
     }
 }

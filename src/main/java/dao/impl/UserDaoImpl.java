@@ -2,7 +2,9 @@ package dao.impl;
 
 import dao.UserDao;
 import pojo.User;
-import util.DatabaseHelper;
+import dao.util.DatabaseHelper;
+
+import java.util.ArrayList;
 
 public class UserDaoImpl implements UserDao {
     private final DatabaseHelper DbHelper = new DatabaseHelper();
@@ -27,7 +29,6 @@ public class UserDaoImpl implements UserDao {
             return null;
         }
     }
-    // 改了吗
 
     public void register(User user) {
         DbHelper.update(
@@ -76,5 +77,19 @@ public class UserDaoImpl implements UserDao {
                 "insert into canteen_manager (canteenName, managerName) values (?, ?)",
                 canteenName, managerName
         );
+    }
+
+    @Override
+    public ArrayList<User> queryAllUsers() {
+        var result = DbHelper.query(
+                "select * from user"
+        );
+        ArrayList<User> users =new ArrayList<>();
+        for (var user : result) {
+            users.add(new User(
+                    (Integer) user.get(0), (String) user.get(1), (String) user.get(2), (String) user.get(3), (String) user.get(4), (String) user.get(5)
+            ));
+        }
+        return users;
     }
 }

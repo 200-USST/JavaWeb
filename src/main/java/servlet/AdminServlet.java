@@ -5,6 +5,7 @@ import business.admin.AdminServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import pojo.Info;
 
 import java.io.IOException;
 
@@ -13,16 +14,20 @@ public class AdminServlet extends HttpServlet {
     AdminService adminService=new AdminServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getParameter("type").equals("newCanteen")){
-            String canteenName=request.getParameter("canteenName");
-            String canteenLocation=request.getParameter("canteenLocation");
-            String canteenAbstract=request.getParameter("canteenAbstract");
-            adminService.newCanteen(canteenName,canteenLocation,canteenAbstract);
-        }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        if(request.getParameter("addCanteen")!=null){
+            String canteenName=request.getParameter("canteenName");
+            String canteenLocation=request.getParameter("canteenLocation");
+            String canteenAbstract=request.getParameter("canteenAbstract");
+            Info info=adminService.newCanteen(canteenName,canteenLocation,canteenAbstract);
+            request.getSession().setAttribute("info",info);
+            System.out.println(info.getDescription());
+            request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
+            response.sendRedirect("/200web/dashboard");
+        }
     }
 }

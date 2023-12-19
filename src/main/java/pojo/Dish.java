@@ -1,6 +1,7 @@
 package pojo;
 
 public class Dish {
+    private Integer dishId;
     private String dishName;
     private String dishClass;
     private double dishPrice;
@@ -10,12 +11,21 @@ public class Dish {
     public Dish() {
     }
 
-    public Dish(String dishName, String dishClass, double dishPrice, String dishInfo, String dishCanteen) {
+    public Dish(Integer dishId, String dishName, String dishClass, double dishPrice, String dishInfo, String dishCanteen) {
+        this.dishId = dishId;
         this.dishName = dishName;
         this.dishClass = dishClass;
         this.dishPrice = dishPrice;
         this.dishInfo = dishInfo;
         this.dishCanteen = dishCanteen;
+    }
+
+    public Integer getDishId() {
+        return dishId;
+    }
+
+    public void setDishId(Integer dishId) {
+        this.dishId = dishId;
     }
 
     public String getDishName() {

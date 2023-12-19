@@ -1,4 +1,5 @@
 src/main/java/test/
+src/main/webapp/test/
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
