@@ -33,7 +33,6 @@ public class DashboardServlet extends HttpServlet {
                 System.out.println(t.getUserName());
             }
             if(info!=null){
-
                 request.setAttribute("info",info);
                 session.removeAttribute("info");
                 System.out.println(info.getFlag());
