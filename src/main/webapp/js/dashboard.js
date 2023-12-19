@@ -60,8 +60,6 @@ function active (a) {
     // main.style.display = "block"
     main.style.visibility = "visible"
     main.style.opacity = "1"
-
-    localStorage.setItem("last", a.id)
 }
 
 item.forEach((a) => {
@@ -69,15 +67,6 @@ item.forEach((a) => {
         active(a)
     })
 })
-
-// 自动回到上一次打开的界面
-document.addEventListener('DOMContentLoaded', () => {
-    let which_a = localStorage.getItem('last');
-    if (which_a) {
-        active ( document.getElementById(which_a) )
-        localStorage.removeItem('last')
-    }
-});
 
 // personal-info
 // 设置可编辑

@@ -27,6 +27,7 @@ public class ModifyProfileServlet extends HttpServlet {
         Info info=sharedService.modifyProfile(user,userName,age,gender);
         request.getSession().setAttribute("user",user);
         request.getSession().setAttribute("info",info);
+        request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
         response.sendRedirect("/200web/dashboard");
     }
 }
