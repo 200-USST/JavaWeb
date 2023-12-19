@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
     ManagerService managerService = new ManagerServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login-register.jsp");
         dispatcher.forward(request, response);
     }
 
