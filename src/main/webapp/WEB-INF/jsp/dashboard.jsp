@@ -214,23 +214,23 @@
 
             <h2>添加食堂</h2>
             <div class="function">
-                <form>
+                <form action="${pageContext.request.contextPath}/adminServlet?addCanteen=true" method="post">
                     <div class="three-split">
                         <div class="split">
                             <p>
                             <h3>食堂名</h3>
-                            <input type="text" name="userName" placeholder="食堂名">
+                            <input type="text" name="canteenName" placeholder="食堂名">
                             </p>
                             <p>
                             <h3>食堂位置</h3>
-                            <input type="text" name="userPassword" placeholder="食堂位置">
+                            <input type="text" name="canteenLocation" placeholder="食堂位置">
                             </p>
                             <p>
                         </div>
                         <div class="split">
                             <p>
                             <h3>食堂简介</h3>
-                            <textarea id="message" name="message" rows="4"></textarea>
+                            <textarea id="message" name="canteenAbstract" rows="4"></textarea>
                             </p>
                             <p>
                         </div>
