@@ -1,13 +1,23 @@
 package business.util;
 
+import dao.CanteenDao;
+import dao.DishDao;
 import dao.UserDao;
+import dao.impl.CanteenDaoImpl;
+import dao.impl.DishDaoImpl;
 import dao.impl.UserDaoImpl;
+import pojo.Canteen;
+import pojo.Dish;
 import pojo.Info;
 import pojo.User;
+
+import java.util.ArrayList;
 
 
 public class SharedServiceImpl implements SharedService{
     private UserDao userDao = new UserDaoImpl();
+    private CanteenDao canteenDao = new CanteenDaoImpl();
+    private DishDao dishDao =new DishDaoImpl();
     @Override
     public User login(String userName, String userPassword) {
         User user =new User(null, userName,userPassword, null, null, null);
@@ -45,5 +55,12 @@ public class SharedServiceImpl implements SharedService{
             userDao.modify(user);
             return new Info(true,"Modify successfully");
         }
+    }
+
+    @Override
+    public void updateAllInfo(ArrayList<User> users, ArrayList<Canteen> canteens, ArrayList<Dish> dishes) {
+        users.addAll(userDao.queryAllUsers());
+        canteens.addAll(canteenDao.queryAllCanteens());
+        dishes.addAll(dishDao.queryAllDishes());
     }
 }
