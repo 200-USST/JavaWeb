@@ -348,7 +348,7 @@
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 
 <script>
-    active ( document.getElementById("${activeBar}") )
+    active ( document.getElementById("${empty activeBar ? 'dashboard' : activeBar}") )
 </script>
 
 </body>
