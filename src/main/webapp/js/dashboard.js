@@ -35,7 +35,7 @@ darkMode.addEventListener('click', () => {
 
 // 我加的
 
-
+// sidebar点击切换界面
 
 let item = document.querySelectorAll(".sidebar a")
 let main_all = document.querySelectorAll("main")
@@ -52,20 +52,35 @@ function inactive_all () {
     })
 }
 
+function active (a) {
+    inactive_all()
+    a.classList.add("active")
+
+    let main = document.getElementById(a.id + "-main")
+    // main.style.display = "block"
+    main.style.visibility = "visible"
+    main.style.opacity = "1"
+
+    localStorage.setItem("last", a.id)
+}
+
 item.forEach((a) => {
     a.addEventListener("click", () => {
-        inactive_all()
-        a.classList.add("active")
-
-        let main = document.getElementById(a.id + "-main")
-        // main.style.display = "block"
-        main.style.visibility = "visible"
-        main.style.opacity = "1"
+        active(a)
     })
 })
 
-// personal-info
+// 自动回到上一次打开的界面
+document.addEventListener('DOMContentLoaded', () => {
+    let which_a = localStorage.getItem('last');
+    if (which_a) {
+        active ( document.getElementById(which_a) )
+        localStorage.removeItem('last')
+    }
+});
 
+// personal-info
+// 设置可编辑
 let modify_butt = document.querySelector("#personal-info-main .modify")
 let submit_butt = document.querySelector("#personal-info-main .submit")
 let all_input = document.querySelectorAll(".personal-info-profile input")
