@@ -48,12 +48,12 @@
         <div class="toggle">
             <div class="toggle-panel toggle-left">
                 <h1>欢迎回来！</h1>
-                <p>已有账号？前往登陆</p>
+                <p>已有账号？前往登陆 👈</p>
                 <button class="hidden" id="login">登陆</button>
             </div>
             <div class="toggle-panel toggle-right">
-                <h1>你好，朋友！</h1>
-                <p>没有账号？前往注册</p>
+                <h1>你好朋友！</h1>
+                <p>没有账号？前往注册 👉</p>
                 <button class="hidden" id="register">注册</button>
             </div>
         </div>

@@ -14,7 +14,7 @@ public class DashboardServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         var user_identity=user.getUserIdentity();
-        request.getRequestDispatcher("/WEB-INF/jsp/"+user_identity+".jsp").forward(request,response);
+        request.getRequestDispatcher("/WEB-INF/jsp/dashboard.jsp").forward(request,response);
         System.out.println(user_identity);
     }
 

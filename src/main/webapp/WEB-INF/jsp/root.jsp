@@ -84,7 +84,7 @@
             <label for="gender-mod">性别：</label>
             <input type="text" name="userGender" id="gender-mod" value="${user.userGender}" required>
             <br><br>
-            <label for="age-mod">用户名：</label>
+            <label for="age-mod">年龄：</label>
             <input type="text" name="userAge" id="age-mod" value="${user.userAge}" required>
             <br><br>
             <input type="submit" value="提交">
