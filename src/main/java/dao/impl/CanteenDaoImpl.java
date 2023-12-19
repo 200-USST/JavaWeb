@@ -29,6 +29,11 @@ public class CanteenDaoImpl implements CanteenDao {
     }
 
     @Override
+    public Canteen findCanteen(User user) {
+        return null;
+    }
+
+    @Override
     public boolean isNameExist(String canteenName) {
         var result = DbHelper.query(
                 "select * from canteen where binary canteenName = ?",
@@ -36,5 +41,10 @@ public class CanteenDaoImpl implements CanteenDao {
         );
 
         return !result.isEmpty();
+    }
+
+    @Override
+    public void modify(Canteen canteen) {
+
     }
 }

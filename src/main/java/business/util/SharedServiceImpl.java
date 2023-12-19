@@ -18,11 +18,18 @@ public class SharedServiceImpl implements SharedService{
     @Override
     public Info modifyPassword(User user, String oldPsw, String newPsw, String newPswRe) {
         if(!user.getUserPassword().equals(oldPsw)){
-            return new Info(false,"修改失败,旧密码输入错误！");
+            return new Info(false,"Failed to modify, old password entered wrong");
         }
         else if(!newPsw.equals(newPswRe)){
-            return new Info(false,"修改失败,两次新密码输入不一致！");
+            return new Info(false,"Failed to modify, two new password input is inconsistent!");
         }
-        return new Info(true,"修改成功");
+        else if(!Validator.isValidPassword(newPsw).getFlag()){
+            return new Info(false,"Failed to modify, the new password does not meet specifications");
+        }
+        else  {
+            user.setUserPassword(newPsw);
+            userDao.modify(user);
+            return new Info(true,"Modify successfully");
+        }
     }
 }

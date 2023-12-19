@@ -12,11 +12,11 @@
         <a>
             <img src="${pageContext.request.contextPath}/img/admin-logo.png" alt="Welcome Image">
         </a>
-        <p>欢迎您, ${username}</p>
+        <p>欢迎您, ${user.getUserName()}</p>
     </div>
 
     <div id="topbut">
-        <button id="topbutton">退出登录</button>
+        <a id="topbutton" href="logout">退出登录</a>
     </div>
 </div>
 

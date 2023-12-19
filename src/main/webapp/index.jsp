@@ -5,7 +5,7 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<h1><%= "Hello World 我修改了" %>
+<h1><%= "测试界面" %>
 </h1>
 <br/>
 

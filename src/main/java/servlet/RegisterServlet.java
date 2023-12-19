@@ -19,14 +19,14 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String type = request.getParameter("type");
-        if(type.equals("user")){
+        if(type.equals("user")){//注册普通用户
             String userName = request.getParameter("userName");
             String password = request.getParameter("userPassword");
             String passwordRe = request.getParameter("userPasswordRepeat");
             Info info = userService.register(userName,password,passwordRe);
             System.out.println(info.getFlag()+" "+info.getDescription());
         }
-        else if(type.equals("manager")){
+        else if(type.equals("manager")){//注册管理员用户
             String userName = request.getParameter("userName");
             String password = request.getParameter("userPassword");
             String passwordRe = request.getParameter("userPasswordRepeat");
