@@ -68,7 +68,7 @@ item.forEach((a) => {
 
 let modify_butt = document.querySelector("#personal-info-main .modify")
 let submit_butt = document.querySelector("#personal-info-main .submit")
-let all_input = document.querySelectorAll("#personal-info-main input")
+let all_input = document.querySelectorAll(".personal-info-profile input")
 
 modify_butt.addEventListener("click", () => {
     modify_butt.style.display = "none"
