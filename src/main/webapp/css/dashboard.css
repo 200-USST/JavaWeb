@@ -784,6 +784,7 @@ textarea {
     transition: background-color 0.5s ease;
     background-color: var(--color-light);
     height: 8.5rem;
+    resize: none;
 }
 
 .two-split {

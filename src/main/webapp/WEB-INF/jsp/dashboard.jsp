@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ch">
 
@@ -48,6 +49,7 @@
                     </span>
                 <h3>个人信息</h3>
             </a>
+<c:if test="${user.userIdentity == 'root'}">
             <a href="#" id="canteen-info">
                     <span class="material-icons-sharp">
                         restaurant
@@ -60,12 +62,54 @@
                     </span>
                 <h3>账号管理</h3>
             </a>
-            <a href="#" id="community">
+            <a href="#" id="community-manage">
                     <span class="material-icons-sharp">
                         forum
                     </span>
                 <h3>社区管理</h3>
             </a>
+</c:if>
+<c:if test="${user.userIdentity == 'user'}">
+            <a href="#" id="community-chat">
+                    <span class="material-icons-sharp">
+                        forum
+                    </span>
+                <h3>交流社区</h3>
+            </a>
+            <a href="#" id="canteen-search">
+                    <span class="material-icons-sharp">
+                        restaurant
+                    </span>
+                <h3>食堂检索</h3>
+            </a>
+            <a href="#" id="dishes-search">
+                    <span class="material-icons-sharp">
+                        ramen_dining
+                    </span>
+                <h3>菜品检索</h3>
+            </a>
+</c:if>
+<c:if test="${user.userIdentity == 'manager'}">
+            <a href="#" id="canteen-guard">
+                    <span class="material-icons-sharp">
+                        restaurant
+                    </span>
+                <h3>食堂维护</h3>
+            </a>
+            <a href="#" id="dishes-guard">
+                    <span class="material-icons-sharp">
+                        ramen_dining
+                    </span>
+                <h3>菜品维护</h3>
+            </a>
+            <a href="#" id="canteen-comments">
+                    <span class="material-icons-sharp">
+                        comment
+                    </span>
+                <h3>食堂评价</h3>
+            </a>
+</c:if>
+
             <a href="logout" id="logout">
                     <span class="material-icons-sharp">
                         logout
