@@ -70,27 +70,60 @@ item.forEach((a) => {
 
 // personal-info
 // 设置可编辑
-let modify_butt = document.querySelector("#personal-info-main .modify")
-let submit_butt = document.querySelector("#personal-info-main .submit")
-let all_input = document.querySelectorAll(".personal-info-profile input")
+let modify_butts = document.querySelectorAll(".modify");
+let submit_butts = document.querySelectorAll(".submit");
 
-modify_butt.addEventListener("click", () => {
-    modify_butt.style.display = "none"
-    submit_butt.style.display = "inline"
+modify_butts.forEach((butt, i) => {
+    butt.addEventListener("click", () => {
+        // 获取当前按钮所在的表单
+        let form = butt.closest('.switch');
 
-    all_input.forEach((e) => {
-        if (e.id === "cannot-modify") return
-        e.removeAttribute("readonly")
+        // 修改当前表单中的元素
+        form.querySelector(".modify").style.display = "none";
+        form.querySelector(".submit").style.display = "inline";
+
+        let all_input = form.querySelectorAll("input");
+        all_input.forEach((e) => {
+            if (e.id === "cannot-modify") return;
+            e.removeAttribute("readonly");
+        });
+
+        let area = form.querySelector("textarea");
+        if (area != null) area.removeAttribute("readonly")
+    });
+});
+
+submit_butts.forEach((butt, i) => {
+    butt.addEventListener("click", (event) => {
+        // 获取当前按钮所在的表单
+        let form = butt.closest('.switch');
+
+        // 修改当前表单中的元素
+        form.querySelector(".modify").style.display = "inline";
+        form.querySelector(".submit").style.display = "none";
+
+        let all_input = form.querySelectorAll("input");
+        all_input.forEach((e) => {
+            e.setAttribute("readonly", true);
+        });
+
+        let area = form.querySelector("textarea");
+        if (area != null) area.setAttribute("readonly", true)
+    });
+});
+
+
+
+
+// canteen-info
+
+document.querySelectorAll(".butt-tr").forEach((tr) => {
+    tr.addEventListener("click", () => {
+        let canteen_input = document.querySelectorAll("#modify-canteen input")
+        let canteen_area = document.querySelector("#modify-canteen textarea")
+        canteen_input[0].value = tr.getAttribute("cname")
+        canteen_input[1].value = tr.getAttribute("clocation")
+        canteen_area.value = tr.getAttribute("cabstract")
     })
 })
-
-submit_butt.addEventListener("click", (event) => {
-    modify_butt.style.display = "inline"
-    submit_butt.style.display = "none"
-
-    all_input.forEach((e) => {
-        e.setAttribute("readonly", true)
-    })
-})
-
 

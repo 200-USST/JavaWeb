@@ -127,7 +127,7 @@
         <main id="personal-info-main">
             <h1>个人信息</h1>
             <div class="function">
-                <form action="${pageContext.request.contextPath}/modifyProfile?activeBar=personal-info" method="post" class="personal-info-profile">
+                <form action="${pageContext.request.contextPath}/modifyProfile?activeBar=personal-info" method="post" class="switch">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -194,23 +194,55 @@
                     <tr>
                         <th>食堂名</th>
                         <th>食堂位置</th>
-                        <th>Payment</th>
-                        <th>Status</th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
+<c:forEach items="${canteenList}" var="canteen">
+                    <tr class="butt-tr"
+                        cid="${canteen.canteenId}"
+                        cname="${canteen.canteenName}"
+                        clocation="${canteen.canteenLocation}"
+                        cabstract="${canteen.canteenAbstract}">
+                        <td>${canteen.canteenName}</td>
+                        <td>${canteen.canteenLocation}</td>
                     </tr>
+</c:forEach>
                     </tbody>
                 </table>
                 <a href="#">Show All</a>
             </div>
+
+
+            <h2>食堂信息</h2>
+            <div class="function">
+                <form class="switch" id="modify-canteen">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>食堂名</h3>
+                            <input type="text" name="canteenName" placeholder="食堂名" readonly>
+                            </p>
+                            <p>
+                            <h3>食堂位置</h3>
+                            <input type="text" name="canteenLocation" placeholder="食堂位置" readonly>
+                            </p>
+                            <p>
+                        </div>
+                        <div class="split">
+                            <p>
+                            <h3>食堂简介</h3>
+                            <textarea name="canteenAbstract" rows="4" readonly></textarea>
+                            </p>
+                            <p>
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="modify">修改</button>
+                            <button type="submit" class="submit" style="display: none;">提交修改</button>
+                        </div></div>
+                    </div>
+                </form>
+            </div>
+
 
             <h2>添加食堂</h2>
             <div class="function">
@@ -230,7 +262,7 @@
                         <div class="split">
                             <p>
                             <h3>食堂简介</h3>
-                            <textarea id="message" name="canteenAbstract" rows="4"></textarea>
+                            <textarea name="canteenAbstract" rows="4"></textarea>
                             </p>
                             <p>
                         </div>
@@ -347,6 +379,7 @@
 
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 
+<%--刷新回到定位--%>
 <script>
     active ( document.getElementById("${empty activeBar ? 'dashboard' : activeBar}") )
 </script>

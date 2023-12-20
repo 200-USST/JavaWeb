@@ -782,9 +782,15 @@ textarea {
     outline: none;
 
     transition: background-color 0.5s ease;
-    background-color: var(--color-light);
     height: 8.5rem;
     resize: none;
+}
+
+textarea:not([readonly]) {
+    background-color: var(--color-light);
+}
+textarea[readonly] {
+    background-color: var(--color-white);
 }
 
 .two-split {
