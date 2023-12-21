@@ -407,6 +407,78 @@ cmJson='${cmJson}'>
 
         </main>
 
+
+        <main id="canteen-guard-main">
+            <h1>食堂维护</h1>
+            <div class="function">
+                <form class="switch">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>食堂名</h3>
+                            <input type="text" name="canteenName" placeholder="食堂名" value="${mcMap[user.userName].canteenName}" readonly>
+                            </p>
+                            <p>
+                            <h3>食堂位置</h3>
+                            <input type="text" name="canteenLocation" placeholder="食堂位置" value="${mcMap[user.userName].canteenLocation}" readonly>
+                            </p>
+                            <p>
+                        </div>
+                        <div class="split">
+                            <p>
+                            <h3>食堂简介</h3>
+                            <textarea name="canteenAbstract" placeholder="食堂简介" rows="4" readonly>${mcMap[user.userName].canteenAbstract}</textarea>
+                            </p>
+                            <p>
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="modify">修改</button>
+                            <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
+                        </div></div>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <main id="dishes-search-main">
+            <h1>菜品检索</h1>
+            <div class="function">
+                <form class="check">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>检索框</h3>
+                            <input type="text" name="checkbox">
+                            </p>
+                        </div>
+                        <div class="split">
+                            <p>
+                            <h3>按菜系/价格/食堂检索</h3>
+                            <input type="text" name="checkby">
+                            </p>
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="check-in">检索</button>
+                        </div></div>
+                    </div>
+                </form>
+                <div class="user-list">
+                    <div class="user">
+                        <c:forEach items="${dishList}" var="dish">
+                            <img src="${dish.dishPic}">
+                            <h2>${dish.disName}</h2>
+                            <p>${dish.dishPrice}</p >
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+
+            <h2>菜品信息</h2>
+
+
+        </main>
+
+
     </div>
     <!-- End of Main Content -->
 

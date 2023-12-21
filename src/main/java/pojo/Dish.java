@@ -8,6 +8,7 @@ public class Dish {
     private String dishInfo;
     private String dishCanteen;
 
+
     public Dish() {
     }
 
