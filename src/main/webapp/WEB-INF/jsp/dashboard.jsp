@@ -227,7 +227,7 @@ cmJson='${cmJson}'>
 
             <h2>食堂信息</h2>
             <div class="function">
-                <form class="switch">
+                <form class="switch" action="activeBar=canteen-info">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -334,7 +334,7 @@ cmJson='${cmJson}'>
 
             <h2>账号信息</h2>
             <div class="function">
-                <form class="switch">
+                <form class="switch" action="activeBar=accounts-manage">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -380,7 +380,7 @@ cmJson='${cmJson}'>
 
             <h2>分发管理员账号</h2>
             <div class="function">
-                <form action="${pageContext.request.contextPath}/register.do?type=manager" class="switch" method="post">
+                <form action="${pageContext.request.contextPath}/register.do?type=manager&activeBar=accounts-manage" class="switch" method="post">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -426,7 +426,7 @@ cmJson='${cmJson}'>
         <main id="canteen-guard-main">
             <h1>食堂信息维护</h1>
             <div class="function">
-                <form class="switch">
+                <form class="switch" action="activeBar=canteen-guard">
                     <div class="three-split">
                         <div class="split">
                             <p>
