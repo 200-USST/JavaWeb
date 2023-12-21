@@ -25,18 +25,41 @@ public class DishDaoImpl implements DishDao {
 
     @Override
     public Dish newDish(Dish dish) {
-        return null;
+        DbHelper.update(
+                "insert into dish (dishesName, dishesCuisine, dishesAbstract, dishesCanteen, dishesPrice, dishPic) values (?, ?, ?, ?, ?, ?)",
+                dish.getDishName(), dish.getDishClass(), dish.getDishInfo(), dish.getDishCanteenId(), dish.getDishPrice(), dish.getDishPic()
+        );
+
+        var result = DbHelper.query(
+                "select * from dish where dishesID = last_insert_id()"
+        );
+
+        return new Dish(
+                (Integer) result.get(0).get(0),
+                (String) result.get(0).get(1),
+                (String) result.get(0).get(2),
+                (Double) result.get(0).get(5),
+                (String) result.get(0).get(3),
+                (Integer) result.get(0).get(4),
+                (String) result.get(0).get(6)
+        );
     }
 
     @Override
     public boolean isNameExist(String dishName,Integer canteenId) {
-        return false;
+         var result = DbHelper.query(
+                 "select * from dish where binary dishesName = ? and dishesCanteen = ?",
+                 dishName, canteenId
+         );
+
+         return !result.isEmpty();
     }
 
     @Override
     public void modifyDish(Dish dish) {
-
+        DbHelper.update(
+                "update dish set dishesName = ?, dishesCuisine = ?, dishesAbstract = ?, dishesPrice = ?, dishPic = ? where dishesID = ?",
+                dish.getDishName(), dish.getDishClass(), dish.getDishInfo(), dish.getDishPrice(), dish.getDishPic(), dish.getDishId()
+        );
     }
-
-
 }
