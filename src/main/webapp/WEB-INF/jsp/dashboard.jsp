@@ -249,7 +249,7 @@ cmJson='${cmJson}'>
                         <div class="split">
                             <p>
                             <h3>食堂照片</h3>
-                            <input type="file" name="file" accept="image/*" class="img-upload" readonly>
+                            <input type="file" name="file" accept="image/*" class="img-upload" readonly disabled>
                             <img src="${pageContext.request.contextPath}/img/profile-1.jpg">
                             </p>
                         </div>

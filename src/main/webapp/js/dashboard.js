@@ -93,6 +93,9 @@ modify_butts.forEach((butt) => {
 
         let area = form.querySelector("textarea");
         if (area) area.removeAttribute("readonly")
+
+        let file_input = form.querySelector(".img-upload");
+        file_input.removeAttribute("disabled")
     });
 });
 
@@ -114,6 +117,9 @@ submit_butts.forEach((butt) => {
 
         let area = form.querySelector("textarea");
         if (area) area.setAttribute("readonly", true)
+
+        let file_input = form.querySelector(".img-upload");
+        file_input.setAttribute("disabled", true)
     });
 });
 
@@ -134,6 +140,9 @@ delete_butts.forEach((butt) => {
 
         let area = form.querySelector("textarea");
         if (area) area.setAttribute("readonly", true)
+
+        let file_input = form.querySelector(".img-upload");
+        file_input.setAttribute("disabled", true)
     })
 })
 
