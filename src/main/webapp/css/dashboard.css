@@ -842,3 +842,6 @@ button{
     padding: 10px 15px;
 }
 
+form img {
+    margin-top: 1rem;
+}

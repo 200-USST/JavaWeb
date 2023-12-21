@@ -188,7 +188,6 @@ cmJson='${cmJson}'>
                             <p>
                             <h3>新密码</h3>
                             <input type="password" name="newPswRepeat" placeholder="确认密码">
-                            <input type="file" name="file" placeholder="请选择文件">
                             </p>
                         </div>
                         <div class="align-center"><div class="split">
@@ -410,15 +409,167 @@ cmJson='${cmJson}'>
 
                         </div>
                         <div class="align-center"><div class="split">
+                            <button type="submit" class="submit">添加</button>
+                        </div></div>
+                    </div>
+                </form>
+            </div>
+
+
+        </main>
+
+
+
+        <main id="canteen-guard-main">
+            <h1>食堂信息维护</h1>
+            <div class="function">
+                <form class="switch">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>食堂名</h3>
+                            <input type="text" name="canteenName" value="${mcMap[user.userName].canteenName}" readonly>
+                            </p>
+                            <p>
+                            <h3>食堂位置</h3>
+                            <input type="text" name="canteenLocation" value="${mcMap[user.userName].canteenLocation}" readonly>
+                            </p>
+                            <p>
+                            <h3>食堂简介</h3>
+                            <textarea name="canteenAbstract" rows="4" readonly>${mcMap[user.userName].canteenAbstract}</textarea>
+                            </p>
+                            <h3>食堂管理者</h3>
+                            <p class="input-like" cname="${mcMap[user.userName].canteenName}"></p>
+                        </div>
+                        <div class="split">
+                            <p>
+                            <h3>食堂照片</h3>
+<%--                            <input type="file" name="file" accept="image/*" class="img-upload" readonly disabled>--%>
+                            <img src="${pageContext.request.contextPath}/img/profile-1.jpg">
+                            </p>
+                        </div>
+                        <div class="align-center"><div class="split">
                             <button type="button" class="modify">修改</button>
                             <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
                             <br><br>
                             <button type="submit" name="action" value="delete" class="delete" style="display: none;">确认删除</button>
                         </div></div>
                     </div>
+                    <input type="hidden" name="canteenId" value="${mcMap[user.userName].canteenId}">
+                </form>
+            </div>
+        </main>
+
+
+        <main id="dishes-guard-main">
+            <h1>菜品信息维护</h1>
+            <div class="recent-orders">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>菜品名</th>
+                        <th>菜系</th>
+                        <th>价格</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+<c:forEach items="${dishesList}" var="dishes">
+                        <tr class="dishes-tr"
+                            did="${dishes.dishId}"
+                            dname="${dishes.dishName}"
+                            dclass="${dishes.dishClass}"
+                            dprice="${dishes.dishPrice}"
+                            dinfo="${dishes.dishInfo}"
+                            dcanteen="${dishes.dishCanteenId}"
+                            dpic="${dishes.dishPic}">
+                            <td>${dishes.dishName}</td>
+                            <td>${dishes.dishClass}</td>
+                            <td>${dishes.dishPrice}</td>
+                        </tr>
+</c:forEach>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>菜品信息</h2>
+            <div class="function">
+                <form class="switch">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>菜品名</h3>
+                            <input type="text" name="dishName" readonly>
+                            </p>
+                            <p>
+                            <h3>菜系</h3>
+                            <input type="text" name="dishClass" readonly>
+                            </p>
+                            <p>
+                            <h3>价格</h3>
+                            <input type="text" name="dishPrice" readonly>
+                            </p>
+                            <p>
+                            <h3>简介</h3>
+                            <textarea name="dishInfo" rows="4" readonly></textarea>
+                            </p>
+                        </div>
+                        <div class="split">
+
+                            <p>
+                            <h3>菜品图片</h3>
+                            <input type="file" name="file" accept="image/*" class="img-upload" readonly disabled>
+                            <img src="${pageContext.request.contextPath}/img/data/dish_pic/">
+                            </p>
+
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="modify">修改</button>
+                            <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
+                            <br><br>
+                            <button type="submit" name="action" value="delete" class="delete" style="display: none;">确认删除</button>
+                        </div></div>
+                    </div>
+                    <input type="hidden" name="dishId">
                 </form>
             </div>
 
+            <h2>添加菜品</h2>
+            <div class="function">
+                <form>
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>菜品名</h3>
+                            <input type="text" name="dishName" placeholder="菜品名">
+                            </p>
+                            <p>
+                            <h3>菜系</h3>
+                            <input type="text" name="dishClass" placeholder="菜系">
+                            </p>
+                            <p>
+                            <h3>价格</h3>
+                            <input type="text" name="dishPrice" placeholder="价格">
+                            </p>
+                            <p>
+                            <h3>简介</h3>
+                            <textarea name="dishInfo" rows="4" placeholder="简介"></textarea>
+                            </p>
+                        </div>
+                        <div class="split">
+
+                            <p>
+                            <h3>菜品图片</h3>
+                            <input type="file" name="file" accept="image/*" class="img-upload">
+                            <img src="">
+                            </p>
+
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="submit" class="submit">添加</button>
+                        </div></div>
+                    </div>
+                </form>
+            </div>
 
         </main>
 
