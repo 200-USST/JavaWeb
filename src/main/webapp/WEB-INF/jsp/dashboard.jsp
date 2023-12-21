@@ -149,7 +149,7 @@ cmJson='${cmJson}'>
                             </p>
                             <p>
                             <h3>用户类型</h3>
-                            <input type="text" name="userIdentity" value="${user.userIdentity}" readonly id="cannot-modify">
+                            <input type="text" name="userIdentity" value="${user.userIdentity}" readonly class="cannot-modify">
                             </p>
                         </div>
                         <div class="split">
@@ -240,13 +240,18 @@ cmJson='${cmJson}'>
                             <input type="text" name="canteenLocation" readonly>
                             </p>
                             <p>
-                        </div>
-                        <div class="split">
-                            <p>
                             <h3>食堂简介</h3>
                             <textarea name="canteenAbstract" rows="4" readonly></textarea>
                             </p>
+                            <h3>食堂管理者</h3>
+                            <p class="input-like"></p>
+                        </div>
+                        <div class="split">
                             <p>
+                            <h3>食堂照片</h3>
+                            <input type="file" name="file" accept="image/*" class="img-upload" readonly>
+                            <img src="${pageContext.request.contextPath}/img/profile-1.jpg">
+                            </p>
                         </div>
                         <div class="align-center"><div class="split">
                             <button type="button" class="modify">修改</button>
@@ -256,10 +261,6 @@ cmJson='${cmJson}'>
                         </div></div>
                     </div>
                     <input type="hidden" name="canteenId">
-                    <div class="split">
-                        <h3>食堂管理者</h3>
-                        <p id="canteen-manager"></p>
-                    </div>
                 </form>
             </div>
 

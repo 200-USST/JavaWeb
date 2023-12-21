@@ -87,7 +87,7 @@ modify_butts.forEach((butt) => {
 
         let all_input = form.querySelectorAll("input");
         all_input.forEach((e) => {
-            if (e.id === "cannot-modify") return;
+            if (e.classList.contains("cannot-modify")) return;
             e.removeAttribute("readonly");
         });
 
@@ -141,7 +141,7 @@ delete_butts.forEach((butt) => {
 
 
 // canteen-info
-
+// 点table
 document.querySelectorAll(".canteen-tr").forEach((tr) => {
     tr.addEventListener("click", () => {
         let form = tr.closest('main').querySelector("form.switch")
@@ -149,11 +149,11 @@ document.querySelectorAll(".canteen-tr").forEach((tr) => {
         let area = form.querySelector("textarea")
         inputs[0].value = tr.getAttribute("cname")
         inputs[1].value = tr.getAttribute("clocation")
-        inputs[2].value = tr.getAttribute("cid")
+        inputs[3].value = tr.getAttribute("cid")
         area.value = tr.getAttribute("cabstract")
 
         let json = document.getElementById("storage").getAttribute("cmJson")
-        let p_tag = form.querySelector("#canteen-manager")
+        let p_tag = form.querySelector(".input-like")
         p_tag.innerText = ''
         json = JSON.parse(json)
         let manager_list = json[tr.getAttribute("cname")]
@@ -162,6 +162,24 @@ document.querySelectorAll(".canteen-tr").forEach((tr) => {
         }
     })
 })
+
+// 有图片上传
+document.querySelectorAll(".img-upload").forEach((e) => {
+    let preview = e.closest("div").querySelector("img")
+    let objectURL
+    e.addEventListener('change', function(event) {
+        var file = event.target.files[0];
+        if (file) {
+            objectURL = URL.createObjectURL(file);
+            preview.src = objectURL
+        }
+    });
+    preview.onload = () => {
+        URL.revokeObjectURL(objectURL);
+    }
+
+})
+
 
 // account-info
 

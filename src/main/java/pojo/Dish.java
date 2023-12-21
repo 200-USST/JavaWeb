@@ -4,7 +4,7 @@ public class Dish {
     private Integer dishId;
     private String dishName;
     private String dishClass;
-    private double dishPrice;
+    private Double dishPrice;
     private String dishInfo;
     private Integer dishCanteenId;
     private String dishPic;
@@ -21,7 +21,7 @@ public class Dish {
         this.dishCanteenId = dishCanteenId;
     }
 
-    public Dish(Integer dishId, String dishName, String dishClass, double dishPrice, String dishInfo, Integer dishCanteenId, String dishPic) {
+    public Dish(Integer dishId, String dishName, String dishClass, Double dishPrice, String dishInfo, Integer dishCanteenId, String dishPic) {
         this.dishId = dishId;
         this.dishName = dishName;
         this.dishClass = dishClass;
@@ -63,11 +63,11 @@ public class Dish {
         this.dishClass = dishClass;
     }
 
-    public double getDishPrice() {
+    public Double getDishPrice() {
         return dishPrice;
     }
 
-    public void setDishPrice(double dishPrice) {
+    public void setDishPrice(Double dishPrice) {
         this.dishPrice = dishPrice;
     }
 

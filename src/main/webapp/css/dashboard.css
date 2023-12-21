@@ -837,7 +837,7 @@ button{
     align-items: center;
 }
 
-#canteen-manager {
+.input-like {
     margin: 8px 0;
     padding: 10px 15px;
 }
