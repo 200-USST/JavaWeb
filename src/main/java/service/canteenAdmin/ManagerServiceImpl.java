@@ -20,7 +20,7 @@ public class ManagerServiceImpl implements ManagerService{
 
     @Override
     public Canteen findCanteen(User user) {
-        return canteenDao.findCanteen(user);
+        return canteenDao.findCanteen(user.getUserName());
     }
 
     @Override

@@ -30,6 +30,9 @@
 </script>
 <body>
 
+<div id="storage"
+cmJson='${cmJson}'>
+
 <div class="container">
     <!-- Sidebar Section -->
     <aside>
@@ -64,7 +67,7 @@
                     <span class="material-icons-sharp">
                         restaurant
                     </span>
-                <h3>食堂信息</h3>
+                <h3>食堂管理</h3>
             </a>
             <a href="#" id="accounts-manage">
                     <span class="material-icons-sharp">
@@ -137,7 +140,7 @@
         <main id="personal-info-main">
             <h1>个人信息</h1>
             <div class="function">
-                <form action="${pageContext.request.contextPath}/modifyProfile?activeBar=personal-info" method="post" class="personal-info-profile">
+                <form action="${pageContext.request.contextPath}/modifyProfile?activeBar=personal-info" method="post" class="switch">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -204,23 +207,61 @@
                     <tr>
                         <th>食堂名</th>
                         <th>食堂位置</th>
-                        <th>Payment</th>
-                        <th>Status</th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
+<c:forEach items="${canteenList}" var="canteen">
+                    <tr class="canteen-tr"
+                        cid="${canteen.canteenId}"
+                        cname="${canteen.canteenName}"
+                        clocation="${canteen.canteenLocation}"
+                        cabstract="${canteen.canteenAbstract}">
+                        <td>${canteen.canteenName}</td>
+                        <td>${canteen.canteenLocation}</td>
                     </tr>
+</c:forEach>
                     </tbody>
                 </table>
-                <a href="#">Show All</a>
             </div>
+
+
+            <h2>食堂信息</h2>
+            <div class="function">
+                <form class="switch">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>食堂名</h3>
+                            <input type="text" name="canteenName" readonly>
+                            </p>
+                            <p>
+                            <h3>食堂位置</h3>
+                            <input type="text" name="canteenLocation" readonly>
+                            </p>
+                            <p>
+                        </div>
+                        <div class="split">
+                            <p>
+                            <h3>食堂简介</h3>
+                            <textarea name="canteenAbstract" rows="4" readonly></textarea>
+                            </p>
+                            <p>
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="modify">修改</button>
+                            <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
+                            <br><br>
+                            <button type="submit" name="action" value="delete" class="delete" style="display: none;">确认删除</button>
+                        </div></div>
+                    </div>
+                    <input type="hidden" name="canteenId">
+                    <div class="split">
+                        <h3>食堂管理者</h3>
+                        <p id="canteen-manager"></p>
+                    </div>
+                </form>
+            </div>
+
 
             <h2>添加食堂</h2>
             <div class="function">
@@ -240,7 +281,7 @@
                         <div class="split">
                             <p>
                             <h3>食堂简介</h3>
-                            <textarea id="message" name="canteenAbstract" rows="4"></textarea>
+                            <textarea name="canteenAbstract" placeholder="食堂简介" rows="4"></textarea>
                             </p>
                             <p>
                         </div>
@@ -250,6 +291,130 @@
                     </div>
                 </form>
             </div>
+        </main>
+
+
+        <main id="accounts-manage-main">
+            <h1>账号信息管理</h1>
+            <div class="recent-orders">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>身份</th>
+                        <th>食堂管理</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+<c:forEach items="${userList}" var="account">
+                        <tr class="account-tr"
+                            uid="${account.id}"
+                            uname="${account.userName}"
+                            upassword="${account.userPassword}"
+                            uidentity="${account.userIdentity}"
+                            ugender="${account.userGender}"
+                            uage="${account.userAge}"
+                            ucanteen="${mcMap[account.userName].canteenName}">
+                            <td>${account.userName}</td>
+                            <td>${account.userIdentity}</td>
+                            <td>${mcMap[account.userName].canteenName}</td>
+                            <td>${account.userGender}</td>
+                            <td>${account.userAge}</td>
+                        </tr>
+</c:forEach>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>账号信息</h2>
+            <div class="function">
+                <form class="switch">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>用户名</h3>
+                            <input type="text" name="userName" readonly>
+                            </p>
+                            <p>
+                            <h3>用户密码</h3>
+                            <input type="text" name="userPassword" readonly>
+                            </p>
+                            <p>
+                            <h3>用户类型</h3>
+                            <input type="text" name="userIdentity" readonly>
+                            </p>
+                        </div>
+                        <div class="split">
+
+                            <p>
+                            <h3>性别</h3>
+                            <input type="text" name="userGender" readonly>
+                            </p>
+                            <p>
+                            <h3>年龄</h3>
+                            <input type="text" name="userAge" readonly>
+                            </p>
+                            <p>
+                            <h3>管理食堂</h3>
+                            <input type="text" name="userManagement" readonly>
+                            </p>
+
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="modify">修改</button>
+                            <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
+                            <br><br>
+                            <button type="submit" name="action" value="delete" class="delete" style="display: none;">确认删除</button>
+                        </div></div>
+                    </div>
+                    <input type="hidden" name="userId">
+                </form>
+            </div>
+
+
+            <h2>添加账号</h2>
+            <div class="function">
+                <form class="switch">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>用户名</h3>
+                            <input type="text" name="userName" placeholder="用户名">
+                            </p>
+                            <p>
+                            <h3>用户密码</h3>
+                            <input type="text" name="userPassword" placeholder="密码">
+                            </p>
+                            <p>
+                            <h3>用户类型</h3>
+                            <input type="text" name="userIdentity" placeholder="用户类型">
+                            </p>
+                        </div>
+                        <div class="split">
+
+                            <p>
+                            <h3>性别</h3>
+                            <input type="text" name="userGender" placeholder="性别">
+                            </p>
+                            <p>
+                            <h3>年龄</h3>
+                            <input type="text" name="userAge" placeholder="年龄">
+                            </p>
+
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="modify">修改</button>
+                            <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
+                            <br><br>
+                            <button type="submit" name="action" value="delete" class="delete" style="display: none;">确认删除</button>
+                        </div></div>
+                    </div>
+                </form>
+            </div>
+
+
         </main>
 
     </div>
@@ -357,6 +522,7 @@
 
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 
+<%--刷新回到定位--%>
 <script>
     active ( document.getElementById("${empty activeBar ? 'dashboard' : activeBar}") )
 </script>
