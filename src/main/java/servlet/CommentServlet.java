@@ -33,16 +33,13 @@ public class CommentServlet extends HttpServlet {
 
         String message;
         Gson gson = new Gson();
-        try {
-            CommentDaoImpl commentDao = new CommentDaoImpl();
-            commentDao.insertComment(comment);
-            message = "评论成功";
-            String messageJson = gson.toJson(message);
-            pw.write(messageJson);
-        } catch (SQLException e) {
-            message = "评论失败";
-            String messageJson = gson.toJson(message);
-            pw.write(messageJson);
-        }
+        CommentDaoImpl commentDao = new CommentDaoImpl();
+        commentDao.insertComment(comment);
+        message = "评论成功";
+        String messageJson = gson.toJson(message);
+        pw.write(messageJson);
+//        message = "评论失败";
+//        String messageJson = gson.toJson(message);
+//        pw.write(messageJson);
     }
 }
