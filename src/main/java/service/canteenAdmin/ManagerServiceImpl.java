@@ -91,7 +91,6 @@ public class ManagerServiceImpl implements ManagerService{
             return new Info(false,"Dish has already existed");
         }
         else {
-            System.out.println(dish.getDishPrice());
             dish= dishDao.newDish(dish);
             dish.setDishPic(dish.getDishId()+"."+uploadfiletype);
             dishDao.modifyDish(dish);

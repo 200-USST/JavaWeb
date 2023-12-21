@@ -18,6 +18,7 @@ import pojo.Info;
 import pojo.User;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public Info newCanteen(HttpServletRequest request, String realPath, String tmpPath) throws FileUploadException, UnsupportedEncodingException {
+    public Info newCanteen(HttpServletRequest request, String realPath, String tmpPath) throws FileUploadException, IOException {
         File saveFilePath = new File(realPath);
         File tempFilePath = new File(tmpPath);
         if (!saveFilePath.exists()) {
@@ -94,22 +95,22 @@ public class AdminServiceImpl implements AdminService{
                 uploadfiletype = uploadfilename.substring(uploadfilename.lastIndexOf(".") + 1);
             }
         }
-        Canteen canteen  = new Canteen(null,canteenName,canteenLocation,canteenAbstract);
-        if(canteenDao.isNameExist(canteenName)){ //判断该食堂存在该菜品
+        Canteen canteen  = new Canteen(null,canteenName,canteenLocation,canteenAbstract,null);
+        if(canteenDao.isNameExist(canteenName)){ //判断食堂已经存在
             return new Info(false,"Canteen has already existed");
         }
         else {
-//            dish.setDishPic(dish.getDishId()+"."+uploadfiletype);
-//            dishDao.modifyDish(dish);
-//            for (FileItem fileItem : fileItems) {
-//                if (!fileItem.isFormField()) {
-//                    if(fileItem.getSize()>0) FileUploadOnly.fileup(realPath,fileItem, String.valueOf(dish.getDishId()));
-//                    else System.out.println(12);
-//                }
-//            }
-//            return new Info(true,"New dish successfully");
+            canteen = canteenDao.newCanteen(canteen);
+            canteen.setCanteenPic(canteen.getCanteenId()+'.'+uploadfiletype);
+            canteenDao.modify(canteen);
+            for (FileItem fileItem : fileItems) {
+                if (!fileItem.isFormField()) {
+                    if(fileItem.getSize()>0) FileUploadOnly.fileup(realPath,fileItem, String.valueOf(canteen.getCanteenId()));
+                    else System.out.println(12);
+                }
+            }
+            return new Info(true,"New Canteen successfully");
         }
-        return null;
     }
     }
 
