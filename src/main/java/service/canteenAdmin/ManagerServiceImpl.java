@@ -87,15 +87,17 @@ public class ManagerServiceImpl implements ManagerService{
                 uploadfiletype = uploadfilename.substring(uploadfilename.lastIndexOf(".") + 1);
             }
         }
-        Dish dish =new Dish(null,dishName,dishClass,dishPrice,dishInfo,canteen.getCanteenName(),null);
-        if(dishDao.isNameExist(dishName,canteen.getCanteenName())){//判断该食堂存在该菜品
+        Dish dish =new Dish(null,dishName,dishClass,dishPrice,dishInfo,canteen.getCanteenId(),null);
+        if(dishDao.isNameExist(dishName,canteen.getCanteenId())){//判断该食堂存在该菜品
             return new Info(false,"Dish has already existed");
         }
         else {
-            dishDao.newDish(dish);
+            dish= dishDao.newDish(dish);
+            dish.setDishPic(dish.getDishId()+"."+uploadfiletype);
+            dishDao.modifyDish(dish);
             for (FileItem fileItem : fileItems) {
                 if (!fileItem.isFormField()) {
-                    FileUploadOnly.fileup(realPath,fileItem,canteen.getCanteenId()+"_"+dishName);
+                    FileUploadOnly.fileup(realPath,fileItem, String.valueOf(dish.getDishId()));
                 }
             }
             return new Info(true,"New dish successfully");
