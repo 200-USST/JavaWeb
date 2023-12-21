@@ -1,6 +1,10 @@
 package servlet;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import service.util.Rc;
 import service.util.SharedService;
 import service.util.SharedServiceImpl;
 import jakarta.servlet.*;
@@ -10,6 +14,7 @@ import pojo.Info;
 import pojo.User;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "modifyPsw", value = "/modifyPsw")
 public class ModifyPswServlet extends HttpServlet {
@@ -27,6 +32,14 @@ public class ModifyPswServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getParameter("type").equals("newDish")){
+            ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
+            try {
+                List<FileItem> items = upload.parseRequest(new Rc(request));
+            } catch (FileUploadException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
             User user = (User) request.getSession().getAttribute("user");
             String oldPsw = request.getParameter("oldPsw");
             String newPsw = request.getParameter("newPsw");
@@ -36,5 +49,7 @@ public class ModifyPswServlet extends HttpServlet {
             request.getSession().setAttribute("info",info);
             request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
             response.sendRedirect("/200web/dashboard");
+        }
+
     }
 }

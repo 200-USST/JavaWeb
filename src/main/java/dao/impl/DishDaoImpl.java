@@ -24,12 +24,19 @@ public class DishDaoImpl implements DishDao {
     }
 
     @Override
-    public void newDish(Dish dish) {
-
+    public Dish newDish(Dish dish) {
+        return null;
     }
 
     @Override
-    public boolean isNameExist(String dishName) {
+    public boolean isNameExist(String dishName,String canteenName) {
         return false;
     }
+
+    @Override
+    public void modifyDish(Dish dish) {
+
+    }
+
+
 }

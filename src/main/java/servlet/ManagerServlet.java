@@ -1,5 +1,6 @@
 package servlet;
 
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.RequestContext;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import service.canteenAdmin.ManagerService;
@@ -39,9 +40,15 @@ public class ManagerServlet extends HttpServlet {
             out.flush();
         }
         else if(request.getParameter("type").equals("newDish")){
-            if(!ServletFileUpload.isMultipartContent((RequestContext) request)){
-                System.out.println(123);
-            };
+            String realPath1 = "C:\\Users\\15520\\IdeaProjects\\JavaWebApp\\src\\main\\webapp\\data\\dish_pics";
+            String realPath2 = "C:\\Users\\15520\\IdeaProjects\\JavaWebApp\\src\\main\\webapp\\data\\dish_picstmp";
+            Canteen canteen = (Canteen) request.getSession().getAttribute("canteen");
+            try {
+                Info info = managerService.newDish(request,realPath1,realPath2,canteen);
+                System.out.println(info.getDescription());
+            } catch (FileUploadException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

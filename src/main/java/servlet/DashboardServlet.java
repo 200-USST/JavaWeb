@@ -36,9 +36,6 @@ public class DashboardServlet extends HttpServlet {
             session.setAttribute("dishesList",dishes);
             session.setAttribute("mcMap", manager_canteen_pair);
             session.setAttribute("cmJson", canteen_manager_json.toString());
-            for(var t : users){
-                System.out.println(t.getUserName());
-            }
             if(info!=null){
                 request.setAttribute("info",info);
                 session.removeAttribute("info");
