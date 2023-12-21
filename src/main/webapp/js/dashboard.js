@@ -238,6 +238,6 @@ document.querySelectorAll(".dishes-tr").forEach((tr) => {
         inputs[4].value = tr.getAttribute("did")
 
         area.value = tr.getAttribute("dinfo")
-        img.src = img.src + tr.getAttribute("dpic")
+        img.src = img.getAttribute("basesrc") + tr.getAttribute("dpic")
     })
 })

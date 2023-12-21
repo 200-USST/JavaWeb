@@ -1,5 +1,7 @@
 package servlet;
 
+import org.apache.commons.fileupload.FileUploadException;
+import pojo.Canteen;
 import service.admin.AdminService;
 import service.admin.AdminServiceImpl;
 import jakarta.servlet.*;
@@ -20,12 +22,19 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameter("addCanteen")!=null){
-            String canteenName=request.getParameter("canteenName");
-            String canteenLocation=request.getParameter("canteenLocation");
-            String canteenAbstract=request.getParameter("canteenAbstract");
-            Info info=adminService.newCanteen(canteenName,canteenLocation,canteenAbstract);
+            String originalPath = getServletContext().getRealPath("/");
+            int targetIndex = originalPath.indexOf("target");
+            String basePath = originalPath.substring(0, targetIndex);
+            String realPath1 = basePath + "src\\main\\webapp\\data\\canteen_pics";
+            String realPath2 = basePath + "src\\main\\webapp\\data\\canteen_picstmp";
+            Info info;
+            try {
+                info = adminService.newCanteen(request,realPath1,realPath2);
+                System.out.println(info.getDescription());
+            } catch (FileUploadException e) {
+                throw new RuntimeException(e);
+            }
             request.getSession().setAttribute("info",info);
-            System.out.println(info.getDescription());
             request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
             response.sendRedirect("/200web/dashboard");
         }

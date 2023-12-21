@@ -266,7 +266,7 @@ cmJson='${cmJson}'>
 
             <h2>添加食堂</h2>
             <div class="function">
-                <form action="${pageContext.request.contextPath}/adminServlet?addCanteen=true&activeBar=canteen-info" method="post">
+                <form action="${pageContext.request.contextPath}/adminServlet?type=addCanteen&activeBar=canteen-info" enctype="multipart/form-data" method="post">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -518,7 +518,7 @@ cmJson='${cmJson}'>
                             <p>
                             <h3>菜品图片</h3>
                             <input type="file" name="file" accept="image/*" class="img-upload" readonly disabled>
-                            <img src="${pageContext.request.contextPath}/img/data/dish_pic/">
+                            <img src="" basesrc="${pageContext.request.contextPath}/data/dish_pics/">
                             </p>
 
                         </div>
@@ -535,7 +535,7 @@ cmJson='${cmJson}'>
 
             <h2>添加菜品</h2>
             <div class="function">
-                <form>
+                <form action="${pageContext.request.contextPath}/manager?type=newDish" method="post" enctype="multipart/form-data">
                     <div class="three-split">
                         <div class="split">
                             <p>
