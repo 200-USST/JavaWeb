@@ -58,8 +58,7 @@ public class ManagerServiceImpl implements ManagerService{
         String dishName = null;
         double dishPrice = 0;
         String dishClass = null;
-        String dishInfo;
-        dishInfo = null;
+        String dishInfo= null;
         String uploadfiletype = null;
         for(FileItem item : fileItems){
             if (item.isFormField()) {

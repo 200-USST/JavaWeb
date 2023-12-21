@@ -35,8 +35,6 @@ public class DishDaoImpl implements DishDao {
 
     @Override
     public void modifyDish(Dish dish) {
-
     }
-
 
 }
