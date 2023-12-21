@@ -1,7 +1,7 @@
 package servlet;
 
-import business.util.SharedService;
-import business.util.SharedServiceImpl;
+import service.util.SharedService;
+import service.util.SharedServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

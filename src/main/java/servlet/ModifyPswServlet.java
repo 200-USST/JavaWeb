@@ -1,7 +1,8 @@
 package servlet;
 
-import business.util.SharedService;
-import business.util.SharedServiceImpl;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import service.util.SharedService;
+import service.util.SharedServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -26,14 +27,14 @@ public class ModifyPswServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
-        String oldPsw = request.getParameter("oldPsw");
-        String newPsw = request.getParameter("newPsw");
-        String newPswRepeat = request.getParameter("newPswRepeat");
-        Info info=sharedService.modifyPassword(user,oldPsw,newPsw,newPswRepeat);
-        request.getSession().setAttribute("user",user);
-        request.getSession().setAttribute("info",info);
-        request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
-        response.sendRedirect("/200web/dashboard");
+            User user = (User) request.getSession().getAttribute("user");
+            String oldPsw = request.getParameter("oldPsw");
+            String newPsw = request.getParameter("newPsw");
+            String newPswRepeat = request.getParameter("newPswRepeat");
+            Info info=sharedService.modifyPassword(user,oldPsw,newPsw,newPswRepeat);
+            request.getSession().setAttribute("user",user);
+            request.getSession().setAttribute("info",info);
+            request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
+            response.sendRedirect("/200web/dashboard");
     }
 }

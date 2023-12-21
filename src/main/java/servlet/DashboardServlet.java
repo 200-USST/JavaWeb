@@ -1,7 +1,7 @@
 package servlet;
 
-import business.util.SharedService;
-import business.util.SharedServiceImpl;
+import service.util.SharedService;
+import service.util.SharedServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -29,9 +29,6 @@ public class DashboardServlet extends HttpServlet {
             session.setAttribute("userList",users);
             session.setAttribute("canteenList",canteens);
             session.setAttribute("dishesList",dishes);
-            for(var t : users){
-                System.out.println(t.getUserName());
-            }
             if(info!=null){
                 request.setAttribute("info",info);
                 session.removeAttribute("info");

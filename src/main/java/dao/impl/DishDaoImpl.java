@@ -17,9 +17,19 @@ public class DishDaoImpl implements DishDao {
         ArrayList<Dish> dishes =new ArrayList<>();
         for (var dish : result) {
             dishes.add(new Dish(
-                    (Integer) dish.get(0), (String) dish.get(1), (String) dish.get(2), (Double) dish.get(3), (String) dish.get(4), (String) dish.get(5)
+                    (Integer) dish.get(0), (String) dish.get(1), (String) dish.get(2), (Double) dish.get(3), (String) dish.get(4), (String) dish.get(5),(String) dish.get(6)
             ));
         }
         return dishes;
+    }
+
+    @Override
+    public void newDish(Dish dish) {
+
+    }
+
+    @Override
+    public boolean isNameExist(String dishName) {
+        return false;
     }
 }

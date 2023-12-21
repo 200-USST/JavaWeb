@@ -1,14 +1,15 @@
 package servlet;
 
-import business.canteenAdmin.ManagerService;
-import business.canteenAdmin.ManagerServiceImpl;
+import org.apache.commons.fileupload.RequestContext;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import service.canteenAdmin.ManagerService;
+import service.canteenAdmin.ManagerServiceImpl;
 import com.google.gson.Gson;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import pojo.Canteen;
 import pojo.Info;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -21,7 +22,7 @@ public class ManagerServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // 设置响应类型和编码
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -36,6 +37,11 @@ public class ManagerServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.print(infoJson);
             out.flush();
+        }
+        else if(request.getParameter("type").equals("newDish")){
+            if(!ServletFileUpload.isMultipartContent((RequestContext) request)){
+                System.out.println(123);
+            };
         }
     }
 }

@@ -1,6 +1,6 @@
-package business.admin;
+package service.admin;
 
-import business.util.Validator;
+import service.util.Validator;
 import dao.CanteenDao;
 import dao.UserDao;
 import dao.impl.CanteenDaoImpl;

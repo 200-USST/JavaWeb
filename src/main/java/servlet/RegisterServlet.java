@@ -1,14 +1,13 @@
 package servlet;
 
-import business.admin.AdminService;
-import business.admin.AdminServiceImpl;
-import business.user.UserService;
-import business.user.UserServiceImpl;
+import service.admin.AdminService;
+import service.admin.AdminServiceImpl;
+import service.user.UserService;
+import service.user.UserServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import pojo.Info;
-import pojo.User;
 
 import java.io.IOException;
 

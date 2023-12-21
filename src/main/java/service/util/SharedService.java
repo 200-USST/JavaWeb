@@ -1,4 +1,4 @@
-package business.util;
+package service.util;
 
 import pojo.Canteen;
 import pojo.Dish;

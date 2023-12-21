@@ -1,7 +1,7 @@
 package servlet;
 
-import business.admin.AdminService;
-import business.admin.AdminServiceImpl;
+import service.admin.AdminService;
+import service.admin.AdminServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
