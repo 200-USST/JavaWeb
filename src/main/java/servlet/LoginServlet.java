@@ -1,11 +1,10 @@
 package servlet;
 
-import business.canteenAdmin.ManagerService;
-import business.canteenAdmin.ManagerServiceImpl;
-import business.util.SharedService;
-import business.util.SharedServiceImpl;
+import service.canteenAdmin.ManagerService;
+import service.canteenAdmin.ManagerServiceImpl;
+import service.util.SharedService;
+import service.util.SharedServiceImpl;
 import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,6 +30,8 @@ public class LoginServlet extends HttpServlet {
         String userName = request.getParameter("userName");
         String password = request.getParameter("userPassword");
         User user = sharedService.login(userName,password);
+        String path = getServletContext().getRealPath("/data/dish_pics");
+        System.out.println(path);
         if(user!=null){
             HttpSession session = request.getSession(true);
             session.setAttribute("user",user);

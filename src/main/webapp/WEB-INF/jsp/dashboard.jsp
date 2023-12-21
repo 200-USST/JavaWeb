@@ -17,7 +17,17 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <title>Dashboard</title>
 </head>
-
+<script>
+    window.onload = () => {
+        let which_a = localStorage.getItem('last');
+        console.log(which_a);
+        console.log(123123);
+        if (which_a) {
+            active ( document.getElementById(which_a) )
+            // localStorage.removeItem('last')
+        }
+    };
+</script>
 <body>
 
 <div id="storage"
@@ -164,7 +174,7 @@ cmJson='${cmJson}'>
             <h2>修改密码</h2>
 
             <div class="function">
-                <form action="${pageContext.request.contextPath}/modifyPsw?activeBar=personal-info" method="post">
+                <form action="${pageContext.request.contextPath}/modifyPsw?activeBar=personal-info&type=newDish" method="post" enctype="multipart/form-data">
                     <div class="two-split">
                         <div class="split">
                             <p>
@@ -178,6 +188,7 @@ cmJson='${cmJson}'>
                             <p>
                             <h3>新密码</h3>
                             <input type="password" name="newPswRepeat" placeholder="确认密码">
+                            <input type="file" name="file" placeholder="请选择文件">
                             </p>
                         </div>
                         <div class="align-center"><div class="split">

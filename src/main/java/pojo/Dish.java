@@ -7,17 +7,27 @@ public class Dish {
     private double dishPrice;
     private String dishInfo;
     private String dishCanteen;
+    private String dishPic;
+
+    public String getDishPic() {
+        return dishPic;
+    }
+
+    public void setDishPic(String dishPic) {
+        this.dishPic = dishPic;
+    }
 
     public Dish() {
     }
 
-    public Dish(Integer dishId, String dishName, String dishClass, double dishPrice, String dishInfo, String dishCanteen) {
+    public Dish(Integer dishId, String dishName, String dishClass, double dishPrice, String dishInfo, String dishCanteen, String dishPic) {
         this.dishId = dishId;
         this.dishName = dishName;
         this.dishClass = dishClass;
         this.dishPrice = dishPrice;
         this.dishInfo = dishInfo;
         this.dishCanteen = dishCanteen;
+        this.dishPic = dishPic;
     }
 
     public Integer getDishId() {
