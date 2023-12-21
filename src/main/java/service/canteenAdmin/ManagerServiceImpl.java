@@ -91,12 +91,13 @@ public class ManagerServiceImpl implements ManagerService{
             return new Info(false,"Dish has already existed");
         }
         else {
+            System.out.println(dish.getDishPrice());
             dish= dishDao.newDish(dish);
             dish.setDishPic(dish.getDishId()+"."+uploadfiletype);
             dishDao.modifyDish(dish);
             for (FileItem fileItem : fileItems) {
                 if (!fileItem.isFormField()) {
-                    FileUploadOnly.fileup(realPath,fileItem, String.valueOf(dish.getDishId()));
+                    if(fileItem.getSize()>0) FileUploadOnly.fileup(realPath,fileItem, String.valueOf(dish.getDishId()));
                 }
             }
             return new Info(true,"New dish successfully");
