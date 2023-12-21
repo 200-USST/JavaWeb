@@ -8,14 +8,25 @@ public class Canteen implements Serializable {
     private String canteenLocation;
     private String canteenAbstract;
 
-    public Canteen(Integer canteenId, String canteenName, String canteenLocation, String canteenAbstract) {
+    private String canteenPic;
+
+    public Canteen(Integer canteenId, String canteenName, String canteenLocation, String canteenAbstract, String canteenPic) {
         this.canteenId = canteenId;
         this.canteenName = canteenName;
         this.canteenLocation = canteenLocation;
         this.canteenAbstract = canteenAbstract;
+        this.canteenPic = canteenPic;
     }
 
     public Canteen() {
+    }
+
+    public String getCanteenPic() {
+        return canteenPic;
+    }
+
+    public void setCanteenPic(String canteenPic) {
+        this.canteenPic = canteenPic;
     }
 
     public Integer getCanteenId() {

@@ -99,7 +99,6 @@ public class AdminServiceImpl implements AdminService{
             return new Info(false,"Canteen has already existed");
         }
         else {
-
 //            dish.setDishPic(dish.getDishId()+"."+uploadfiletype);
 //            dishDao.modifyDish(dish);
 //            for (FileItem fileItem : fileItems) {

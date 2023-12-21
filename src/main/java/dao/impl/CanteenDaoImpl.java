@@ -43,7 +43,7 @@ public class CanteenDaoImpl implements CanteenDao {
         );
 
         return new Canteen(
-                (Integer) result.get(0).get(0), (String) result.get(0).get(1), (String) result.get(0).get(2), (String) result.get(0).get(3)
+                (Integer) result.get(0).get(0), (String) result.get(0).get(1), (String) result.get(0).get(2), (String) result.get(0).get(3),(String) result.get(0).get(4)
         );
     }
 
@@ -86,7 +86,7 @@ public class CanteenDaoImpl implements CanteenDao {
         ArrayList<Canteen> canteens =new ArrayList<>();
         for (var can : result) {
             canteens.add(new Canteen(
-                    (Integer) can.get(0), (String) can.get(1), (String) can.get(2), (String) can.get(3)
+                    (Integer) can.get(0), (String) can.get(1), (String) can.get(2), (String) can.get(3),(String) can.get(4)
             ));
         }
         return canteens;
