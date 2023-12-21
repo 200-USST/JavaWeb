@@ -101,7 +101,8 @@ public class AdminServiceImpl implements AdminService{
         }
         else {
             canteen = canteenDao.newCanteen(canteen);
-            canteen.setCanteenPic(canteen.getCanteenId()+'.'+uploadfiletype);
+            canteen.setCanteenPic(canteen.getCanteenId()+"."+uploadfiletype);
+            System.out.println(canteen.getCanteenPic());
             canteenDao.modify(canteen);
             for (FileItem fileItem : fileItems) {
                 if (!fileItem.isFormField()) {

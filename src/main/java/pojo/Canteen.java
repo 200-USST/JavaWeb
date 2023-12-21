@@ -7,7 +7,6 @@ public class Canteen implements Serializable {
     private String canteenName;
     private String canteenLocation;
     private String canteenAbstract;
-
     private String canteenPic;
 
     public Canteen(Integer canteenId, String canteenName, String canteenLocation, String canteenAbstract, String canteenPic) {

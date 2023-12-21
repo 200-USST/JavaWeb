@@ -27,15 +27,21 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect("/200web/login.do");
         }
         else if(type.equals("manager")){//注册管理员用户
+
+        }
+    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getParameter("type").equals("manager")){//注册管理员用户
             String userName = request.getParameter("userName");
             String password = request.getParameter("userPassword");
             String passwordRe = request.getParameter("userPasswordRepeat");
             String canteenName = request.getParameter("canteenName");
             Info info = adminService.distributeCanteenAdmin(userName,password,passwordRe,canteenName);
+            System.out.println(info.getDescription());
+            request.getSession().setAttribute("info",info);
+            request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
+            response.sendRedirect("/200web/dashboard");
         }
-    }
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

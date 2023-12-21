@@ -73,10 +73,11 @@ public class CanteenDaoImpl implements CanteenDao {
         ).get(0).get(0);
 
         DbHelper.update(
-                "update canteen set canteenName = ?, canteenLocation = ?, canteenAbstract = ? where canteenID = ?",
+                "update canteen set canteenName = ?, canteenLocation = ?, canteenAbstract = ?, canteenPic = ? where canteenID = ?",
                 canteen.getCanteenName(),
                 canteen.getCanteenLocation(),
                 canteen.getCanteenAbstract(),
+                canteen.getCanteenPic(),
                 canteen.getCanteenId()
         );
         DbHelper.update(

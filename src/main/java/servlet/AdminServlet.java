@@ -21,7 +21,7 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getParameter("addCanteen")!=null){
+        if(request.getParameter("type").equals("addCanteen")){
             String originalPath = getServletContext().getRealPath("/");
             int targetIndex = originalPath.indexOf("target");
             String basePath = originalPath.substring(0, targetIndex);
@@ -30,7 +30,6 @@ public class AdminServlet extends HttpServlet {
             Info info;
             try {
                 info = adminService.newCanteen(request,realPath1,realPath2);
-                System.out.println(info.getDescription());
             } catch (FileUploadException e) {
                 throw new RuntimeException(e);
             }

@@ -378,9 +378,9 @@ cmJson='${cmJson}'>
             </div>
 
 
-            <h2>添加账号</h2>
+            <h2>分发管理员账号</h2>
             <div class="function">
-                <form class="switch">
+                <form action="${pageContext.request.contextPath}/register.do?type=manager" class="switch" method="post">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -389,11 +389,14 @@ cmJson='${cmJson}'>
                             </p>
                             <p>
                             <h3>用户密码</h3>
-                            <input type="text" name="userPassword" placeholder="密码">
+                            <input type="password" name="userPassword" placeholder="密码">
+                            </p>
+                            <h3>密码确认</h3>
+                            <input type="password" name="userPasswordRepeat" placeholder="再次输入密码">
                             </p>
                             <p>
-                            <h3>用户类型</h3>
-                            <input type="text" name="userIdentity" placeholder="用户类型">
+                            <h3>管理食堂</h3>
+                            <input type="text" name="canteenName" placeholder="管理食堂">
                             </p>
                         </div>
                         <div class="split">
@@ -493,7 +496,7 @@ cmJson='${cmJson}'>
 
             <h2>菜品信息</h2>
             <div class="function">
-                <form class="switch">
+                <form class="switch" action="${pageContext.request.contextPath}/manager?type=newDish&activeBar=dishes-guard" method="post" enctype="multipart/form-data">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -535,7 +538,7 @@ cmJson='${cmJson}'>
 
             <h2>添加菜品</h2>
             <div class="function">
-                <form action="${pageContext.request.contextPath}/manager?type=newDish" method="post" enctype="multipart/form-data">
+                <form action="${pageContext.request.contextPath}/manager?type=newDish&activeBar=dishes-guard" method="post" enctype="multipart/form-data">
                     <div class="three-split">
                         <div class="split">
                             <p>
