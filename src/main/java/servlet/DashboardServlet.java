@@ -12,6 +12,9 @@ import pojo.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "dashboardServlet", value = "/dashboard")
 public class DashboardServlet extends HttpServlet {
@@ -25,10 +28,14 @@ public class DashboardServlet extends HttpServlet {
             ArrayList<User> users=new ArrayList<>();
             ArrayList<Canteen> canteens = new ArrayList<>();
             ArrayList<Dish> dishes=new ArrayList<>();
-            sharedService.updateAllInfo(users,canteens,dishes);
+            Map<String, Canteen> manager_canteen_pair = new HashMap<>();
+            StringBuilder canteen_manager_json = new StringBuilder();
+            sharedService.updateAllInfo(users,canteens,dishes, manager_canteen_pair, canteen_manager_json);
             session.setAttribute("userList",users);
             session.setAttribute("canteenList",canteens);
             session.setAttribute("dishesList",dishes);
+            session.setAttribute("mcMap", manager_canteen_pair);
+            session.setAttribute("cmJson", canteen_manager_json.toString());
             for(var t : users){
                 System.out.println(t.getUserName());
             }

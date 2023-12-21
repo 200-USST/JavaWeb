@@ -362,6 +362,8 @@ main .recent-orders table{
     box-shadow: var(--box-shadow);
     border-radius: var(--card-border-radius);
     transition: all 0.3s ease;
+
+    margin: 1rem 0 2rem 0;
 }
 
 main .recent-orders table:hover{
@@ -751,7 +753,7 @@ main .function:hover{
 
 input {
     font-family: inherit;
-    color: var(--color-dark);
+    color: var(--color-dark-variant);
     border: none;
     margin: 8px 0;
     padding: 10px 15px;
@@ -772,7 +774,7 @@ input[readonly] {
 
 textarea {
     font-family: inherit;
-    color: var(--color-dark);
+    color: var(--color-dark-variant);
     border: none;
     margin: 8px 0;
     padding: 10px 15px;
@@ -833,5 +835,10 @@ button{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#canteen-manager {
+    margin: 8px 0;
+    padding: 10px 15px;
 }
 

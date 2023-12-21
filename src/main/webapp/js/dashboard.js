@@ -72,8 +72,9 @@ item.forEach((a) => {
 // 设置可编辑
 let modify_butts = document.querySelectorAll(".modify");
 let submit_butts = document.querySelectorAll(".submit");
+let delete_butts = document.querySelectorAll(".delete");
 
-modify_butts.forEach((butt, i) => {
+modify_butts.forEach((butt) => {
     butt.addEventListener("click", () => {
         // 获取当前按钮所在的表单
         let form = butt.closest('.switch');
@@ -81,6 +82,8 @@ modify_butts.forEach((butt, i) => {
         // 修改当前表单中的元素
         form.querySelector(".modify").style.display = "none";
         form.querySelector(".submit").style.display = "inline";
+        let del_butt = form.querySelector(".delete")
+        if (del_butt) del_butt.style.display = "inline"
 
         let all_input = form.querySelectorAll("input");
         all_input.forEach((e) => {
@@ -89,18 +92,20 @@ modify_butts.forEach((butt, i) => {
         });
 
         let area = form.querySelector("textarea");
-        if (area != null) area.removeAttribute("readonly")
+        if (area) area.removeAttribute("readonly")
     });
 });
 
-submit_butts.forEach((butt, i) => {
-    butt.addEventListener("click", (event) => {
+submit_butts.forEach((butt) => {
+    butt.addEventListener("click", () => {
         // 获取当前按钮所在的表单
         let form = butt.closest('.switch');
 
         // 修改当前表单中的元素
         form.querySelector(".modify").style.display = "inline";
         form.querySelector(".submit").style.display = "none";
+        let del_butt = form.querySelector(".delete")
+        if (del_butt) del_butt.style.display = "none"
 
         let all_input = form.querySelectorAll("input");
         all_input.forEach((e) => {
@@ -108,22 +113,69 @@ submit_butts.forEach((butt, i) => {
         });
 
         let area = form.querySelector("textarea");
-        if (area != null) area.setAttribute("readonly", true)
+        if (area) area.setAttribute("readonly", true)
     });
 });
+
+delete_butts.forEach((butt) => {
+    butt.addEventListener("click", () => {
+        // 获取当前按钮所在的表单
+        let form = butt.closest('.switch');
+
+        // 修改当前表单中的元素
+        form.querySelector(".modify").style.display = "inline";
+        form.querySelector(".submit").style.display = "none";
+        form.querySelector(".delete").style.display = "none";
+
+        let all_input = form.querySelectorAll("input");
+        all_input.forEach((e) => {
+            e.setAttribute("readonly", true);
+        });
+
+        let area = form.querySelector("textarea");
+        if (area) area.setAttribute("readonly", true)
+    })
+})
 
 
 
 
 // canteen-info
 
-document.querySelectorAll(".butt-tr").forEach((tr) => {
+document.querySelectorAll(".canteen-tr").forEach((tr) => {
     tr.addEventListener("click", () => {
-        let canteen_input = document.querySelectorAll("#modify-canteen input")
-        let canteen_area = document.querySelector("#modify-canteen textarea")
-        canteen_input[0].value = tr.getAttribute("cname")
-        canteen_input[1].value = tr.getAttribute("clocation")
-        canteen_area.value = tr.getAttribute("cabstract")
+        let form = tr.closest('main').querySelector("form.switch")
+        let inputs = form.querySelectorAll("input")
+        let area = form.querySelector("textarea")
+        inputs[0].value = tr.getAttribute("cname")
+        inputs[1].value = tr.getAttribute("clocation")
+        inputs[2].value = tr.getAttribute("cid")
+        area.value = tr.getAttribute("cabstract")
+
+        let json = document.getElementById("storage").getAttribute("cmJson")
+        let p_tag = form.querySelector("#canteen-manager")
+        p_tag.innerText = ''
+        json = JSON.parse(json)
+        let manager_list = json[tr.getAttribute("cname")]
+        for (var i in manager_list) {
+            p_tag.innerText += manager_list[i] + '、'
+        }
+    })
+})
+
+// account-info
+
+document.querySelectorAll(".account-tr").forEach((tr) => {
+    tr.addEventListener("click", () => {
+        let form = tr.closest('main').querySelector("form.switch")
+        let inputs = form.querySelectorAll("input")
+        inputs[0].value = tr.getAttribute("uname")
+        inputs[1].value = tr.getAttribute("upassword")
+        inputs[2].value = tr.getAttribute("uidentity")
+        inputs[3].value = tr.getAttribute("ugender")
+        inputs[4].value = tr.getAttribute("uage")
+        inputs[5].value = tr.getAttribute("ucanteen")
+        inputs[6].value = tr.getAttribute("uid")
     })
 })
 

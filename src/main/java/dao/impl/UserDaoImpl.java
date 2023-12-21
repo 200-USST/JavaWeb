@@ -1,10 +1,15 @@
 package dao.impl;
 
+import dao.CanteenDao;
 import dao.UserDao;
+import pojo.Canteen;
 import pojo.User;
 import dao.util.DatabaseHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class UserDaoImpl implements UserDao {
     private final DatabaseHelper DbHelper = new DatabaseHelper();
@@ -42,6 +47,19 @@ public class UserDaoImpl implements UserDao {
     }
 
     public void modify(User user) {
+        if (user.getUserIdentity().equals("manager")) {
+            var origin_name = DbHelper.query(
+                    "select userName from user where userID = ?",
+                    user.getId()
+            ).get(0).get(0);
+
+            DbHelper.update(
+                    "update canteen_manager set managerName = ? where managerName = ?",
+                    user.getUserName(),
+                    origin_name
+            );
+        }
+
         DbHelper.update(
                 "update user set userName = ?, userPassword = ?, userIdentity = ?, userGender = ?, userAge = ? where userID = ?",
                 user.getUserName(),
@@ -91,5 +109,20 @@ public class UserDaoImpl implements UserDao {
             ));
         }
         return users;
+    }
+
+    public Map<String, Canteen> getAllManagersWithCanteen() {
+        var result = DbHelper.query(
+                "select * from canteen_manager"
+        );
+
+        CanteenDao canteenDao = new CanteenDaoImpl();
+        Map<String, Canteen> pair = new HashMap<>();
+        for (var row : result) {
+            var manager = (String) row.get(1);
+            var canteen = canteenDao.findCanteen(manager);
+            pair.put(manager, canteen);
+        }
+        return pair;
     }
 }

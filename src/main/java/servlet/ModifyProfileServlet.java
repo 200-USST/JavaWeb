@@ -23,7 +23,9 @@ public class ModifyProfileServlet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         String userName = request.getParameter("userName");
         String age = request.getParameter("userAge");
+        age = age.isBlank() ? null : age;
         String gender = request.getParameter("userGender");
+        gender = gender.isBlank() ? null : gender;
         Info info=sharedService.modifyProfile(user,userName,age,gender);
         request.getSession().setAttribute("user",user);
         request.getSession().setAttribute("info",info);
