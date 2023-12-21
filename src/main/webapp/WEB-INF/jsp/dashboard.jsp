@@ -279,13 +279,16 @@ cmJson='${cmJson}'>
                             <input type="text" name="canteenLocation" placeholder="食堂位置">
                             </p>
                             <p>
-                        </div>
-                        <div class="split">
-                            <p>
                             <h3>食堂简介</h3>
                             <textarea name="canteenAbstract" placeholder="食堂简介" rows="4"></textarea>
                             </p>
+                        </div>
+                        <div class="split">
                             <p>
+                            <h3>食堂照片</h3>
+                            <input type="file" name="file" accept="image/*" class="img-upload">
+                            <img src="">
+                            </p>
                         </div>
                         <div class="align-center"><div class="split">
                             <button type="submit" class="submit">添加</button>
