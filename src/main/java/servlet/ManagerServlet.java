@@ -38,20 +38,23 @@ public class ManagerServlet extends HttpServlet {
             response.sendRedirect("/200web/dashboard");
         }
         else if(request.getParameter("type").equals("newDish")){//处理新增菜品请求
-
             String originalPath = getServletContext().getRealPath("/");
             int targetIndex = originalPath.indexOf("target");
             String basePath = originalPath.substring(0, targetIndex);
             String realPath1 = basePath + "src\\main\\webapp\\data\\dish_pics";
             String realPath2 = basePath + "src\\main\\webapp\\data\\dish_picstmp";
 //          Canteen canteen = (Canteen) request.getSession().getAttribute("canteen");
+            Info info;
             Canteen canteen = new Canteen(1,"思餐厅","南校","好吃");
             try {
-                Info info = managerService.newDish(request,realPath1,realPath2,canteen);
+                info = managerService.newDish(request,realPath1,realPath2,canteen);
                 System.out.println(info.getDescription());
             } catch (FileUploadException e) {
                 throw new RuntimeException(e);
             }
+            request.getSession().setAttribute("info",info);
+            request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
+            response.sendRedirect("/200web/dashboard");
         }
     }
 }

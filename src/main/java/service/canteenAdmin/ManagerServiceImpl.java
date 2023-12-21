@@ -98,6 +98,7 @@ public class ManagerServiceImpl implements ManagerService{
             for (FileItem fileItem : fileItems) {
                 if (!fileItem.isFormField()) {
                     if(fileItem.getSize()>0) FileUploadOnly.fileup(realPath,fileItem, String.valueOf(dish.getDishId()));
+                    else System.out.println(12);
                 }
             }
             return new Info(true,"New dish successfully");

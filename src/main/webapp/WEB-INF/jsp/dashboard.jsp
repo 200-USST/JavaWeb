@@ -174,7 +174,7 @@ cmJson='${cmJson}'>
             <h2>修改密码</h2>
 
             <div class="function">
-                <form action="${pageContext.request.contextPath}/modifyPsw?activeBar=personal-info&type=newDish" method="post" enctype="multipart/form-data">
+                <form action="${pageContext.request.contextPath}/modifyPsw?activeBar=personal-info&type=newDish" method="post">
                     <div class="two-split">
                         <div class="split">
                             <p>
@@ -188,7 +188,6 @@ cmJson='${cmJson}'>
                             <p>
                             <h3>新密码</h3>
                             <input type="password" name="newPswRepeat" placeholder="确认密码">
-                            <input type="file" name="file" placeholder="请选择文件">
                             </p>
                         </div>
                         <div class="align-center"><div class="split">

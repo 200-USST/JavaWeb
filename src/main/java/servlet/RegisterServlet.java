@@ -33,8 +33,6 @@ public class RegisterServlet extends HttpServlet {
             String canteenName = request.getParameter("canteenName");
             Info info = adminService.distributeCanteenAdmin(userName,password,passwordRe,canteenName);
         }
-
-
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
