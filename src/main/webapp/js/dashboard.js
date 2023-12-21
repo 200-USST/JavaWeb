@@ -93,6 +93,12 @@ modify_butts.forEach((butt) => {
 
         let area = form.querySelector("textarea");
         if (area) area.removeAttribute("readonly")
+
+        let file_input = form.querySelector(".img-upload");
+        if (file_input) {
+            if (file_input.classList.contains("cannot-modify")) return;
+            file_input.removeAttribute("disabled")
+        }
     });
 });
 
@@ -114,6 +120,9 @@ submit_butts.forEach((butt) => {
 
         let area = form.querySelector("textarea");
         if (area) area.setAttribute("readonly", true)
+
+        let file_input = form.querySelector(".img-upload");
+        if (file_input) file_input.setAttribute("disabled", true)
     });
 });
 
@@ -134,6 +143,9 @@ delete_butts.forEach((butt) => {
 
         let area = form.querySelector("textarea");
         if (area) area.setAttribute("readonly", true)
+
+        let file_input = form.querySelector(".img-upload");
+        if (file_input) file_input.setAttribute("disabled", true)
     })
 })
 
@@ -154,12 +166,13 @@ document.querySelectorAll(".canteen-tr").forEach((tr) => {
 
         let json = document.getElementById("storage").getAttribute("cmJson")
         let p_tag = form.querySelector(".input-like")
-        p_tag.innerText = ''
+        let text = ''
         json = JSON.parse(json)
         let manager_list = json[tr.getAttribute("cname")]
         for (var i in manager_list) {
-            p_tag.innerText += manager_list[i] + '、'
+            text += manager_list[i] + '、'
         }
+        p_tag.innerText = text
     })
 })
 
@@ -197,3 +210,34 @@ document.querySelectorAll(".account-tr").forEach((tr) => {
     })
 })
 
+// canteen-guard
+
+document.addEventListener("DOMContentLoaded", () => {
+    let json = document.getElementById("storage").getAttribute("cmJson")
+    let p_tag = document.querySelector("#canteen-guard-main p.input-like")
+    let text = ''
+    json = JSON.parse(json)
+    let manager_list = json[p_tag.getAttribute("cname")]
+    for (var i in manager_list) {
+        text += manager_list[i] + '、'
+    }
+    p_tag.innerText = text;
+})
+
+// dish-guard
+
+document.querySelectorAll(".dishes-tr").forEach((tr) => {
+    tr.addEventListener("click", () => {
+        let form = tr.closest('main').querySelector("form.switch")
+        let inputs = form.querySelectorAll("input")
+        let area = form.querySelector("textarea")
+        let img = form.querySelector("img")
+        inputs[0].value = tr.getAttribute("dname")
+        inputs[1].value = tr.getAttribute("dclass")
+        inputs[2].value = tr.getAttribute("dprice")
+        inputs[4].value = tr.getAttribute("did")
+
+        area.value = tr.getAttribute("dinfo")
+        img.src = img.src + tr.getAttribute("dpic")
+    })
+})
