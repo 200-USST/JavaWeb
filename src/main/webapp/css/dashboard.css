@@ -310,16 +310,16 @@ main .analyse .progresss .percentage{
     width: 100%;
 }
 
-main .new-users{
-    margin-top: 1.3rem;
-}
+/*main .new-users{*/
+/*    margin-top: 1.3rem;*/
+/*}*/
 
-main .new-users .user-list{
-    background-color: var(--color-white);
+main .user-list{
+    /*background-color: var(--color-white);*/
     padding: var(--card-padding);
-    border-radius: var(--card-border-radius);
+    /*border-radius: var(--card-border-radius);*/
     margin-top: 1rem;
-    box-shadow: var(--box-shadow);
+    /*box-shadow: var(--box-shadow);*/
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -328,18 +328,18 @@ main .new-users .user-list{
     transition: all 0.3s ease;
 }
 
-main .new-users .user-list:hover{
-    box-shadow: none;
-}
+/*main .new-users .user-list:hover{*/
+/*    box-shadow: none;*/
+/*}*/
 
-main .new-users .user-list .user{
+main .user-list .user{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-main .new-users .user-list .user img{
+main .user-list .user img{
     width: 5rem;
     height: 5rem;
     margin-bottom: 0.4rem;
@@ -844,4 +844,9 @@ button{
 
 form img {
     margin-top: 1rem;
+}
+
+.info-display img {
+    height: 20rem;
+    width: auto;
 }

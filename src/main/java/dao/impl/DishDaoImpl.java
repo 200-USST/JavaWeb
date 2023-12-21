@@ -2,11 +2,13 @@ package dao.impl;
 
 import dao.DishDao;
 import dao.util.DatabaseHelper;
+import pojo.Canteen;
 import pojo.Dish;
 import pojo.User;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DishDaoImpl implements DishDao {
     private final DatabaseHelper DbHelper = new DatabaseHelper();
@@ -15,13 +17,7 @@ public class DishDaoImpl implements DishDao {
         var result = DbHelper.query(
                 "select * from dish"
         );
-        ArrayList<Dish> dishes =new ArrayList<>();
-        for (var dish : result) {
-            dishes.add(new Dish(
-                    (Integer) dish.get(0), (String) dish.get(1), (String) dish.get(2), ((BigDecimal) dish.get(5)).doubleValue(), (String) dish.get(3), (Integer) dish.get(4),(String) dish.get(6)
-            ));
-        }
-        return dishes;
+        return (ArrayList<Dish>) makeResultList(result);
     }
 
     @Override
@@ -63,5 +59,31 @@ public class DishDaoImpl implements DishDao {
                 "update dish set dishesName = ?, dishesCuisine = ?, dishesAbstract = ?, dishesPrice = ?, dishPic = ? where dishesID = ?",
                 dish.getDishName(), dish.getDishClass(), dish.getDishInfo(), dish.getDishPrice(), dish.getDishPic(), dish.getDishId()
         );
+    }
+
+    @Override
+    public List<Dish> getAllDishesSoldIn(Canteen canteen) {
+        var result = DbHelper.query(
+                "select * from dish where dishesCanteen = ?",
+                canteen.getCanteenId()
+        );
+
+        return makeResultList(result);
+    }
+
+    private List<Dish> makeResultList(List<List<Object>> result) {
+        List<Dish> list = new ArrayList<>();
+        for (var row : result) {
+            list.add(new Dish(
+                    (Integer) row.get(0),
+                    (String) row.get(1),
+                    (String) row.get(2),
+                    ((BigDecimal) row.get(5)).doubleValue(),
+                    (String) row.get(3),
+                    (Integer) row.get(4),
+                    (String) row.get(6)
+            ));
+        }
+        return list;
     }
 }

@@ -30,12 +30,14 @@ public class DashboardServlet extends HttpServlet {
             ArrayList<Dish> dishes=new ArrayList<>();
             Map<String, Canteen> manager_canteen_pair = new HashMap<>();
             StringBuilder canteen_manager_json = new StringBuilder();
-            sharedService.updateAllInfo(users,canteens,dishes, manager_canteen_pair, canteen_manager_json);
+            Map<String, List<Dish>> canteen_dishes_dict = new HashMap<>();
+            sharedService.updateAllInfo(users,canteens,dishes, manager_canteen_pair, canteen_manager_json, canteen_dishes_dict);
             session.setAttribute("userList",users);
             session.setAttribute("canteenList",canteens);
             session.setAttribute("dishesList",dishes);
             session.setAttribute("mcMap", manager_canteen_pair);
             session.setAttribute("cmJson", canteen_manager_json.toString());
+            session.setAttribute("cdMap", canteen_dishes_dict);
             if(info!=null){
                 request.setAttribute("info",info);
                 session.removeAttribute("info");

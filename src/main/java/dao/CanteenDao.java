@@ -1,6 +1,7 @@
 package dao;
 
 import pojo.Canteen;
+import pojo.Dish;
 import pojo.User;
 
 import java.util.ArrayList;
@@ -15,4 +16,5 @@ public interface CanteenDao {
     void modify(Canteen canteen);
     ArrayList<Canteen> queryAllCanteens();
     Map<String, List<String>> getAllCanteenWithManager ();
+    Map<String, List<Dish>> getAllCanteenWithDishes ();
 }

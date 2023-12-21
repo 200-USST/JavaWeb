@@ -1,7 +1,9 @@
 package dao.impl;
 
 import dao.CanteenDao;
+import dao.DishDao;
 import pojo.Canteen;
+import pojo.Dish;
 import pojo.User;
 import dao.util.DatabaseHelper;
 
@@ -117,6 +119,20 @@ public class CanteenDaoImpl implements CanteenDao {
             }
             map.put((String) canteen.get(0), manager_list);
         }
+        return map;
+    }
+
+    @Override
+    public Map<String, List<Dish>> getAllCanteenWithDishes() {
+        DishDao dishDao = new DishDaoImpl();
+
+        var all_canteen = queryAllCanteens();
+        Map<String, List<Dish>> map = new HashMap<>();
+        for (var canteen : all_canteen) {
+            var dishes_sold_in_canteen = dishDao.getAllDishesSoldIn(canteen);
+            map.put(canteen.getCanteenName(), dishes_sold_in_canteen);
+        }
+
         return map;
     }
 }

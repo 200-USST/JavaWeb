@@ -17,17 +17,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <title>Dashboard</title>
 </head>
-<script>
-    window.onload = () => {
-        let which_a = localStorage.getItem('last');
-        console.log(which_a);
-        console.log(123123);
-        if (which_a) {
-            active ( document.getElementById(which_a) )
-            // localStorage.removeItem('last')
-        }
-    };
-</script>
 <body>
 
 <div id="storage"
@@ -297,7 +286,6 @@ cmJson='${cmJson}'>
             </div>
         </main>
 
-
         <main id="accounts-manage-main">
             <h1>账号信息管理</h1>
             <div class="recent-orders">
@@ -421,8 +409,6 @@ cmJson='${cmJson}'>
 
         </main>
 
-
-
         <main id="canteen-guard-main">
             <h1>食堂信息维护</h1>
             <div class="function">
@@ -463,7 +449,6 @@ cmJson='${cmJson}'>
             </div>
         </main>
 
-
         <main id="dishes-guard-main">
             <h1>菜品信息维护</h1>
             <div class="recent-orders">
@@ -476,7 +461,7 @@ cmJson='${cmJson}'>
                     </tr>
                     </thead>
                     <tbody>
-<c:forEach items="${dishesList}" var="dishes">
+<c:forEach items="${cdMap[mcMap[user.userName].canteenName]}" var="dishes">
                         <tr class="dishes-tr"
                             did="${dishes.dishId}"
                             dname="${dishes.dishName}"
@@ -573,6 +558,78 @@ cmJson='${cmJson}'>
                     </div>
                 </form>
             </div>
+
+        </main>
+
+        <main id="dishes-search-main">
+            <h1>菜品检索</h1>
+            <div class="function">
+                <form class="check">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>检索框</h3>
+                            <input type="text" name="checkbox">
+                            </p>
+                        </div>
+                        <div class="split">
+                            <p>
+                            <h3>按菜系/价格/食堂检索</h3>
+                            <input type="text" name="checkby">
+                            </p>
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="check-in">检索</button>
+                        </div></div>
+                    </div>
+                </form>
+                <div class="user-list">
+<c:forEach items="${dishesList}" var="dishes">
+                    <div class="user"
+                         did="${dishes.dishId}"
+                         dname="${dishes.dishName}"
+                         dclass="${dishes.dishClass}"
+                         dprice="${dishes.dishPrice}"
+                         dinfo="${dishes.dishInfo}"
+                         dcanteen="${dishes.dishCanteenId}"
+                         dpic="${dishes.dishPic}">
+                        <img src="${pageContext.request.contextPath}/data/dish_pics/${dishes.dishPic}">
+                        <h2>${dishes.dishName}</h2>
+                        <p>${dishes.dishPrice} 元</p>
+                    </div>
+</c:forEach>
+                </div>
+            </div>
+
+            <form action="dishes-search" class="info-display">
+            <h2>菜品信息</h2>
+                <div class="function">
+                    <div class="two-split">
+                        <div class="split">
+                            <h3>菜品名</h3>
+                            <p class="input-like"></p>
+                            <h3>菜系</h3>
+                            <p class="input-like"></p>
+                            <h3>价格</h3>
+                            <p class="input-like"></p>
+                            <h3>简介</h3>
+                            <p class="input-like"></p>
+                        </div>
+                        <div class="split">
+                            <h3>菜品图片</h3>
+                            <img src="" basesrc="${pageContext.request.contextPath}/data/dish_pics/">
+                        </div>
+                    </div>
+                </div>
+
+            <h2>评价</h2>
+            <div class="function">
+                <p>
+                <textarea name="comments" rows="4" readonly></textarea>
+                </p>
+            </div>
+                <input type="hidden" name="dishId">
+            </form>
 
         </main>
 

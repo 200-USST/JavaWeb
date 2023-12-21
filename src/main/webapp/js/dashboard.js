@@ -241,3 +241,19 @@ document.querySelectorAll(".dishes-tr").forEach((tr) => {
         img.src = img.getAttribute("basesrc") + tr.getAttribute("dpic")
     })
 })
+
+// dish-search
+document.querySelectorAll("#dishes-search-main div.user").forEach((div) => {
+    div.addEventListener("click", () => {
+        let form = div.closest('main').querySelector("form.info-display")
+        let p_tag = form.querySelectorAll("p")
+        let img = form.querySelector("img")
+        p_tag[0].innerText = div.getAttribute("dname")
+        p_tag[1].innerText = div.getAttribute("dclass")
+        p_tag[2].innerText = div.getAttribute("dprice")
+        p_tag[3].innerText = div.getAttribute("dinfo")
+
+        img.src = img.getAttribute("basesrc") + div.getAttribute("dpic")
+    })
+})
+
