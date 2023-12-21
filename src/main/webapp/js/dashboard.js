@@ -87,7 +87,7 @@ modify_butts.forEach((butt) => {
 
         let all_input = form.querySelectorAll("input");
         all_input.forEach((e) => {
-            if (e.id === "cannot-modify") return;
+            if (e.classList.contains("cannot-modify")) return;
             e.removeAttribute("readonly");
         });
 
@@ -153,7 +153,7 @@ document.querySelectorAll(".canteen-tr").forEach((tr) => {
         area.value = tr.getAttribute("cabstract")
 
         let json = document.getElementById("storage").getAttribute("cmJson")
-        let p_tag = form.querySelector("#canteen-manager")
+        let p_tag = form.querySelector(".input-like")
         p_tag.innerText = ''
         json = JSON.parse(json)
         let manager_list = json[tr.getAttribute("cname")]

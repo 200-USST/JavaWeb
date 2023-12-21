@@ -139,7 +139,7 @@ cmJson='${cmJson}'>
                             </p>
                             <p>
                             <h3>用户类型</h3>
-                            <input type="text" name="userIdentity" value="${user.userIdentity}" readonly id="cannot-modify">
+                            <input type="text" name="userIdentity" value="${user.userIdentity}" readonly class="cannot-modify">
                             </p>
                         </div>
                         <div class="split">
@@ -247,7 +247,7 @@ cmJson='${cmJson}'>
                     <input type="hidden" name="canteenId">
                     <div class="split">
                         <h3>食堂管理者</h3>
-                        <p id="canteen-manager"></p>
+                        <p class="input-like"></p>
                     </div>
                 </form>
             </div>
