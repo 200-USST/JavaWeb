@@ -12,10 +12,18 @@ public class CanteenDaoImpl implements CanteenDao {
     @Override
     public Canteen newCanteen(Canteen canteen) {
         DbHelper.update(
-                "insert into canteen (canteenName, canteenLocation, canteenAbstract) values (?, ?, ?)",
-                canteen.getCanteenName(), canteen.getCanteenLocation(), canteen.getCanteenAbstract()
+                "insert into canteen (canteenName, canteenLocation, canteenAbstract, canteenPic) values (?, ?, ?, ?)",
+                canteen.getCanteenName(), canteen.getCanteenLocation(), canteen.getCanteenAbstract(), canteen.getCanteenPic()
         );
-        return null;
+
+        var result = DbHelper.query(
+                "select * from canteen where canteenName = ?",
+                canteen.getCanteenName()
+        );
+
+        return new Canteen(
+                (Integer) result.get(0).get(0), (String) result.get(0).get(1), (String) result.get(0).get(2), (String) result.get(0).get(3), (String) result.get(0).get(4)
+        );
     }
 
     @Override
