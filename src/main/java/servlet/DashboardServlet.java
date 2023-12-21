@@ -42,7 +42,6 @@ public class DashboardServlet extends HttpServlet {
                 System.out.println(info.getFlag());
                 System.out.println(info.getDescription());
             }
-            var user_identity=user.getUserIdentity();
             request.getRequestDispatcher("/WEB-INF/jsp/dashboard.jsp").forward(request,response);
         }
         else {

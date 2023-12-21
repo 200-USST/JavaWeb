@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import pojo.User;
 
+import java.io.File;
 import java.io.IOException;
 
 @WebServlet(name = "loginServlet", value = "/login.do")
@@ -30,8 +31,6 @@ public class LoginServlet extends HttpServlet {
         String userName = request.getParameter("userName");
         String password = request.getParameter("userPassword");
         User user = sharedService.login(userName,password);
-        String path = getServletContext().getRealPath("/data/dish_pics");
-        System.out.println(path);
         if(user!=null){
             HttpSession session = request.getSession(true);
             session.setAttribute("user",user);

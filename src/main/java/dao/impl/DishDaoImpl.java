@@ -5,6 +5,7 @@ import dao.util.DatabaseHelper;
 import pojo.Dish;
 import pojo.User;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class DishDaoImpl implements DishDao {
@@ -17,7 +18,7 @@ public class DishDaoImpl implements DishDao {
         ArrayList<Dish> dishes =new ArrayList<>();
         for (var dish : result) {
             dishes.add(new Dish(
-                    (Integer) dish.get(0), (String) dish.get(1), (String) dish.get(2), (Double) dish.get(3), (String) dish.get(4), (Integer) dish.get(5),(String) dish.get(6)
+                    (Integer) dish.get(0), (String) dish.get(1), (String) dish.get(2), ((BigDecimal) dish.get(5)).doubleValue(), (String) dish.get(3), (Integer) dish.get(4),(String) dish.get(6)
             ));
         }
         return dishes;
@@ -31,14 +32,15 @@ public class DishDaoImpl implements DishDao {
         );
 
         var result = DbHelper.query(
-                "select * from dish where dishesID = last_insert_id()"
+                "select * from dish where dishesName = ? and dishesCanteen = ?",
+                dish.getDishName(), dish.getDishCanteenId()
         );
 
         return new Dish(
                 (Integer) result.get(0).get(0),
                 (String) result.get(0).get(1),
                 (String) result.get(0).get(2),
-                (Double) result.get(0).get(5),
+                ((BigDecimal) result.get(0).get(5)).doubleValue(),
                 (String) result.get(0).get(3),
                 (Integer) result.get(0).get(4),
                 (String) result.get(0).get(6)
