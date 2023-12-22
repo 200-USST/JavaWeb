@@ -147,6 +147,7 @@ document.querySelectorAll(".canteen-tr").forEach((tr) => {
         inputs[0].value = tr.getAttribute("cname")
         inputs[1].value = tr.getAttribute("clocation")
         inputs[3].value = tr.getAttribute("cid")
+        inputs[4].value = tr.getAttribute("cpic")
         area.value = tr.getAttribute("cabstract")
 
         let json = document.getElementById("storage").getAttribute("cmJson")
@@ -224,6 +225,7 @@ document.querySelectorAll(".dishes-tr").forEach((tr) => {
         inputs[1].value = tr.getAttribute("dclass")
         inputs[2].value = tr.getAttribute("dprice")
         inputs[4].value = tr.getAttribute("did")
+        inputs[5].value = tr.getAttribute("dpic")
 
         area.value = tr.getAttribute("dinfo")
         img.src = img.getAttribute("basesrc") + tr.getAttribute("dpic")

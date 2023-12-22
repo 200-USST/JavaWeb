@@ -250,6 +250,7 @@ cmJson='${cmJson}'>
                         </div></div>
                     </div>
                     <input type="hidden" name="canteenId">
+                    <input type="hidden" name="canteenPic">
                 </form>
             </div>
 
@@ -519,6 +520,7 @@ cmJson='${cmJson}'>
                         </div></div>
                     </div>
                     <input type="hidden" name="dishId">
+                    <input type="hidden" name="dishPic">
                 </form>
             </div>
 
