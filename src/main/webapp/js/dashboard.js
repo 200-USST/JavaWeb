@@ -260,3 +260,17 @@ document.querySelectorAll("#dishes-search-main div.user").forEach((div) => {
     })
 })
 
+// canteen-search
+document.querySelectorAll("#canteen-search-main div.user").forEach((div) => {
+    div.addEventListener("click", () => {
+        let form = div.closest('main').querySelector("form.info-display")
+        let p_tag = form.querySelectorAll("p")
+        let img = form.querySelector("img")
+        p_tag[0].innerText = div.getAttribute("cname")
+        p_tag[1].innerText = div.getAttribute("clocation")
+        p_tag[2].innerText = div.getAttribute("cabstract")
+
+        img.src = img.getAttribute("basesrc") + div.getAttribute("cpic")
+    })
+})
+

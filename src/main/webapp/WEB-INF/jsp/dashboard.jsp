@@ -672,26 +672,24 @@ cmJson='${cmJson}'>
                 </div>
             </div>
 
-            <form action="dishes-search" class="info-display">
-            <h2>菜品信息</h2>
-            <div class="function">
-                <div class="two-split">
-                    <div class="split">
-                        <h3>菜品名</h3>
-                        <p class="input-like"></p>
-                        <h3>菜系</h3>
-                        <p class="input-like"></p>
-                        <h3>价格</h3>
-                        <p class="input-like"></p>
-                        <h3>简介</h3>
-                        <p class="input-like"></p>
-                    </div>
-                    <div class="split">
-                        <h3>菜品图片</h3>
-                        <img src="" basesrc="${pageContext.request.contextPath}/data/dish_pics/">
+            <form action="canteen-search" class="info-display">
+                <h2>食堂信息</h2>
+                <div class="function">
+                    <div class="two-split">
+                        <div class="split">
+                            <h3>食堂名</h3>
+                            <p class="input-like"></p>
+                            <h3>食堂位置</h3>
+                            <p class="input-like"></p>
+                            <h3>食堂简介</h3>
+                            <p class="input-like"></p>
+                        </div>
+                        <div class="split">
+                            <h3>食堂照片</h3>
+                            <img src="" basesrc="${pageContext.request.contextPath}/data/canteen_pics/">
+                        </div>
                     </div>
                 </div>
-            </div>
 
             <h2>评价</h2>
             <div class="function">
