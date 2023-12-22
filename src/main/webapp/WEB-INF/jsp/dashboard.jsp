@@ -204,7 +204,8 @@ cmJson='${cmJson}'>
                         cid="${canteen.canteenId}"
                         cname="${canteen.canteenName}"
                         clocation="${canteen.canteenLocation}"
-                        cabstract="${canteen.canteenAbstract}">
+                        cabstract="${canteen.canteenAbstract}"
+                        cpic="${canteen.canteenPic}">
                         <td>${canteen.canteenName}</td>
                         <td>${canteen.canteenLocation}</td>
                     </tr>
@@ -238,7 +239,7 @@ cmJson='${cmJson}'>
                             <p>
                             <h3>食堂照片</h3>
                             <input type="file" name="file" accept="image/*" class="img-upload" readonly disabled>
-                            <img src="${pageContext.request.contextPath}/img/profile-1.jpg">
+                            <img src="" basesrc="${pageContext.request.contextPath}/data/canteen_pics/">
                             </p>
                         </div>
                         <div class="align-center"><div class="split">
@@ -564,7 +565,7 @@ cmJson='${cmJson}'>
         <main id="dishes-search-main">
             <h1>菜品检索</h1>
             <div class="function">
-                <form class="check">
+                <form class="check" action="dishes-search">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -630,6 +631,77 @@ cmJson='${cmJson}'>
             </div>
                 <input type="hidden" name="dishId">
             </form>
+
+        </main>
+
+        <main id="canteen-search-main">
+            <h1>食堂检索</h1>
+            <div class="function">
+                <form class="check" action="canteen-search">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>检索框</h3>
+                            <input type="text" name="checkbox">
+                            </p>
+                        </div>
+                        <div class="split">
+                            <p>
+                            <h3>按菜系/价格/食堂检索</h3>
+                            <input type="text" name="checkby">
+                            </p>
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="check-in">检索</button>
+                        </div></div>
+                    </div>
+                </form>
+                <div class="user-list">
+<c:forEach items="${canteenList}" var="canteen">
+                    <div class="user"
+                         cid="${canteen.canteenId}"
+                         cname="${canteen.canteenName}"
+                         clocation="${canteen.canteenLocation}"
+                         cabstract="${canteen.canteenAbstract}"
+                         cpic="${canteen.canteenPic}">
+                        <img src="${pageContext.request.contextPath}/data/canteen_pics/${canteen.canteenPic}">
+                        <h2>${canteen.canteenName}</h2>
+                        <p>${canteen.canteenLocation}</p>
+                    </div>
+</c:forEach>
+                </div>
+            </div>
+
+            <form action="dishes-search" class="info-display">
+            <h2>菜品信息</h2>
+            <div class="function">
+                <div class="two-split">
+                    <div class="split">
+                        <h3>菜品名</h3>
+                        <p class="input-like"></p>
+                        <h3>菜系</h3>
+                        <p class="input-like"></p>
+                        <h3>价格</h3>
+                        <p class="input-like"></p>
+                        <h3>简介</h3>
+                        <p class="input-like"></p>
+                    </div>
+                    <div class="split">
+                        <h3>菜品图片</h3>
+                        <img src="" basesrc="${pageContext.request.contextPath}/data/dish_pics/">
+                    </div>
+                </div>
+            </div>
+
+            <h2>评价</h2>
+            <div class="function">
+                <p>
+                    <textarea name="comments" rows="4" readonly></textarea>
+                </p>
+            </div>
+            <input type="hidden" name="dishId">
+            </form>
+
 
         </main>
 

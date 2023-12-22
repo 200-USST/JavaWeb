@@ -173,6 +173,9 @@ document.querySelectorAll(".canteen-tr").forEach((tr) => {
             text += manager_list[i] + '、'
         }
         p_tag.innerText = text
+
+        let img = form.querySelector("img")
+        img.src = img.getAttribute("basesrc") + tr.getAttribute("cpic")
     })
 })
 

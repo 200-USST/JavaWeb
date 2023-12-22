@@ -314,20 +314,21 @@ main .analyse .progresss .percentage{
 /*    margin-top: 1.3rem;*/
 /*}*/
 
-main .user-list{
-    /*background-color: var(--color-white);*/
-    padding: var(--card-padding);
-    /*border-radius: var(--card-border-radius);*/
-    margin-top: 1rem;
-    /*box-shadow: var(--box-shadow);*/
-    display: flex;
+main .user-list {
+    /* background-color: var(--color-white); */
+    /* padding: var(--card-padding); */
+    /* border-radius: var(--card-border-radius); */
+    /* margin-top: 1rem; */
+    /* box-shadow: var(--box-shadow); */
+    display: grid;
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 1.4rem;
     cursor: pointer;
     transition: all 0.3s ease;
-}
 
+    grid-template-columns: repeat(4, 1fr);
+}
 /*main .new-users .user-list:hover{*/
 /*    box-shadow: none;*/
 /*}*/
