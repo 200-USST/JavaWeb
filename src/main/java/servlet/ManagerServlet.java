@@ -25,11 +25,18 @@ public class ManagerServlet extends HttpServlet {
         request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
         response.setCharacterEncoding("UTF-8");
         if(request.getParameter("type").equals("modifyCanteen")){//处理修改食堂信息请求
-            String canteenAbstract = request.getParameter("canteenAbstract");
-            Canteen canteen= (Canteen) request.getSession().getAttribute("canteen");
-            canteen.setCanteenAbstract(canteenAbstract);
-            Info info=managerService.modifyCanteen(canteen);
-            request.getSession().setAttribute("canteen",canteen);
+            String originalPath = getServletContext().getRealPath("/");
+            int targetIndex = originalPath.indexOf("target");
+            String basePath = originalPath.substring(0, targetIndex);
+            String realPath1 = basePath + "src\\main\\webapp\\data\\dish_pics";
+            String realPath2 = basePath + "src\\main\\webapp\\data\\dish_picstmp";
+            Canteen canteen = (Canteen) request.getSession().getAttribute("canteen");
+            Info info;
+            try {
+                info = managerService.modifyDish(request,realPath1,realPath2,canteen);
+            } catch (FileUploadException e) {
+                throw new RuntimeException(e);
+            }
             request.getSession().setAttribute("info",info);
             response.sendRedirect("/200web/dashboard");
 
