@@ -65,10 +65,7 @@ public class SharedServiceImpl implements SharedService{
         users.addAll(userDao.queryAllUsers());
         canteens.addAll(canteenDao.queryAllCanteens());
         dishes.addAll(dishDao.queryAllDishes());
-        System.out.println(dishes);
         manager_canteen_pair.putAll(userDao.getAllManagersWithCanteen());
-
-
         try {
             ObjectMapper mapper = new ObjectMapper();
             canteen_manager_json.append(mapper.writeValueAsString(canteenDao.getAllCanteenWithManager()));

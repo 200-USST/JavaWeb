@@ -108,7 +108,7 @@ public class ManagerServiceImpl implements ManagerService{
     public Info modifyDish(HttpServletRequest request, String realPath, String tmpPath, Canteen canteen) throws FileUploadException, IOException {
         File saveFilePath = new File(realPath);
         File tempFilePath = new File(tmpPath);
-        boolean flag = true;
+        boolean flag = false;
         if (!saveFilePath.exists()) {
             saveFilePath.mkdir();
         }
@@ -136,7 +136,6 @@ public class ManagerServiceImpl implements ManagerService{
             if (item.isFormField()) {
                 String fieldName = item.getFieldName();
                 String fieldValue = item.getString("UTF-8");
-
                 switch (fieldName) {
                     case "dishName":
                         dishName = fieldValue;
@@ -159,14 +158,11 @@ public class ManagerServiceImpl implements ManagerService{
                 }
             }
             else {
-                if(item.getSize()==0){//上传图片为空
-                    flag = false;
-                }
-                else {
-                    String uploadpath = item.getName();
-                    String uploadfilename = uploadpath.substring(uploadpath.lastIndexOf("/") + 1);
-                    uploadfiletype = uploadfilename.substring(uploadfilename.lastIndexOf(".") + 1);
-                }
+                System.out.println(1);
+                flag = true;
+                String uploadpath = item.getName();
+                String uploadfilename = uploadpath.substring(uploadpath.lastIndexOf("/") + 1);
+                uploadfiletype = uploadfilename.substring(uploadfilename.lastIndexOf(".") + 1);
 
             }
         }

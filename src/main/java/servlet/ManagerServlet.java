@@ -24,7 +24,7 @@ public class ManagerServlet extends HttpServlet {
         // 设置响应类型和编码
         request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
         response.setCharacterEncoding("UTF-8");
-        if(request.getParameter("type").equals("modifyCanteen")){//处理修改食堂信息请求
+        if(request.getParameter("type").equals("modifyDish")){//处理修改食堂信息请求
             String originalPath = getServletContext().getRealPath("/");
             int targetIndex = originalPath.indexOf("target");
             String basePath = originalPath.substring(0, targetIndex);

@@ -41,8 +41,6 @@ public class DashboardServlet extends HttpServlet {
             if(info!=null){
                 request.setAttribute("info",info);
                 session.removeAttribute("info");
-                System.out.println(info.getFlag());
-                System.out.println(info.getDescription());
             }
             request.getRequestDispatcher("/WEB-INF/jsp/dashboard.jsp").forward(request,response);
         }

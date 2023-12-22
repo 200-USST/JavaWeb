@@ -414,7 +414,7 @@ cmJson='${cmJson}'>
         <main id="canteen-guard-main">
             <h1>食堂信息维护</h1>
             <div class="function">
-                <form class="switch" action="activeBar=canteen-guard">
+                <form class="switch" action="${pageContext.request.contextPath}/manager?type=modifyCanteen&activeBar=canteen-guard">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -483,7 +483,7 @@ cmJson='${cmJson}'>
 
             <h2>菜品信息</h2>
             <div class="function">
-                <form class="switch" action="${pageContext.request.contextPath}/manager?type=newDish&activeBar=dishes-guard" method="post" enctype="multipart/form-data">
+                <form class="switch" action="${pageContext.request.contextPath}/manager?type=modifyDish&activeBar=dishes-guard" method="post" enctype="multipart/form-data">
                     <div class="three-split">
                         <div class="split">
                             <p>
