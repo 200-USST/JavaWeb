@@ -73,7 +73,10 @@ public class DishDaoImpl implements DishDao {
 
     @Override
     public void deleteDish(String dishId) {
-
+        DbHelper.update(
+                "delete from dish where dishesID = ?",
+                dishId
+        );
     }
 
     private List<Dish> makeResultList(List<List<Object>> result) {
