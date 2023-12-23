@@ -16,7 +16,19 @@ public class ManagerServlet extends HttpServlet {
     ManagerService managerService =new ManagerServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
+        if(request.getParameter("type").equals("deleteDish")){
+            String originalPath = getServletContext().getRealPath("/");
+            int targetIndex = originalPath.indexOf("target");
+            String basePath = originalPath.substring(0, targetIndex);
+            String realPath1 = basePath + "src\\main\\webapp\\data\\dish_pics";
+            Info info;
+            String dishId = request.getParameter("dishId");
+            String dishPic = request.getParameter("dishPic");
+            info=managerService.deleteDish(dishId,dishPic,realPath1);
+            request.getSession().setAttribute("info",info);
+            response.sendRedirect("/200web/dashboard");
+        }
     }
 
     @Override
@@ -24,7 +36,8 @@ public class ManagerServlet extends HttpServlet {
         // 设置响应类型和编码
         request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
         response.setCharacterEncoding("UTF-8");
-        if(request.getParameter("type").equals("modifyDish")){//处理修改食堂信息请求
+        System.out.println(request.getParameter("button"));
+        if(request.getParameter("type").equals("modifyDish")){
             String originalPath = getServletContext().getRealPath("/");
             int targetIndex = originalPath.indexOf("target");
             String basePath = originalPath.substring(0, targetIndex);

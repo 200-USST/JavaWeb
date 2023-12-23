@@ -13,4 +13,5 @@ public interface DishDao {
     public boolean isNameExist(String dishName,Integer canteenId);//查询菜品名字是否已经存在
     public void modifyDish(Dish dish);
     List<Dish> getAllDishesSoldIn(Canteen canteen);
+    public void deleteDish(String dishId);//根据菜品的ID删除该菜品
 }

@@ -72,7 +72,6 @@ public class SharedServiceImpl implements SharedService{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         canteen_dishes_dict.putAll(canteenDao.getAllCanteenWithDishes());
     }
 }

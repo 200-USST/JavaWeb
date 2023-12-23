@@ -71,6 +71,11 @@ public class DishDaoImpl implements DishDao {
         return makeResultList(result);
     }
 
+    @Override
+    public void deleteDish(String dishId) {
+
+    }
+
     private List<Dish> makeResultList(List<List<Object>> result) {
         List<Dish> list = new ArrayList<>();
         for (var row : result) {

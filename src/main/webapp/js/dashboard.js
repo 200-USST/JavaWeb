@@ -56,8 +56,6 @@ item.forEach((a) => {
 // personal-info
 // 设置可编辑
 let modify_butts = document.querySelectorAll(".modify");
-let submit_butts = document.querySelectorAll(".submit");
-let delete_butts = document.querySelectorAll(".delete");
 
 modify_butts.forEach((butt) => {
     butt.addEventListener("click", () => {
@@ -87,52 +85,19 @@ modify_butts.forEach((butt) => {
     });
 });
 
-submit_butts.forEach((butt) => {
-    butt.addEventListener("click", () => {
-        // 获取当前按钮所在的表单
-        let form = butt.closest('.switch');
 
-        // 修改当前表单中的元素
-        form.querySelector(".modify").style.display = "inline";
-        form.querySelector(".submit").style.display = "none";
-        let del_butt = form.querySelector(".delete")
-        if (del_butt) del_butt.style.display = "none"
-
-        let all_input = form.querySelectorAll("input");
-        all_input.forEach((e) => {
-            e.setAttribute("readonly", true);
-        });
-
-        let area = form.querySelector("textarea");
-        if (area) area.setAttribute("readonly", true)
-
-        let file_input = form.querySelector(".img-upload");
-        if (file_input) file_input.setAttribute("disabled", true)
-    });
-});
-
+let delete_butts = document.querySelectorAll(".delete");
 delete_butts.forEach((butt) => {
     butt.addEventListener("click", () => {
-        // 获取当前按钮所在的表单
+        console.log("in")
         let form = butt.closest('.switch');
-
-        // 修改当前表单中的元素
-        form.querySelector(".modify").style.display = "inline";
-        form.querySelector(".submit").style.display = "none";
-        form.querySelector(".delete").style.display = "none";
-
         let all_input = form.querySelectorAll("input");
-        all_input.forEach((e) => {
-            e.setAttribute("readonly", true);
-        });
-
-        let area = form.querySelector("textarea");
-        if (area) area.setAttribute("readonly", true)
-
-        let file_input = form.querySelector(".img-upload");
-        if (file_input) file_input.setAttribute("disabled", true)
+        let id = all_input[all_input.length - 2].value
+        let pic = all_input[all_input.length - 1].value
+        location.href = 'manager?type=deleteDish&activeBar=dishes-guard&dishId=' + id + "&dishPic=" + pic;
     })
 })
+
 
 
 

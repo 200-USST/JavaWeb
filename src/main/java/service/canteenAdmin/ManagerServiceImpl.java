@@ -4,6 +4,7 @@ import dao.CanteenDao;
 import dao.DishDao;
 import dao.impl.CanteenDaoImpl;
 import dao.impl.DishDaoImpl;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -92,13 +93,17 @@ public class ManagerServiceImpl implements ManagerService{
         }
         else {
             dish= dishDao.newDish(dish);
-            dish.setDishPic(dish.getDishId()+"."+uploadfiletype);
-            dishDao.modifyDish(dish);
-            for (FileItem fileItem : fileItems) {
-                if (!fileItem.isFormField()) {
-                    if(fileItem.getSize()>0) FileUploadOnly.fileup(realPath,fileItem, String.valueOf(dish.getDishId()));
-                    else System.out.println(12);
+            if(!uploadfiletype.equals("")){//存在图片
+                dish.setDishPic(dish.getDishId()+"."+uploadfiletype);
+                dishDao.modifyDish(dish);
+                for (FileItem fileItem : fileItems) {
+                    if (!fileItem.isFormField()) {
+                        FileUploadOnly.fileup(realPath,fileItem, String.valueOf(dish.getDishId()));
+                    }
                 }
+            }
+            else {//不存在图片
+
             }
             return new Info(true,"New dish successfully");
         }
@@ -108,7 +113,6 @@ public class ManagerServiceImpl implements ManagerService{
     public Info modifyDish(HttpServletRequest request, String realPath, String tmpPath, Canteen canteen) throws FileUploadException, IOException {
         File saveFilePath = new File(realPath);
         File tempFilePath = new File(tmpPath);
-        boolean flag = false;
         if (!saveFilePath.exists()) {
             saveFilePath.mkdir();
         }
@@ -158,8 +162,6 @@ public class ManagerServiceImpl implements ManagerService{
                 }
             }
             else {
-                System.out.println(1);
-                flag = true;
                 String uploadpath = item.getName();
                 String uploadfilename = uploadpath.substring(uploadpath.lastIndexOf("/") + 1);
                 uploadfiletype = uploadfilename.substring(uploadfilename.lastIndexOf(".") + 1);
@@ -171,20 +173,42 @@ public class ManagerServiceImpl implements ManagerService{
         }
         else {
             Dish dish =new Dish(Integer.parseInt(dishId),dishName,dishClass,dishPrice,dishInfo,canteen.getCanteenId(),dishPic);
-            if(flag){//修改了图片
+            if(!uploadfiletype.equals("")){//修改了图片
                 dish.setDishPic(dish.getDishId()+"."+uploadfiletype);
                 dishDao.modifyDish(dish);
                 for (FileItem fileItem : fileItems) {
                     if (!fileItem.isFormField()) {
-                        if(fileItem.getSize()>0) FileUploadOnly.fileup(realPath,fileItem, String.valueOf(dish.getDishId()));
-                        else System.out.println(12);
+                        FileUploadOnly.fileup(realPath,fileItem, String.valueOf(dish.getDishId()));
                     }
                 }
+
             }
             else {//未修改图片
                 dishDao.modifyDish(dish);
             }
             return new Info(true,"Modify dish successfully");
         }
+    }
+
+    @Override
+    public Info deleteDish(String dishId, String dishPic,String realPath) {
+        dishDao.deleteDish(dishId);
+        File directory = new File(realPath);
+
+        // 确保该路径是目录
+        if (directory.exists() && directory.isDirectory()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    // 检查文件名是否是你要删除的文件
+                    if (file.getName().equals(dishPic)) {
+                        file.delete();
+                    }
+                }
+            }
+        } else {
+            System.out.println("目录不存在或不是一个目录");
+        }
+        return new Info(true,"Delete dish successfully");
     }
 }

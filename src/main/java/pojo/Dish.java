@@ -1,6 +1,8 @@
 package pojo;
 
-public class Dish {
+import java.io.Serializable;
+
+public class Dish implements Serializable {
     private Integer dishId;
     private String dishName;
     private String dishClass;
