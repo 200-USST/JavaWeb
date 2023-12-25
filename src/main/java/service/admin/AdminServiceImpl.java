@@ -101,17 +101,108 @@ public class AdminServiceImpl implements AdminService{
         }
         else {
             canteen = canteenDao.newCanteen(canteen);
-            canteen.setCanteenPic(canteen.getCanteenId()+"."+uploadfiletype);
-            System.out.println(canteen.getCanteenPic());
-            canteenDao.modify(canteen);
-            for (FileItem fileItem : fileItems) {
-                if (!fileItem.isFormField()) {
-                    if(fileItem.getSize()>0) FileUploadOnly.fileup(realPath,fileItem, String.valueOf(canteen.getCanteenId()));
-                    else System.out.println(12);
+            if(!uploadfiletype.equals("")){//存在图片
+                canteen.setCanteenPic(canteen.getCanteenId()+"."+uploadfiletype);
+                canteenDao.modify(canteen);
+                for (FileItem fileItem : fileItems) {
+                    if (!fileItem.isFormField()) {
+                        FileUploadOnly.fileup(realPath,fileItem, String.valueOf(canteen.getCanteenId()));
+                    }
                 }
             }
             return new Info(true,"New Canteen successfully");
         }
     }
+
+    @Override
+    public Info modifyCanteen(HttpServletRequest request, String realPath, String tmpPath) throws FileUploadException, IOException {
+        File saveFilePath = new File(realPath);
+        File tempFilePath = new File(tmpPath);
+        if (!saveFilePath.exists()) {
+            saveFilePath.mkdir();
+        }
+        if (!tempFilePath.exists()) {
+            tempFilePath.mkdir();
+        }
+
+        DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
+        diskFileItemFactory.setSizeThreshold(1024 * 1024);
+        diskFileItemFactory.setRepository(tempFilePath);
+
+        ServletFileUpload servletFileUpload = new ServletFileUpload(diskFileItemFactory);
+        servletFileUpload.setHeaderEncoding("utf-8");
+        servletFileUpload.setFileSizeMax(1024 * 1024 * 10);
+
+        List<FileItem> fileItems = servletFileUpload.parseRequest(new Rc(request));
+        String canteenName = null;
+        String canteenLocation = null;
+        String canteenAbstract= null;
+        String canteenId = null;
+        String uploadfiletype = null;
+        String canteenPic = null;
+        for(FileItem item : fileItems){
+            if (item.isFormField()) {
+                String fieldName = item.getFieldName();
+                String fieldValue = item.getString("UTF-8");
+                switch (fieldName) {
+                    case "canteenName":
+                        canteenName = fieldValue;
+                        break;
+                    case "canteenLocation":
+                        canteenLocation = fieldValue;
+                        break;
+                    case "canteenAbstract":
+                        canteenAbstract = fieldValue;
+                        break;
+                    case "canteenId":
+                        canteenId = fieldValue;
+                        break;
+                    case  "canteenPic":
+                        canteenPic = fieldValue;
+                        break;
+                }
+            }
+            else {
+                String uploadpath = item.getName();
+                String uploadfilename = uploadpath.substring(uploadpath.lastIndexOf("/") + 1);
+                uploadfiletype = uploadfilename.substring(uploadfilename.lastIndexOf(".") + 1);
+            }
+        }
+        Canteen canteen = new Canteen(Integer.parseInt(canteenId),canteenName,canteenLocation,canteenAbstract,canteenPic);
+        if(!uploadfiletype.equals("")){//修改了图片
+            canteen.setCanteenPic(canteen.getCanteenId()+"."+uploadfiletype);
+            canteenDao.modify(canteen);
+            for (FileItem fileItem : fileItems) {
+                if (!fileItem.isFormField()) {
+                    FileUploadOnly.fileup(realPath,fileItem, String.valueOf(canteen.getCanteenId()));
+                }
+            }
+        }
+        else {//未修改图片
+            canteenDao.modify(canteen);
+        }
+        return new Info(true,"Modify canteen successfully");
     }
+
+    @Override
+    public Info deleteCanteen(String canteenId, String canteenPic, String realPath) {
+        canteenDao.deleteCanteen(canteenId);
+        File directory = new File(realPath);
+        // 确保该路径是目录
+        if (directory.exists() && directory.isDirectory()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    // 检查文件名是否是你要删除的文件
+                    if (file.getName().equals(canteenPic)) {
+                        file.delete();
+                    }
+                }
+            }
+        } else {
+            System.out.println("目录不存在或不是一个目录");
+        }
+        return new Info(true,"Delete canteen successfully");
+    }
+}
 

@@ -21,7 +21,6 @@ public class FileUploadOnly {
             }
             InputStream ips = item.getInputStream();
             FileOutputStream fops = new FileOutputStream(realfilepath+"/"+newfilename);
-            System.out.println(realfilepath);
             byte[] buffer = new byte[1024 * 1024];
             int len = 0;
             while ((len = ips.read(buffer)) > 0) {

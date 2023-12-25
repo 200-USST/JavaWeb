@@ -135,4 +135,9 @@ public class CanteenDaoImpl implements CanteenDao {
 
         return map;
     }
+
+    @Override
+    public void deleteCanteen(String canteenId) {
+
+    }
 }

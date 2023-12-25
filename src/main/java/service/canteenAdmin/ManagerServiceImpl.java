@@ -165,13 +165,12 @@ public class ManagerServiceImpl implements ManagerService{
                 String uploadpath = item.getName();
                 String uploadfilename = uploadpath.substring(uploadpath.lastIndexOf("/") + 1);
                 uploadfiletype = uploadfilename.substring(uploadfilename.lastIndexOf(".") + 1);
-
             }
         }
-        if(dishDao.isNameExist(dishName,canteen.getCanteenId())){//判断该食堂存在该菜品
-            return new Info(false,"Dishname has already existed");
-        }
-        else {
+//        if(dishDao.isNameExist(dishName,canteen.getCanteenId())){//判断该食堂存在该菜品
+//            return new Info(false,"Dishname has already existed");
+//        }
+//        else {
             Dish dish =new Dish(Integer.parseInt(dishId),dishName,dishClass,dishPrice,dishInfo,canteen.getCanteenId(),dishPic);
             if(!uploadfiletype.equals("")){//修改了图片
                 dish.setDishPic(dish.getDishId()+"."+uploadfiletype);
@@ -181,14 +180,13 @@ public class ManagerServiceImpl implements ManagerService{
                         FileUploadOnly.fileup(realPath,fileItem, String.valueOf(dish.getDishId()));
                     }
                 }
-
             }
             else {//未修改图片
                 dishDao.modifyDish(dish);
             }
             return new Info(true,"Modify dish successfully");
         }
-    }
+//    }
 
     @Override
     public Info deleteDish(String dishId, String dishPic,String realPath) {

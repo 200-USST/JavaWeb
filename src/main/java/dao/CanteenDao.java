@@ -17,4 +17,5 @@ public interface CanteenDao {
     ArrayList<Canteen> queryAllCanteens();
     Map<String, List<String>> getAllCanteenWithManager ();
     Map<String, List<Dish>> getAllCanteenWithDishes ();
+    public void deleteCanteen(String canteenId);
 }
