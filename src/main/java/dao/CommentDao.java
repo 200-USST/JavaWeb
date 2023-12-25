@@ -7,8 +7,6 @@ import java.util.List;
 
 
 public interface CommentDao {
-    void insertComment(Comment comment) throws SQLException;
-
-
-    List<Comment> selectAllByCount(Integer count) throws SQLException;
+    void insertComment(Comment comment);
+    List<Comment> selectAllByCount(Integer count);
 }

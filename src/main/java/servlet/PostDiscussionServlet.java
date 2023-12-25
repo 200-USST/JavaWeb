@@ -31,7 +31,6 @@ public class PostDiscussionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset = UTF-8");
-        PrintWriter pw = response.getWriter();
 
         String title = request.getParameter("title");
         String time0 = request.getParameter("time");
@@ -58,17 +57,12 @@ public class PostDiscussionServlet extends HttpServlet {
 
         String message;
         Gson gson = new Gson();
-        try {
-            DiscussionDaoImpl discussionDao = new DiscussionDaoImpl();
-            discussionDao.insertDiscussion(discussion);
-            message = "发布成功";
-            String messageJson = gson.toJson(message);
-            pw.write(messageJson);
-        } catch (SQLException e) {
-            message = "发布失败";
-            String messageJson = gson.toJson(message);
-            pw.write(messageJson);
-        }
+
+        DiscussionDaoImpl discussionDao = new DiscussionDaoImpl();
+        discussionDao.insertDiscussion(discussion);
+        message = "发布成功";
+        request.setAttribute("message",message);
+
     }
 
     private String handleImage(Part image0) {

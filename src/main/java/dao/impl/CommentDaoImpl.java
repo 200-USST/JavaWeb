@@ -8,12 +8,12 @@ import java.util.List;
 
 public class CommentDaoImpl implements CommentDao {
     @Override
-    public void insertComment(Comment comment) throws SQLException {
+    public void insertComment(Comment comment)  {
 
     }
 
     @Override
-    public List<Comment> selectAllByCount(Integer count) throws SQLException {
+    public List<Comment> selectAllByCount(Integer count)  {
         return null;
 
     }

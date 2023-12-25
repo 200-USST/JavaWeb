@@ -22,27 +22,18 @@ public class CommentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset = UTF-8");
-        PrintWriter pw = response.getWriter();
 
-        String discussionID = request.getParameter("discussionID");
-        String userID = request.getParameter("userID");
+        Integer discussionID = Integer.getInteger(request.getParameter("discussionID"));
+        Integer userID = Integer.getInteger(request.getParameter("userID"));
         String username = request.getParameter("username");
         String content = request.getParameter("content");
 
-        Comment comment = new Comment(null, Integer.getInteger(discussionID), Integer.getInteger(userID), username, content);
+        Comment comment = new Comment(null, discussionID, userID, username, content);
 
-        String message;
-        Gson gson = new Gson();
-        try {
-            CommentDaoImpl commentDao = new CommentDaoImpl();
-            commentDao.insertComment(comment);
-            message = "评论成功";
-            String messageJson = gson.toJson(message);
-            pw.write(messageJson);
-        } catch (SQLException e) {
-            message = "评论失败";
-            String messageJson = gson.toJson(message);
-            pw.write(messageJson);
-        }
+        CommentDaoImpl commentDao = new CommentDaoImpl();
+        commentDao.insertComment(comment);
+
+        String message = "评论成功";
+        request.setAttribute("message",message);
     }
 }
