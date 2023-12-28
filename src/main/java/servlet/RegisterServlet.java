@@ -26,9 +26,6 @@ public class RegisterServlet extends HttpServlet {
             System.out.println(info.getFlag()+" "+info.getDescription());
             response.sendRedirect("/200web/login.do");
         }
-        else if(type.equals("manager")){//注册管理员用户
-
-        }
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

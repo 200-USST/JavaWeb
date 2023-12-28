@@ -420,7 +420,7 @@ cmJson='${cmJson}'>
                         <div class="split">
                             <h3>食堂照片</h3>
 <%--                            <input type="file" name="file" accept="image/*" class="img-upload" readonly disabled>--%>
-                            <img src="${pageContext.request.contextPath}/img/profile-1.jpg" alt="">
+                            <img src="${pageContext.request.contextPath}/data/canteen_pics/${mcMap[user.userName].canteenPic}" alt="">
                         </div>
                         <div class="align-center"><div class="split">
                             <button type="button" class="modify">修改</button>

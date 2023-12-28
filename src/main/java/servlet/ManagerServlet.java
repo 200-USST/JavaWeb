@@ -18,10 +18,8 @@ public class ManagerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
         if(request.getParameter("type").equals("deleteDish")){
-            String originalPath = getServletContext().getRealPath("/");
-            int targetIndex = originalPath.indexOf("target");
-            String basePath = originalPath.substring(0, targetIndex);
-            String realPath1 = basePath + "src\\main\\webapp\\data\\dish_pics";
+            String originalPath = getServletContext().getRealPath("");
+            String realPath1 = originalPath + "data/dish_pics";
             String dishId = request.getParameter("dishId");
             String dishPic = request.getParameter("dishPic");
             Info info=managerService.deleteDish(dishId,dishPic,realPath1);
@@ -36,11 +34,9 @@ public class ManagerServlet extends HttpServlet {
         request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
         response.setCharacterEncoding("UTF-8");
         if(request.getParameter("type").equals("modifyDish")){
-            String originalPath = getServletContext().getRealPath("/");
-            int targetIndex = originalPath.indexOf("target");
-            String basePath = originalPath.substring(0, targetIndex);
-            String realPath1 = basePath + "src\\main\\webapp\\data\\dish_pics";
-            String realPath2 = basePath + "src\\main\\webapp\\data\\dish_picstmp";
+            String originalPath = getServletContext().getRealPath("");
+            String realPath1 = originalPath + "data/dish_pics";
+            String realPath2 = originalPath + "data/dish_picstmp";
             Canteen canteen = (Canteen) request.getSession().getAttribute("canteen");
             Info info;
             try {
@@ -52,11 +48,9 @@ public class ManagerServlet extends HttpServlet {
             response.sendRedirect("/200web/dashboard");
         }
         else if(request.getParameter("type").equals("newDish")){//处理新增菜品请求
-            String originalPath = getServletContext().getRealPath("/");
-            int targetIndex = originalPath.indexOf("target");
-            String basePath = originalPath.substring(0, targetIndex);
-            String realPath1 = basePath + "src\\main\\webapp\\data\\dish_pics";
-            String realPath2 = basePath + "src\\main\\webapp\\data\\dish_picstmp";
+            String originalPath = getServletContext().getRealPath("");
+            String realPath1 = originalPath + "data/dish_pics";
+            String realPath2 = originalPath + "data/dish_picstmp";
             Canteen canteen = (Canteen) request.getSession().getAttribute("canteen");
             Info info;
             try {
@@ -71,6 +65,8 @@ public class ManagerServlet extends HttpServlet {
             String canteenAbstract = request.getParameter("canteenAbstract");
             String canteenId = request.getParameter("canteenId");
             Info info = managerService.modifyCanteen(canteenId,canteenAbstract);
+            request.getSession().setAttribute("info",info);
+            response.sendRedirect("/200web/dashboard");
         }
     }
 }
