@@ -1,14 +1,13 @@
 package servlet;
 
-import business.admin.AdminService;
-import business.admin.AdminServiceImpl;
-import business.user.UserService;
-import business.user.UserServiceImpl;
+import service.admin.AdminService;
+import service.admin.AdminServiceImpl;
+import service.user.UserService;
+import service.user.UserServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import pojo.Info;
-import pojo.User;
 
 import java.io.IOException;
 
@@ -27,18 +26,19 @@ public class RegisterServlet extends HttpServlet {
             System.out.println(info.getFlag()+" "+info.getDescription());
             response.sendRedirect("/200web/login.do");
         }
-        else if(type.equals("manager")){//注册管理员用户
+    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getParameter("type").equals("manager")){//注册管理员用户
             String userName = request.getParameter("userName");
             String password = request.getParameter("userPassword");
             String passwordRe = request.getParameter("userPasswordRepeat");
             String canteenName = request.getParameter("canteenName");
             Info info = adminService.distributeCanteenAdmin(userName,password,passwordRe,canteenName);
+            System.out.println(info.getDescription());
+            request.getSession().setAttribute("info",info);
+            request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
+            response.sendRedirect("/200web/dashboard");
         }
-
-
-    }
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

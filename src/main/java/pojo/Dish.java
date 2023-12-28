@@ -1,24 +1,45 @@
 package pojo;
 
-public class Dish {
+import java.io.Serializable;
+
+public class Dish implements Serializable {
     private Integer dishId;
     private String dishName;
     private String dishClass;
-    private double dishPrice;
+    private Double dishPrice;
     private String dishInfo;
-    private String dishCanteen;
+    private Integer dishCanteenId;
+    private String dishPic;
 
-    public Dish() {
+    public String getDishPic() {
+        return dishPic;
     }
 
-    public Dish(Integer dishId, String dishName, String dishClass, double dishPrice, String dishInfo, String dishCanteen) {
+    public Integer getDishCanteenId() {
+        return dishCanteenId;
+    }
+
+    public void setDishCanteenId(Integer dishCanteenId) {
+        this.dishCanteenId = dishCanteenId;
+    }
+
+    public Dish(Integer dishId, String dishName, String dishClass, Double dishPrice, String dishInfo, Integer dishCanteenId, String dishPic) {
         this.dishId = dishId;
         this.dishName = dishName;
         this.dishClass = dishClass;
         this.dishPrice = dishPrice;
         this.dishInfo = dishInfo;
-        this.dishCanteen = dishCanteen;
+        this.dishCanteenId = dishCanteenId;
+        this.dishPic = dishPic;
     }
+
+    public void setDishPic(String dishPic) {
+        this.dishPic = dishPic;
+    }
+
+    public Dish() {
+    }
+
 
     public Integer getDishId() {
         return dishId;
@@ -44,11 +65,11 @@ public class Dish {
         this.dishClass = dishClass;
     }
 
-    public double getDishPrice() {
+    public Double getDishPrice() {
         return dishPrice;
     }
 
-    public void setDishPrice(double dishPrice) {
+    public void setDishPrice(Double dishPrice) {
         this.dishPrice = dishPrice;
     }
 
@@ -60,11 +81,4 @@ public class Dish {
         this.dishInfo = dishInfo;
     }
 
-    public String getDishCanteen() {
-        return dishCanteen;
-    }
-
-    public void setDishCanteen(String dishCanteen) {
-        this.dishCanteen = dishCanteen;
-    }
 }

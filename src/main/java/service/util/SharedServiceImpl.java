@@ -1,5 +1,6 @@
-package business.util;
+package service.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.CanteenDao;
 import dao.DishDao;
 import dao.UserDao;
@@ -12,6 +13,8 @@ import pojo.Info;
 import pojo.User;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class SharedServiceImpl implements SharedService{
@@ -58,9 +61,17 @@ public class SharedServiceImpl implements SharedService{
     }
 
     @Override
-    public void updateAllInfo(ArrayList<User> users, ArrayList<Canteen> canteens, ArrayList<Dish> dishes) {
+    public void updateAllInfo(ArrayList<User> users, ArrayList<Canteen> canteens, ArrayList<Dish> dishes, Map<String, Canteen> manager_canteen_pair, StringBuilder canteen_manager_json, Map<String, List<Dish>> canteen_dishes_dict) {
         users.addAll(userDao.queryAllUsers());
         canteens.addAll(canteenDao.queryAllCanteens());
         dishes.addAll(dishDao.queryAllDishes());
+        manager_canteen_pair.putAll(userDao.getAllManagersWithCanteen());
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            canteen_manager_json.append(mapper.writeValueAsString(canteenDao.getAllCanteenWithManager()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        canteen_dishes_dict.putAll(canteenDao.getAllCanteenWithDishes());
     }
 }

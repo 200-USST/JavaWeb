@@ -1,4 +1,4 @@
-package business.user;
+package service.user;
 
 import pojo.Info;
 

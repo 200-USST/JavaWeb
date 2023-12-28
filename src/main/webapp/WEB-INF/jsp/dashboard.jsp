@@ -17,8 +17,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <title>Dashboard</title>
 </head>
-
 <body>
+
+<div id="storage"
+cmJson='${cmJson}'>
 
 <div class="container">
     <!-- Sidebar Section -->
@@ -54,7 +56,7 @@
                     <span class="material-icons-sharp">
                         restaurant
                     </span>
-                <h3>食堂信息</h3>
+                <h3>食堂管理</h3>
             </a>
             <a href="#" id="accounts-manage">
                     <span class="material-icons-sharp">
@@ -127,7 +129,7 @@
         <main id="personal-info-main">
             <h1>个人信息</h1>
             <div class="function">
-                <form action="${pageContext.request.contextPath}/modifyProfile?activeBar=personal-info" method="post" class="personal-info-profile">
+                <form action="${pageContext.request.contextPath}/modifyProfile?activeBar=personal-info" method="post" class="switch">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -136,7 +138,7 @@
                             </p>
                             <p>
                             <h3>用户类型</h3>
-                            <input type="text" name="userIdentity" value="${user.userIdentity}" readonly id="cannot-modify">
+                            <input type="text" name="userIdentity" value="${user.userIdentity}" readonly class="cannot-modify">
                             </p>
                         </div>
                         <div class="split">
@@ -194,27 +196,68 @@
                     <tr>
                         <th>食堂名</th>
                         <th>食堂位置</th>
-                        <th>Payment</th>
-                        <th>Status</th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
+<c:forEach items="${canteenList}" var="canteen">
+                    <tr class="canteen-tr"
+                        cid="${canteen.canteenId}"
+                        cname="${canteen.canteenName}"
+                        clocation="${canteen.canteenLocation}"
+                        cabstract="${canteen.canteenAbstract}"
+                        cpic="${canteen.canteenPic}">
+                        <td>${canteen.canteenName}</td>
+                        <td>${canteen.canteenLocation}</td>
                     </tr>
+</c:forEach>
                     </tbody>
                 </table>
-                <a href="#">Show All</a>
             </div>
+
+
+            <h2>食堂信息</h2>
+            <div class="function">
+                <form class="switch" action="${pageContext.request.contextPath}/adminServlet?type=modifyCanteen&activeBar=canteen-info" enctype="multipart/form-data" method="post">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>食堂名</h3>
+                            <input type="text" name="canteenName" readonly>
+                            </p>
+                            <p>
+                            <h3>食堂位置</h3>
+                            <input type="text" name="canteenLocation" readonly>
+                            </p>
+                            <p>
+                            <h3>食堂简介</h3>
+                            <textarea name="canteenAbstract" rows="4" readonly></textarea>
+                            </p>
+                            <h3>食堂管理者</h3>
+                            <p class="input-like"></p>
+                        </div>
+                        <div class="split">
+                            <p>
+                            <h3>食堂照片</h3>
+                            <input type="file" name="file" accept="image/*" class="img-upload" readonly disabled>
+                            <img src="" basesrc="${pageContext.request.contextPath}/data/canteen_pics/">
+                            </p>
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="modify">修改</button>
+                            <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
+                            <br><br>
+                            <button type="button" name="action" value="delete" class="delete" id="canteen" style="display: none;">确认删除</button>
+                        </div></div>
+                    </div>
+                    <input type="hidden" name="canteenId">
+                    <input type="hidden" name="canteenPic">
+                </form>
+            </div>
+
 
             <h2>添加食堂</h2>
             <div class="function">
-                <form action="${pageContext.request.contextPath}/adminServlet?addCanteen=true&activeBar=canteen-info" method="post">
+                <form action="${pageContext.request.contextPath}/adminServlet?type=addCanteen&activeBar=canteen-info" enctype="multipart/form-data" method="post">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -226,13 +269,16 @@
                             <input type="text" name="canteenLocation" placeholder="食堂位置">
                             </p>
                             <p>
+                            <h3>食堂简介</h3>
+                            <textarea name="canteenAbstract" placeholder="食堂简介" rows="4"></textarea>
+                            </p>
                         </div>
                         <div class="split">
                             <p>
-                            <h3>食堂简介</h3>
-                            <textarea id="message" name="canteenAbstract" rows="4"></textarea>
+                            <h3>食堂照片</h3>
+                            <input type="file" name="file" accept="image/*" class="img-upload">
+                            <img src="">
                             </p>
-                            <p>
                         </div>
                         <div class="align-center"><div class="split">
                             <button type="submit" class="submit">添加</button>
@@ -240,6 +286,404 @@
                     </div>
                 </form>
             </div>
+        </main>
+
+        <main id="accounts-manage-main">
+            <h1>账号信息管理</h1>
+            <div class="recent-orders">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>身份</th>
+                        <th>食堂管理</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+<c:forEach items="${userList}" var="account">
+                        <tr class="account-tr"
+                            uid="${account.id}"
+                            uname="${account.userName}"
+                            upassword="${account.userPassword}"
+                            uidentity="${account.userIdentity}"
+                            ugender="${account.userGender}"
+                            uage="${account.userAge}"
+                            ucanteen="${mcMap[account.userName].canteenName}">
+                            <td>${account.userName}</td>
+                            <td>${account.userIdentity}</td>
+                            <td>${mcMap[account.userName].canteenName}</td>
+                            <td>${account.userGender}</td>
+                            <td>${account.userAge}</td>
+                        </tr>
+</c:forEach>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>账号信息</h2>
+            <div class="function">
+                <form class="switch" action="${pageContext.request.contextPath}/adminServlet?type=modifyProfile&activeBar=accounts-manage" method="post">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>用户名</h3>
+                            <input type="text" name="userName" readonly>
+                            </p>
+                            <p>
+                            <h3>用户密码</h3>
+                            <input type="text" name="userPassword" readonly>
+                            </p>
+                            <p>
+                            <h3>用户类型</h3>
+                            <input type="text" name="userIdentity" readonly>
+                            </p>
+                        </div>
+                        <div class="split">
+
+                            <p>
+                            <h3>性别</h3>
+                            <input type="text" name="userGender" readonly>
+                            </p>
+                            <p>
+                            <h3>年龄</h3>
+                            <input type="text" name="userAge" readonly>
+                            </p>
+                            <p>
+                            <h3>管理食堂</h3>
+                            <input type="text" name="userManagement" class="cannot-modify" readonly>
+                            </p>
+
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="modify">修改</button>
+                            <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
+                            <br><br>
+                            <button type="submit" name="action" value="delete" class="delete" id="account" style="display: none;">确认删除</button>
+                        </div></div>
+                    </div>
+                    <input type="hidden" name="userId">
+                </form>
+            </div>
+
+
+            <h2>分发管理员账号</h2>
+            <div class="function">
+                <form action="${pageContext.request.contextPath}/register.do?type=manager&activeBar=accounts-manage" class="switch" method="post">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>用户名</h3>
+                            <input type="text" name="userName" placeholder="用户名">
+                            </p>
+                            <p>
+                            <h3>管理食堂</h3>
+                            <input type="text" name="canteenName" placeholder="管理食堂">
+                            </p>
+                        </div>
+                        <div class="split">
+                            <p>
+                            <h3>用户密码</h3>
+                            <input type="password" name="userPassword" placeholder="密码">
+                            </p>
+                            <h3>密码确认</h3>
+                            <input type="password" name="userPasswordRepeat" placeholder="再次输入密码">
+                            </p>
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="submit" class="submit">添加</button>
+                        </div></div>
+                    </div>
+                </form>
+            </div>
+
+
+        </main>
+
+        <main id="canteen-guard-main">
+            <h1>食堂信息维护</h1>
+            <div class="function">
+<%--                --%>
+                <form class="switch" action="${pageContext.request.contextPath}/manager?type=modifyCanteen&activeBar=canteen-guard" method="post">
+                    <div class="three-split">
+                        <div class="split">
+                            <h3>食堂名</h3>
+                            <p class="input-like">${mcMap[user.userName].canteenName}</p>
+                            <h3>食堂位置</h3>
+                            <p class="input-like">${mcMap[user.userName].canteenLocation}</p>
+                            <h3>食堂简介</h3>
+                            <textarea name="canteenAbstract" rows="4" readonly>${mcMap[user.userName].canteenAbstract}</textarea>
+                            <h3>食堂管理者</h3>
+                            <p class="input-like" cname="${mcMap[user.userName].canteenName}"></p>
+                        </div>
+                        <div class="split">
+                            <h3>食堂照片</h3>
+<%--                            <input type="file" name="file" accept="image/*" class="img-upload" readonly disabled>--%>
+                            <img src="${pageContext.request.contextPath}/data/canteen_pics/${mcMap[user.userName].canteenPic}" alt="">
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="modify">修改</button>
+                            <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
+                        </div></div>
+                    </div>
+                    <input type="hidden" name="canteenId" value="${mcMap[user.userName].canteenId}">
+                </form>
+            </div>
+        </main>
+
+        <main id="dishes-guard-main">
+            <h1>菜品信息维护</h1>
+            <div class="recent-orders">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>菜品名</th>
+                        <th>菜系</th>
+                        <th>价格</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+<c:forEach items="${cdMap[mcMap[user.userName].canteenName]}" var="dishes">
+                        <tr class="dishes-tr"
+                            did="${dishes.dishId}"
+                            dname="${dishes.dishName}"
+                            dclass="${dishes.dishClass}"
+                            dprice="${dishes.dishPrice}"
+                            dinfo="${dishes.dishInfo}"
+                            dcanteen="${dishes.dishCanteenId}"
+                            dpic="${dishes.dishPic}">
+                            <td>${dishes.dishName}</td>
+                            <td>${dishes.dishClass}</td>
+                            <td>${dishes.dishPrice}</td>
+                        </tr>
+</c:forEach>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>菜品信息</h2>
+            <div class="function">
+                <form class="switch" action="${pageContext.request.contextPath}/manager?type=modifyDish&activeBar=dishes-guard" method="post" enctype="multipart/form-data">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>菜品名</h3>
+                            <input type="text" name="dishName" readonly>
+                            </p>
+                            <p>
+                            <h3>菜系</h3>
+                            <input type="text" name="dishClass" readonly>
+                            </p>
+                            <p>
+                            <h3>价格</h3>
+                            <input type="text" name="dishPrice" readonly>
+                            </p>
+                            <p>
+                            <h3>简介</h3>
+                            <textarea name="dishInfo" rows="4" readonly></textarea>
+                            </p>
+                        </div>
+                        <div class="split">
+
+                            <p>
+                            <h3>菜品图片</h3>
+                            <input type="file" name="file" accept="image/*" class="img-upload" readonly disabled>
+                            <img src="" basesrc="${pageContext.request.contextPath}/data/dish_pics/">
+                            </p>
+
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="modify">修改</button>
+                            <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
+                            <br><br>
+                            <button type="button" name="action" value="delete" class="delete" id="dish" style="display: none;">确认删除</button>
+                        </div></div>
+                    </div>
+                    <input type="hidden" name="dishId">
+                    <input type="hidden" name="dishPic">
+                </form>
+            </div>
+
+            <h2>添加菜品</h2>
+            <div class="function">
+                <form action="${pageContext.request.contextPath}/manager?type=newDish&activeBar=dishes-guard" method="post" enctype="multipart/form-data">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>菜品名</h3>
+                            <input type="text" name="dishName" placeholder="菜品名">
+                            </p>
+                            <p>
+                            <h3>菜系</h3>
+                            <input type="text" name="dishClass" placeholder="菜系">
+                            </p>
+                            <p>
+                            <h3>价格</h3>
+                            <input type="text" name="dishPrice" placeholder="价格">
+                            </p>
+                            <p>
+                            <h3>简介</h3>
+                            <textarea name="dishInfo" rows="4" placeholder="简介"></textarea>
+                            </p>
+                        </div>
+                        <div class="split">
+
+                            <p>
+                            <h3>菜品图片</h3>
+                            <input type="file" name="file" accept="image/*" class="img-upload">
+                            <img src="">
+                            </p>
+
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="submit" class="submit">添加</button>
+                        </div></div>
+                    </div>
+                </form>
+            </div>
+
+        </main>
+
+        <main id="dishes-search-main">
+            <h1>菜品检索</h1>
+            <div class="function">
+                <form class="check" action="dishes-search">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>检索框</h3>
+                            <input type="text" name="checkbox">
+                            </p>
+                        </div>
+                        <div class="split">
+                            <p>
+                            <h3>按菜系/价格/食堂检索</h3>
+                            <input type="text" name="checkby">
+                            </p>
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="check-in">检索</button>
+                        </div></div>
+                    </div>
+                </form>
+                <div class="user-list">
+<c:forEach items="${dishesList}" var="dishes">
+                    <div class="user"
+                         did="${dishes.dishId}"
+                         dname="${dishes.dishName}"
+                         dclass="${dishes.dishClass}"
+                         dprice="${dishes.dishPrice}"
+                         dinfo="${dishes.dishInfo}"
+                         dcanteen="${dishes.dishCanteenId}"
+                         dpic="${dishes.dishPic}">
+                        <img src="${pageContext.request.contextPath}/data/dish_pics/${dishes.dishPic}">
+                        <h2>${dishes.dishName}</h2>
+                        <p>${dishes.dishPrice} 元</p>
+                    </div>
+</c:forEach>
+                </div>
+            </div>
+
+            <form action="dishes-search" class="info-display">
+            <h2>菜品信息</h2>
+                <div class="function">
+                    <div class="two-split">
+                        <div class="split">
+                            <h3>菜品名</h3>
+                            <p class="input-like"></p>
+                            <h3>菜系</h3>
+                            <p class="input-like"></p>
+                            <h3>价格</h3>
+                            <p class="input-like"></p>
+                            <h3>简介</h3>
+                            <p class="input-like"></p>
+                        </div>
+                        <div class="split">
+                            <h3>菜品图片</h3>
+                            <img src="" basesrc="${pageContext.request.contextPath}/data/dish_pics/">
+                        </div>
+                    </div>
+                </div>
+
+            <h2>评价</h2>
+            <div class="function">
+                <p>
+                <textarea name="comments" rows="4" readonly></textarea>
+                </p>
+            </div>
+                <input type="hidden" name="dishId">
+            </form>
+
+        </main>
+
+        <main id="canteen-search-main">
+            <h1>食堂检索</h1>
+            <div class="function">
+                <form class="check" action="canteen-search">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>检索框</h3>
+                            <input type="text" name="checkbox">
+                            </p>
+                        </div>
+                        <div class="split">
+                            <p>
+                            <h3>按菜系/价格/食堂检索</h3>
+                            <input type="text" name="checkby">
+                            </p>
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="check-in">检索</button>
+                        </div></div>
+                    </div>
+                </form>
+                <div class="user-list">
+<c:forEach items="${canteenList}" var="canteen">
+                    <div class="user"
+                         cid="${canteen.canteenId}"
+                         cname="${canteen.canteenName}"
+                         clocation="${canteen.canteenLocation}"
+                         cabstract="${canteen.canteenAbstract}"
+                         cpic="${canteen.canteenPic}">
+                        <img src="${pageContext.request.contextPath}/data/canteen_pics/${canteen.canteenPic}">
+                        <h2>${canteen.canteenName}</h2>
+                        <p>${canteen.canteenLocation}</p>
+                    </div>
+</c:forEach>
+                </div>
+            </div>
+
+            <form action="canteen-search" class="info-display">
+                <h2>食堂信息</h2>
+                <div class="function">
+                    <div class="two-split">
+                        <div class="split">
+                            <h3>食堂名</h3>
+                            <p class="input-like"></p>
+                            <h3>食堂位置</h3>
+                            <p class="input-like"></p>
+                            <h3>食堂简介</h3>
+                            <p class="input-like"></p>
+                        </div>
+                        <div class="split">
+                            <h3>食堂照片</h3>
+                            <img src="" basesrc="${pageContext.request.contextPath}/data/canteen_pics/">
+                        </div>
+                    </div>
+                </div>
+
+            <h2>评价</h2>
+            <div class="function">
+                <p>
+                    <textarea name="comments" rows="4" readonly></textarea>
+                </p>
+            </div>
+            <input type="hidden" name="dishId">
+            </form>
+
+
         </main>
 
     </div>
@@ -347,6 +791,7 @@
 
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 
+<%--刷新回到定位--%>
 <script>
     active ( document.getElementById("${empty activeBar ? 'dashboard' : activeBar}") )
 </script>
