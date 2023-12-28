@@ -70,7 +70,7 @@ public class ManagerServlet extends HttpServlet {
         else if(request.getParameter("type").equals("modifyCanteen")){
             String canteenAbstract = request.getParameter("canteenAbstract");
             String canteenId = request.getParameter("canteenId");
-            managerService.modifyCanteen()
+            Info info = managerService.modifyCanteen(canteenId,canteenAbstract);
         }
     }
 }

@@ -29,7 +29,8 @@ public class ManagerServiceImpl implements ManagerService{
 
     @Override
     public Info modifyCanteen(String canteenId, String canteenAbstract) {
-        return null;
+        canteenDao.managerModifyCanteen(canteenId,canteenAbstract);
+        return new Info(true,"Modify canteen successfully");
     }
 
     @Override
