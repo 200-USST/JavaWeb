@@ -128,6 +128,10 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void deleteUser(String userId) {
-
+        var id = Integer.parseInt(userId);
+        DbHelper.update(
+                "delete from user where userID = ?",
+                id
+        );
     }
 }
