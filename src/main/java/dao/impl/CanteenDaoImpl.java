@@ -162,6 +162,10 @@ public class CanteenDaoImpl implements CanteenDao {
 
     @Override
     public void managerModifyCanteen(String canteenId, String canteenAbstract) {
-
+        var id = Integer.parseInt(canteenId);
+        DbHelper.update(
+                "update canteen set canteenAbstract = ? where canteenID = ?",
+                canteenAbstract, id
+        );
     }
 }
