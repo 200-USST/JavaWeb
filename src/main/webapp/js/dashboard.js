@@ -172,7 +172,8 @@ document.querySelectorAll(".account-tr").forEach((tr) => {
 
 document.addEventListener("DOMContentLoaded", () => {
     let json = document.getElementById("storage").getAttribute("cmJson")
-    let p_tag = document.querySelector("#canteen-guard-main p.input-like")
+    let p_tag = document.querySelectorAll("#canteen-guard-main p.input-like")
+    p_tag = p_tag[p_tag.length - 1]
     let text = ''
     json = JSON.parse(json)
     let manager_list = json[p_tag.getAttribute("cname")]

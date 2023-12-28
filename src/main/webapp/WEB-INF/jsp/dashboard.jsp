@@ -418,11 +418,9 @@ cmJson='${cmJson}'>
                             <p class="input-like" cname="${mcMap[user.userName].canteenName}"></p>
                         </div>
                         <div class="split">
-                            <p>
                             <h3>食堂照片</h3>
 <%--                            <input type="file" name="file" accept="image/*" class="img-upload" readonly disabled>--%>
-                            <img src="${pageContext.request.contextPath}/img/profile-1.jpg">
-                            </p>
+                            <img src="${pageContext.request.contextPath}/img/profile-1.jpg" alt="">
                         </div>
                         <div class="align-center"><div class="split">
                             <button type="button" class="modify">修改</button>
