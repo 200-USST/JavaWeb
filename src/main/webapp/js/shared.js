@@ -4,5 +4,5 @@ window.onload = function() {
         if (messageBox) {
             messageBox.style.display = 'none';
         }
-    }, 3000); // 3秒后消失
+    }, 5000); // 3秒后消失
 };

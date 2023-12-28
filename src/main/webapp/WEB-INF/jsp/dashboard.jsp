@@ -26,7 +26,9 @@
      cdJson='${cdJson}'></div>
 
 <c:if test="${not empty info}">
-    <div id="message-box">${info.description}</div>
+    <div id="message-box">
+        <p>${info.description}</p>
+    </div>
 </c:if>
 
 <div class="container">
