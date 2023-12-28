@@ -204,5 +204,18 @@ public class AdminServiceImpl implements AdminService{
         }
         return new Info(true,"Delete canteen successfully");
     }
+
+    @Override
+    public Info modifyProfile(User user) {
+        userDao.modify(user);
+        return new Info(true,"Modify profile successfully");
+    }
+
+    @Override
+    public Info deleteUser(String userId) {
+        userDao.deleteUser(userId);
+        return new Info(true,"delete user successfully");
+    }
+
 }
 

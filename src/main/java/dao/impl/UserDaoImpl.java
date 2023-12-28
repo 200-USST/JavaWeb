@@ -125,4 +125,9 @@ public class UserDaoImpl implements UserDao {
         }
         return pair;
     }
+
+    @Override
+    public void deleteUser(String userId) {
+
+    }
 }
