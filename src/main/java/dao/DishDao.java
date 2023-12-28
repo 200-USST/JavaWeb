@@ -18,7 +18,7 @@ public interface DishDao {
     public ArrayList<Dish> queryDishesByCanteen();
     public ArrayList<Dish> queryDishesByPrice();
     public ArrayList<Dish> queryDishByClass();
-    public ArrayList<Dish> queryDishByCanteen(String canteenName);
-    public ArrayList<Dish> queryDishesByPrice(String canteenPrice);
-    public ArrayList<Dish> queryDishByClass(String canteenClass);
+    public ArrayList<Dish> queryDishByCanteen(String canteenId);
+    public ArrayList<Dish> queryDishesByPrice(String dishPrice);
+    public ArrayList<Dish> queryDishByClass(String dishClass);
 }

@@ -81,32 +81,56 @@ public class DishDaoImpl implements DishDao {
 
     @Override
     public ArrayList<Dish> queryDishesByCanteen() {
-        return null;
+        var result = DbHelper.query(
+                "select * from dish order by dishesCanteen"
+        );
+        return (ArrayList<Dish>) makeResultList(result);
     }
 
     @Override
     public ArrayList<Dish> queryDishesByPrice() {
-        return null;
+        var result = DbHelper.query(
+                "select * from dish order by dishesPrice"
+        );
+        for(var i : (ArrayList<Dish>) makeResultList(result)){
+            System.out.println(i.getDishName());
+        }
+        return (ArrayList<Dish>) makeResultList(result);
     }
 
     @Override
     public ArrayList<Dish> queryDishByClass() {
-        return null;
+        var result = DbHelper.query(
+                "select * from dish order by dishesCuisine"
+        );
+        return (ArrayList<Dish>) makeResultList(result);
     }
 
     @Override
-    public ArrayList<Dish> queryDishByCanteen(String canteenName) {
-        return null;
+    public ArrayList<Dish> queryDishByCanteen(String canteenId) {
+        var result = DbHelper.query(
+                "select * from dish where dishesCanteen = ?",
+                canteenId
+        );
+        return (ArrayList<Dish>) makeResultList(result);
     }
 
     @Override
-    public ArrayList<Dish> queryDishesByPrice(String canteenPrice) {
-        return null;
+    public ArrayList<Dish> queryDishesByPrice(String dishPrice) {
+        var result = DbHelper.query(
+                "select * from dish where dishesPrice = ?",
+                Double.parseDouble(dishPrice)
+        );
+        return (ArrayList<Dish>) makeResultList(result);
     }
 
     @Override
-    public ArrayList<Dish> queryDishByClass(String canteenClass) {
-        return null;
+    public ArrayList<Dish> queryDishByClass(String dishClass) {
+        var result = DbHelper.query(
+                "select * from dish where dishesCuisine = ?",
+                dishClass
+        );
+        return (ArrayList<Dish>) makeResultList(result);
     }
 
     private List<Dish> makeResultList(List<List<Object>> result) {

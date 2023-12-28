@@ -21,10 +21,13 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
-        if(request.getParameter("type").equals("queryDishesByorder")){
+        if(request.getParameter("type").equals("queryDishesByOrder")){
             String order = request.getParameter("order");
             String value = request.getParameter("value");
             ArrayList<Dish> dishes=new ArrayList<>();
+            userService.queryDishesByorder(order,value,dishes);
+            request.getSession().setAttribute("orderedDishesList",dishes);
         }
+        response.sendRedirect("/200web/dashboard");
     }
 }

@@ -548,27 +548,27 @@ cmJson='${cmJson}'>
         <main id="dishes-search-main">
             <h1>菜品检索</h1>
             <div class="function">
-                <form class="check" action="dishes-search">
+                <form class="check" action="${pageContext.request.contextPath}/user?type=queryDishesByOrder&activeBar=dishes-search" method="post">
                     <div class="three-split">
                         <div class="split">
                             <p>
                             <h3>检索框</h3>
-                            <input type="text" name="checkbox">
+                            <input type="text" name="value">
                             </p>
                         </div>
                         <div class="split">
                             <p>
                             <h3>按菜系/价格/食堂检索</h3>
-                            <input type="text" name="checkby">
+                            <input type="text" name="order">
                             </p>
                         </div>
                         <div class="align-center"><div class="split">
-                            <button type="button" class="check-in">检索</button>
+                            <button type="submit" class="check-in">检索</button>
                         </div></div>
                     </div>
                 </form>
                 <div class="user-list">
-<c:forEach items="${dishesList}" var="dishes">
+<c:forEach items="${orderedDishesList}" var="dishes">
                     <div class="user"
                          did="${dishes.dishId}"
                          dname="${dishes.dishName}"
