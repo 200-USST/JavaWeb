@@ -246,7 +246,7 @@ cmJson='${cmJson}'>
                             <button type="button" class="modify">修改</button>
                             <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
                             <br><br>
-                            <button type="submit" name="action" value="delete" class="delete" style="display: none;">确认删除</button>
+                            <button type="submit" name="action" value="delete" class="delete" id="canteen" style="display: none;">确认删除</button>
                         </div></div>
                     </div>
                     <input type="hidden" name="canteenId">
@@ -360,7 +360,7 @@ cmJson='${cmJson}'>
                             <button type="button" class="modify">修改</button>
                             <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
                             <br><br>
-                            <button type="submit" name="action" value="delete" class="delete" style="display: none;">确认删除</button>
+                            <button type="submit" name="action" value="delete" class="delete" id="account" style="display: none;">确认删除</button>
                         </div></div>
                     </div>
                     <input type="hidden" name="userId">
@@ -509,7 +509,7 @@ cmJson='${cmJson}'>
                             <button type="button" class="modify">修改</button>
                             <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
                             <br><br>
-                            <button type="button" name="action" value="delete" class="delete" id="manager" style="display: none;">确认删除</button>
+                            <button type="button" name="action" value="delete" class="delete" id="dish" style="display: none;">确认删除</button>
                         </div></div>
                     </div>
                     <input type="hidden" name="dishId">
