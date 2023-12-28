@@ -48,6 +48,8 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("/200web/dashboard");
         }
         else {
+            var info = new Info(false, "账号或密码错误");
+            request.getSession().setAttribute("info", info);
             response.sendRedirect("/200web/login.do");
         }
     }
