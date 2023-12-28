@@ -213,6 +213,10 @@ document.querySelectorAll("#dishes-search-main div.user").forEach((div) => {
         p_tag[2].innerText = div.getAttribute("dprice")
         p_tag[3].innerText = div.getAttribute("dinfo")
 
+        let json = document.getElementById("storage").getAttribute("icJson")
+        json = JSON.parse(json)
+        p_tag[4].innerText = json[div.getAttribute("dcanteen")]
+
         img.src = img.getAttribute("basesrc") + div.getAttribute("dpic")
     })
 })
@@ -226,6 +230,15 @@ document.querySelectorAll("#canteen-search-main div.user").forEach((div) => {
         p_tag[0].innerText = div.getAttribute("cname")
         p_tag[1].innerText = div.getAttribute("clocation")
         p_tag[2].innerText = div.getAttribute("cabstract")
+
+        let json = document.getElementById("storage").getAttribute("cdJson")
+        json = JSON.parse(json)
+        let dishes_list = json[div.getAttribute("cname")]
+        let text = ''
+        for (var i in dishes_list) {
+            text += dishes_list[i] + '、'
+        }
+        p_tag[3].innerText = text
 
         img.src = img.getAttribute("basesrc") + div.getAttribute("cpic")
     })

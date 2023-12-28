@@ -19,5 +19,7 @@ public interface CanteenDao {
     Map<String, List<Dish>> getAllCanteenWithDishes ();
     public void deleteCanteen(String canteenId);
     void managerModifyCanteen(String canteenId,String canteenAbstract);
-    String findCanteenId(String canteenName);
+    Integer findCanteenId(String canteenName);
+
+    public Map<Integer, String> getAllCanteenWithID();
 }

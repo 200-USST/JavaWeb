@@ -11,7 +11,7 @@ public class Validator {
         }
 
         int length = username.length();
-        if(length >= 5 && length <= 12) return new Info(true,"Legal username");
+        if(length >= 1 && length <= 12) return new Info(true,"Legal username");
         else return new Info(false,"The username length does not meet the requirements");
     }
 

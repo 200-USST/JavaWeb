@@ -107,7 +107,7 @@ public class DishDaoImpl implements DishDao {
     }
 
     @Override
-    public ArrayList<Dish> queryDishByCanteen(String canteenId) {
+    public ArrayList<Dish> queryDishByCanteen(Integer canteenId) {
         var result = DbHelper.query(
                 "select * from dish where dishesCanteen = ?",
                 canteenId

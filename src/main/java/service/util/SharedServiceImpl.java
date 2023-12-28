@@ -13,6 +13,7 @@ import pojo.Info;
 import pojo.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,17 +62,38 @@ public class SharedServiceImpl implements SharedService{
     }
 
     @Override
-    public void updateAllInfo(ArrayList<User> users, ArrayList<Canteen> canteens, ArrayList<Dish> dishes, Map<String, Canteen> manager_canteen_pair, StringBuilder canteen_manager_json, Map<String, List<Dish>> canteen_dishes_dict) {
+    public void updateAllInfo(ArrayList<User> users, ArrayList<Canteen> canteens, StringBuilder id_canteen, Map<String, Canteen> manager_canteen_pair, StringBuilder canteen_manager_json, Map<String, List<Dish>> canteen_dishes_dict, StringBuilder canteen_dishes_json) {
+        ObjectMapper mapper = new ObjectMapper();
+
         users.addAll(userDao.queryAllUsers());
         canteens.addAll(canteenDao.queryAllCanteens());
-        dishes.addAll(dishDao.queryAllDishes());
+
+        try {
+            id_canteen.append(mapper.writeValueAsString(canteenDao.getAllCanteenWithID()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         manager_canteen_pair.putAll(userDao.getAllManagersWithCanteen());
         try {
-            ObjectMapper mapper = new ObjectMapper();
             canteen_manager_json.append(mapper.writeValueAsString(canteenDao.getAllCanteenWithManager()));
         } catch (Exception e) {
             e.printStackTrace();
         }
         canteen_dishes_dict.putAll(canteenDao.getAllCanteenWithDishes());
+
+        Map<String, List<String>> cdJson = new HashMap<>();
+        for (var entry : canteen_dishes_dict.entrySet()) {
+            List<String> dishes = new ArrayList<>();
+            for (var d : entry.getValue()) {
+                dishes.add(d.getDishName());
+            }
+            cdJson.put(entry.getKey(), dishes);
+        }
+        try {
+            canteen_dishes_json.append(mapper.writeValueAsString(cdJson));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

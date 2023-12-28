@@ -20,7 +20,9 @@
 <body>
 
 <div id="storage"
-cmJson='${cmJson}'>
+     cmJson='${cmJson}'
+     icJson='${icJson}'
+     cdJson='${cdJson}'></div>
 
 <div class="container">
     <!-- Sidebar Section -->
@@ -598,6 +600,8 @@ cmJson='${cmJson}'>
                             <p class="input-like"></p>
                             <h3>简介</h3>
                             <p class="input-like"></p>
+                            <h3>售卖食堂</h3>
+                            <p class="input-like"></p>
                         </div>
                         <div class="split">
                             <h3>菜品图片</h3>
@@ -620,25 +624,6 @@ cmJson='${cmJson}'>
         <main id="canteen-search-main">
             <h1>食堂检索</h1>
             <div class="function">
-                <form class="check" action="canteen-search">
-                    <div class="three-split">
-                        <div class="split">
-                            <p>
-                            <h3>检索框</h3>
-                            <input type="text" name="checkbox">
-                            </p>
-                        </div>
-                        <div class="split">
-                            <p>
-                            <h3>按菜系/价格/食堂检索</h3>
-                            <input type="text" name="checkby">
-                            </p>
-                        </div>
-                        <div class="align-center"><div class="split">
-                            <button type="button" class="check-in">检索</button>
-                        </div></div>
-                    </div>
-                </form>
                 <div class="user-list">
 <c:forEach items="${canteenList}" var="canteen">
                     <div class="user"
@@ -671,6 +656,10 @@ cmJson='${cmJson}'>
                             <h3>食堂照片</h3>
                             <img src="" basesrc="${pageContext.request.contextPath}/data/canteen_pics/">
                         </div>
+                    </div>
+                    <div class="split">
+                        <h3>售卖菜品</h3>
+                        <p class="input-like"></p>
                     </div>
                 </div>
 
