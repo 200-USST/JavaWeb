@@ -79,6 +79,36 @@ public class DishDaoImpl implements DishDao {
         );
     }
 
+    @Override
+    public ArrayList<Dish> queryDishesByCanteen() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Dish> queryDishesByPrice() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Dish> queryDishByClass() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Dish> queryDishByCanteen(String canteenName) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Dish> queryDishesByPrice(String canteenPrice) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Dish> queryDishByClass(String canteenClass) {
+        return null;
+    }
+
     private List<Dish> makeResultList(List<List<Object>> result) {
         List<Dish> list = new ArrayList<>();
         for (var row : result) {
