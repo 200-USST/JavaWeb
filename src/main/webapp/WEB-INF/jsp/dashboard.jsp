@@ -246,7 +246,7 @@ cmJson='${cmJson}'>
                             <button type="button" class="modify">修改</button>
                             <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
                             <br><br>
-                            <button type="submit" name="action" value="delete" class="delete" id="canteen" style="display: none;">确认删除</button>
+                            <button type="button" name="action" value="delete" class="delete" id="canteen" style="display: none;">确认删除</button>
                         </div></div>
                     </div>
                     <input type="hidden" name="canteenId">
@@ -350,6 +350,11 @@ cmJson='${cmJson}'>
                             <h3>年龄</h3>
                             <input type="text" name="userAge" readonly>
                             </p>
+                            <p>
+                            <h3>管理食堂</h3>
+                            <input type="text" name="userManagement" class="cannot-modify" readonly>
+                            </p>
+
                         </div>
                         <div class="align-center"><div class="split">
                             <button type="button" class="modify">修改</button>
@@ -373,28 +378,18 @@ cmJson='${cmJson}'>
                             <input type="text" name="userName" placeholder="用户名">
                             </p>
                             <p>
+                            <h3>管理食堂</h3>
+                            <input type="text" name="canteenName" placeholder="管理食堂">
+                            </p>
+                        </div>
+                        <div class="split">
+                            <p>
                             <h3>用户密码</h3>
                             <input type="password" name="userPassword" placeholder="密码">
                             </p>
                             <h3>密码确认</h3>
                             <input type="password" name="userPasswordRepeat" placeholder="再次输入密码">
                             </p>
-                            <p>
-                            <h3>管理食堂</h3>
-                            <input type="text" name="canteenName" placeholder="管理食堂">
-                            </p>
-                        </div>
-                        <div class="split">
-
-                            <p>
-                            <h3>性别</h3>
-                            <input type="text" name="userGender" placeholder="性别">
-                            </p>
-                            <p>
-                            <h3>年龄</h3>
-                            <input type="text" name="userAge" placeholder="年龄">
-                            </p>
-
                         </div>
                         <div class="align-center"><div class="split">
                             <button type="submit" class="submit">添加</button>

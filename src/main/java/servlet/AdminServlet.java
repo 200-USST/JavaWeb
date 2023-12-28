@@ -22,7 +22,7 @@ public class AdminServlet extends HttpServlet {
             String originalPath = getServletContext().getRealPath("/");
             int targetIndex = originalPath.indexOf("target");
             String basePath = originalPath.substring(0, targetIndex);
-            String realPath1 = basePath + "src\\main\\webapp\\data\\dish_pics";
+            String realPath1 = basePath + "src\\main\\webapp\\data\\canteen_pics";
             String canteenId = request.getParameter("canteenId");
             String canteenPic = request.getParameter("canteenPic");
             Info info = adminService.deleteCanteen(canteenId,canteenPic,realPath1);
@@ -53,8 +53,8 @@ public class AdminServlet extends HttpServlet {
             String originalPath = getServletContext().getRealPath("/");
             int targetIndex = originalPath.indexOf("target");
             String basePath = originalPath.substring(0, targetIndex);
-            String realPath1 = basePath + "src\\main\\webapp\\data\\dish_pics";
-            String realPath2 = basePath + "src\\main\\webapp\\data\\dish_picstmp";
+            String realPath1 = basePath + "src\\main\\webapp\\data\\canteen_pics";
+            String realPath2 = basePath + "src\\main\\webapp\\data\\canteen_picstmp";
             Info info;
             try {
                 info = adminService.modifyCanteen(request,realPath1,realPath2);
@@ -77,9 +77,8 @@ public class AdminServlet extends HttpServlet {
                 info = adminService.modifyProfile(user);
             } else if (request.getParameter("action").equals("delete")) {
                 String userId = request.getParameter("userId");
-
+                info = adminService.deleteUser(userId);
             }
-
             request.getSession().setAttribute("info",info);
             response.sendRedirect("/200web/dashboard");
         }
