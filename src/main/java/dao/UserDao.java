@@ -15,6 +15,7 @@ public interface UserDao {
     void addManagerToCanteen(String managerName,String canteenName);//添加管理员和食堂的关系
     ArrayList<User> queryAllUsers();
     Map<String, Canteen> getAllManagersWithCanteen();
+    void deleteUser(String userId);//删除某个用户
 }
 
 

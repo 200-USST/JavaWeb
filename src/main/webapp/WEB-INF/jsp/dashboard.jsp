@@ -324,7 +324,7 @@ cmJson='${cmJson}'>
 
             <h2>账号信息</h2>
             <div class="function">
-                <form class="switch" action="activeBar=accounts-manage">
+                <form class="switch" action="${pageContext.request.contextPath}/adminServlet?type=modifyProfile&activeBar=accounts-manage" method="post">
                     <div class="three-split">
                         <div class="split">
                             <p>

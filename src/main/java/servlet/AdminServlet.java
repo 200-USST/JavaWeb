@@ -2,6 +2,7 @@ package servlet;
 
 import org.apache.commons.fileupload.FileUploadException;
 import pojo.Canteen;
+import pojo.User;
 import service.admin.AdminService;
 import service.admin.AdminServiceImpl;
 import jakarta.servlet.*;
@@ -60,6 +61,25 @@ public class AdminServlet extends HttpServlet {
             } catch (FileUploadException e) {
                 throw new RuntimeException(e);
             }
+            request.getSession().setAttribute("info",info);
+            response.sendRedirect("/200web/dashboard");
+        }
+        else if(request.getParameter("type").equals("modifyProfile")){
+            Info info = null;
+            if(request.getParameter("action").equals("modify")){
+                String userName = request.getParameter("userName");
+                String userPassword = request.getParameter("userPassword");
+                String userGender = request.getParameter("userGender");
+                String userAge = request.getParameter("userAge");
+                String userId = request.getParameter("userId");
+                String userIdentity = request.getParameter("userIdentity");
+                User user = new User(Integer.parseInt(userId),userName,userPassword,userIdentity,userGender,userAge);
+                info = adminService.modifyProfile(user);
+            } else if (request.getParameter("action").equals("delete")) {
+                String userId = request.getParameter("userId");
+
+            }
+
             request.getSession().setAttribute("info",info);
             response.sendRedirect("/200web/dashboard");
         }
