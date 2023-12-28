@@ -415,7 +415,7 @@ cmJson='${cmJson}'>
             <h1>食堂信息维护</h1>
             <div class="function">
 <%--                --%>
-                <form class="switch" action="${pageContext.request.contextPath}/admin?type=modifyCanteen&activeBar=canteen-guard">
+                <form class="switch" action="${pageContext.request.contextPath}/manager?type=modifyCanteen&activeBar=canteen-guard" method="post">
                     <div class="three-split">
                         <div class="split">
                             <h3>食堂名</h3>

@@ -67,5 +67,10 @@ public class ManagerServlet extends HttpServlet {
             request.getSession().setAttribute("info",info);
             response.sendRedirect("/200web/dashboard");
         }
+        else if(request.getParameter("type").equals("modifyCanteen")){
+            String canteenAbstract = request.getParameter("canteenAbstract");
+            String canteenId = request.getParameter("canteenId");
+            managerService.modifyCanteen()
+        }
     }
 }

@@ -25,10 +25,11 @@ import java.util.List;
 public class ManagerServiceImpl implements ManagerService{
     CanteenDao canteenDao =new CanteenDaoImpl();
     DishDao dishDao = new DishDaoImpl();
+
+
     @Override
-    public Info modifyCanteen(Canteen canteen) {
-        canteenDao.modify(canteen);
-        return new Info(true,"Modify canteen successfully");
+    public Info modifyCanteen(String canteenId, String canteenAbstract) {
+        return null;
     }
 
     @Override

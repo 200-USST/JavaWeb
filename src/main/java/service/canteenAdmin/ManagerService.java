@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 public interface ManagerService {
-    public Info modifyCanteen(Canteen canteen);
+    public Info modifyCanteen(String canteenId,String canteenAbstract);
     public Canteen findCanteen(User user);
     public Info newDish(HttpServletRequest request, String realPath, String tmpPath,Canteen canteen) throws FileUploadException, IOException;
     public Info modifyDish(HttpServletRequest request, String realPath, String tmpPath,Canteen canteen) throws FileUploadException, IOException;

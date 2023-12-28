@@ -37,6 +37,8 @@ public class ModifyPswServlet extends HttpServlet {
             String newPsw = request.getParameter("newPsw");
             String newPswRepeat = request.getParameter("newPswRepeat");
             Info info=sharedService.modifyPassword(user,oldPsw,newPsw,newPswRepeat);
+            System.out.println(oldPsw);
+            System.out.println(newPswRepeat);
             request.getSession().setAttribute("user",user);
             request.getSession().setAttribute("info",info);
             request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
