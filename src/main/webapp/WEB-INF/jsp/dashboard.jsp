@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shared.css">
     <title>Dashboard</title>
 </head>
 <body>
@@ -23,6 +24,10 @@
      cmJson='${cmJson}'
      icJson='${icJson}'
      cdJson='${cdJson}'></div>
+
+<c:if test="${not empty info}">
+    <div id="message-box">${info.description}</div>
+</c:if>
 
 <div class="container">
     <!-- Sidebar Section -->
@@ -779,6 +784,7 @@
 </div>
 
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
+<script src="${pageContext.request.contextPath}/js/shared.js"></script>
 
 <%--刷新回到定位--%>
 <script>
