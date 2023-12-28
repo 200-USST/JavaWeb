@@ -414,21 +414,16 @@ cmJson='${cmJson}'>
         <main id="canteen-guard-main">
             <h1>食堂信息维护</h1>
             <div class="function">
-                <form class="switch" action="${pageContext.request.contextPath}/manager?type=modifyCanteen&activeBar=canteen-guard">
+<%--                --%>
+                <form class="switch" action="${pageContext.request.contextPath}/admin?type=modifyCanteen&activeBar=canteen-guard">
                     <div class="three-split">
                         <div class="split">
-                            <p>
                             <h3>食堂名</h3>
-                            <input type="text" name="canteenName" value="${mcMap[user.userName].canteenName}" readonly>
-                            </p>
-                            <p>
+                            <p class="input-like">${mcMap[user.userName].canteenName}</p>
                             <h3>食堂位置</h3>
-                            <input type="text" name="canteenLocation" value="${mcMap[user.userName].canteenLocation}" readonly>
-                            </p>
-                            <p>
+                            <p class="input-like">${mcMap[user.userName].canteenLocation}</p>
                             <h3>食堂简介</h3>
                             <textarea name="canteenAbstract" rows="4" readonly>${mcMap[user.userName].canteenAbstract}</textarea>
-                            </p>
                             <h3>食堂管理者</h3>
                             <p class="input-like" cname="${mcMap[user.userName].canteenName}"></p>
                         </div>
@@ -442,8 +437,6 @@ cmJson='${cmJson}'>
                         <div class="align-center"><div class="split">
                             <button type="button" class="modify">修改</button>
                             <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
-                            <br><br>
-                            <button type="submit" name="action" value="delete" class="delete" style="display: none;">确认删除</button>
                         </div></div>
                     </div>
                     <input type="hidden" name="canteenId" value="${mcMap[user.userName].canteenId}">
@@ -516,7 +509,7 @@ cmJson='${cmJson}'>
                             <button type="button" class="modify">修改</button>
                             <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
                             <br><br>
-                            <button type="button" name="action" value="delete" class="delete" style="display: none;">确认删除</button>
+                            <button type="button" name="action" value="delete" class="delete" id="manager" style="display: none;">确认删除</button>
                         </div></div>
                     </div>
                     <input type="hidden" name="dishId">
