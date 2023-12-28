@@ -350,11 +350,6 @@ cmJson='${cmJson}'>
                             <h3>年龄</h3>
                             <input type="text" name="userAge" readonly>
                             </p>
-                            <p>
-                            <h3>管理食堂</h3>
-                            <input type="text" name="userManagement" readonly>
-                            </p>
-
                         </div>
                         <div class="align-center"><div class="split">
                             <button type="button" class="modify">修改</button>
