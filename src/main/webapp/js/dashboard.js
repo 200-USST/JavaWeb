@@ -94,7 +94,8 @@ delete_butts.forEach((butt) => {
         let all_input = form.querySelectorAll("input");
         let id = all_input[all_input.length - 2].value
         let pic = all_input[all_input.length - 1].value
-        location.href = 'manager?type=deleteDish&activeBar=dishes-guard&dishId=' + id + "&dishPic=" + pic;
+        let servlet = butt.id
+        location.href = servlet + '?type=deleteDish&activeBar=dishes-guard&dishId=' + id + "&dishPic=" + pic;
     })
 })
 

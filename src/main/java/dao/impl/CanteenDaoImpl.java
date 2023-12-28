@@ -138,6 +138,25 @@ public class CanteenDaoImpl implements CanteenDao {
 
     @Override
     public void deleteCanteen(String canteenId) {
+        var id = Integer.parseInt(canteenId);
+        var name = (String) DbHelper.query(
+                "select canteenName from canteen where canteenID = ?",
+                id
+        ).get(0).get(0);
 
+        DbHelper.update(
+                "delete from canteen where canteenID = ?",
+                id
+        );
+
+        DbHelper.update(
+                "delete from canteen_manager where canteenName = ?",
+                name
+        );
+
+        DbHelper.update(
+                "delete from dish where dishesCanteen = ?",
+                id
+        );
     }
 }
