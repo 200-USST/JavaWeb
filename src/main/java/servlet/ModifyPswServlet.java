@@ -32,24 +32,16 @@ public class ModifyPswServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getParameter("type").equals("newDish")){
-            ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
-            try {
-                List<FileItem> items = upload.parseRequest(new Rc(request));
-            } catch (FileUploadException e) {
-                throw new RuntimeException(e);
-            }
-        }else {
             User user = (User) request.getSession().getAttribute("user");
             String oldPsw = request.getParameter("oldPsw");
             String newPsw = request.getParameter("newPsw");
             String newPswRepeat = request.getParameter("newPswRepeat");
             Info info=sharedService.modifyPassword(user,oldPsw,newPsw,newPswRepeat);
+            System.out.println(oldPsw);
+            System.out.println(newPswRepeat);
             request.getSession().setAttribute("user",user);
             request.getSession().setAttribute("info",info);
             request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
             response.sendRedirect("/200web/dashboard");
-        }
-
     }
 }

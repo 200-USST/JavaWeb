@@ -163,7 +163,7 @@ cmJson='${cmJson}'>
             <h2>修改密码</h2>
 
             <div class="function">
-                <form action="${pageContext.request.contextPath}/modifyPsw?activeBar=personal-info&type=newDish" method="post">
+                <form action="${pageContext.request.contextPath}/modifyPsw?activeBar=personal-info" method="post">
                     <div class="two-split">
                         <div class="split">
                             <p>
@@ -217,7 +217,7 @@ cmJson='${cmJson}'>
 
             <h2>食堂信息</h2>
             <div class="function">
-                <form class="switch" action="activeBar=canteen-info">
+                <form class="switch" action="${pageContext.request.contextPath}/adminServlet?type=modifyCanteen&activeBar=canteen-info" enctype="multipart/form-data" method="post">
                     <div class="three-split">
                         <div class="split">
                             <p>
@@ -415,7 +415,7 @@ cmJson='${cmJson}'>
             <h1>食堂信息维护</h1>
             <div class="function">
 <%--                --%>
-                <form class="switch" action="${pageContext.request.contextPath}/admin?type=modifyCanteen&activeBar=canteen-guard">
+                <form class="switch" action="${pageContext.request.contextPath}/manager?type=modifyCanteen&activeBar=canteen-guard" method="post">
                     <div class="three-split">
                         <div class="split">
                             <h3>食堂名</h3>

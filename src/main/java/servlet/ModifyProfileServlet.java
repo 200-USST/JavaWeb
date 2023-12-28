@@ -15,7 +15,6 @@ public class ModifyProfileServlet extends HttpServlet {
     SharedService sharedService =new SharedServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
     @Override

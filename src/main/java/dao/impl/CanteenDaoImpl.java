@@ -159,4 +159,9 @@ public class CanteenDaoImpl implements CanteenDao {
                 id
         );
     }
+
+    @Override
+    public void managerModifyCanteen(String canteenId, String canteenAbstract) {
+
+    }
 }
