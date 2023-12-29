@@ -25,7 +25,7 @@ public class DiscussionMapperTest {
     }
     @Test
     void testInsert() throws SQLException {
-        Discussion discussion = new Discussion(1, "dfs", new Date(), 2, "fds", "dfsd", "sdf", 26, 1);
+        Discussion discussion = new Discussion(null, "推荐的菜单（顶我上去", new Date(), 2, "纳西妲", "混合花菜配紫米紫薯：轻食健康！巨无霸饭团：冲碳必备！屈臣氏矿泉水：不够干？给我喝！", "sdf", 26, 1);
         discussionMapper.insertDiscussion(discussion);
     }
     @Test
@@ -46,8 +46,6 @@ public class DiscussionMapperTest {
         for (Object item :discussions) {
             System.out.println(item);
         }
-
-
     }
 
 }

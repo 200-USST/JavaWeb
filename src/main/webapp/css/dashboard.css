@@ -4,6 +4,13 @@
     font-weight: normal;
     font-style: normal;
 }
+.division{
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(to left, #fff 5%, gainsboro 50%, #fff 85%);
+    background: -webkit-linear-gradient(left, #fff 5%, gainsboro 50%, #fff 85%);
+    /* webkit是为了兼容苹果浏览器，建议把其他浏览器兼容也写了 */
+}
 
 :root{
     --color-primary: #6C9BCF;

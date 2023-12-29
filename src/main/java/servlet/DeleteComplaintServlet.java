@@ -10,27 +10,25 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import pojo.Complaint;
 import pojo.Discussion;
-import pojo.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
-@WebServlet(name = "DeleteDiscussionServlet", value = "/DeleteDiscussionServlet")
-public class DeleteDiscussionServlet extends HttpServlet {
+@WebServlet(name = "DeleteComplaintServlet", value = "/DeleteComplaintServlet")
+public class DeleteComplaintServlet extends HttpServlet {
     SqlSession sqlSession;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset = UTF-8");
-        String discussionID0 = request.getParameter("discussionID");
-        Integer discussionID = Integer.parseInt(discussionID0);
 
-        DiscussionMapper mapper = (DiscussionMapper) getMapper(DiscussionMapper.class);
+        Integer complaintID = Integer.parseInt(request.getParameter("complaintID"));
+
+        ComplaintMapper mapper = (ComplaintMapper) getMapper(ComplaintMapper.class);
         try {
-            mapper.deleteByID(discussionID);
-            List<Discussion> discussions = mapper.selectAll();
-            request.getSession().setAttribute("discussionList",discussions);
+            mapper.deleteById(complaintID);
+            List<Complaint> complaints = mapper.selectAll();
+            request.getSession().setAttribute("allComplains",complaints);
             response.setStatus(222);
         }catch (SQLException e){
             response.setStatus(555);

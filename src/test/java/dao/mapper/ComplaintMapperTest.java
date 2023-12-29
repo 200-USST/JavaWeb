@@ -24,7 +24,7 @@ public class ComplaintMapperTest {
     @Test
     void testInsert() throws SQLException {
 //        Discussion discussion = new Discussion(1, "dfs", new Date(), 2, "fds", "dfsd", "sdf", 26, 1);
-        Complaint complaint = new Complaint(null, 2, "fdsf", "fdsf", new Date(),false);
+        Complaint complaint = new Complaint(null, 2, "流浪者", "这么大店，连个奶茶都没有，开什么开！", new Date(),false);
         complaintMapper.insertNewComplaint(complaint);
     }
     @Test

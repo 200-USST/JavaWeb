@@ -30,6 +30,7 @@ import java.util.List;
 @WebServlet(name = "PostDiscussionServlet", value = "/PostDiscussionServlet")
 public class PostDiscussionServlet extends HttpServlet {
     SharedService sharedService =new SharedServiceImpl();
+    SqlSession sqlSession;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -84,6 +85,7 @@ public class PostDiscussionServlet extends HttpServlet {
             response.setStatus(555);
 
         }
+        sqlSession.close();
         response.sendRedirect("/200web/dashboard");
         System.out.println(request.getSession().getAttribute("discussionList"));
 
@@ -91,7 +93,7 @@ public class PostDiscussionServlet extends HttpServlet {
 
     private Object getMapper(Class mapperName) {
         SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
-        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+         sqlSession = sqlSessionFactory.openSession(true);
         Object mapper = sqlSession.getMapper(mapperName);
         return mapper;
     }

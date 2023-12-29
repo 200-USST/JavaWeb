@@ -17,11 +17,12 @@ import java.util.List;
 
 @WebServlet(name = "HandleComplaintServlet", value = "/HandleComplaintServlet")
 public class HandleComplaintServlet extends HttpServlet {
+    SqlSession sqlSession;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset = UTF-8");
 
-        Integer complaintID = Integer.getInteger(request.getParameter("complaintID"));
+        Integer complaintID = Integer.parseInt(request.getParameter("complaintID"));
 
         ComplaintMapper mapper = (ComplaintMapper) getMapper(ComplaintMapper.class);
         try {
@@ -32,12 +33,13 @@ public class HandleComplaintServlet extends HttpServlet {
         }catch (SQLException e){
             response.setStatus(555);
         }
+        sqlSession.close();
         response.sendRedirect("/200web/dashboard");
     }
 
     private Object getMapper(Class mapperName) {
         SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
-        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        sqlSession = sqlSessionFactory.openSession(true);
         Object mapper = sqlSession.getMapper(mapperName);
         return mapper;
     }

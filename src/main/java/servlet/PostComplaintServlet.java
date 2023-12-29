@@ -23,6 +23,7 @@ import java.util.List;
 
 @WebServlet(name = "PostComplaintServlet", value = "/PostComplaintServlet")
 public class PostComplaintServlet extends HttpServlet {
+    SqlSession sqlSession;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
@@ -48,16 +49,13 @@ public class PostComplaintServlet extends HttpServlet {
         }catch (SQLException e){
             response.setStatus(555);
         }
-        request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
-        System.out.println("complaint:"+request.getSession().getAttribute("complaintList"));
-
+        sqlSession.close();
         response.sendRedirect("/200web/dashboard");
-        System.out.println("complaint:"+request.getSession().getAttribute("complaintList"));
     }
 
     private Object getMapper(Class mapperName) {
         SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
-        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        sqlSession = sqlSessionFactory.openSession(true);
         Object mapper = sqlSession.getMapper(mapperName);
         return mapper;
     }

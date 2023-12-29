@@ -24,6 +24,7 @@ import java.util.Map;
 @WebServlet(name = "dashboardServlet", value = "/dashboard")
 public class DashboardServlet extends HttpServlet {
     SharedService sharedService =new SharedServiceImpl();
+    SqlSession sqlSession;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -39,6 +40,7 @@ public class DashboardServlet extends HttpServlet {
 
             List<Complaint> complaints;
             List<Discussion> discussions;
+            List<Complaint> allComplaints;
             ComplaintMapper complaintMapper = (ComplaintMapper)getMapper(ComplaintMapper.class);
             DiscussionMapper discussionMapper = (DiscussionMapper)getMapper(DiscussionMapper.class);
             try {
@@ -46,12 +48,17 @@ public class DashboardServlet extends HttpServlet {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
+            try {
+                allComplaints = complaintMapper.selectAll();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             try {
                 discussions = discussionMapper.selectAll();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+            sqlSession.close();
 
 
             StringBuilder canteen_dishes_json = new StringBuilder();
@@ -65,6 +72,8 @@ public class DashboardServlet extends HttpServlet {
             session.setAttribute("cdJson", canteen_dishes_json);
             session.setAttribute("complaintList",complaints);
             session.setAttribute("discussionList",discussions);
+            session.setAttribute("allComplaints",allComplaints);
+
 
             if(info!=null){
                 request.setAttribute("info",info);
@@ -78,7 +87,7 @@ public class DashboardServlet extends HttpServlet {
     }
     private Object getMapper(Class mapperName) {
         SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
-        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+        sqlSession = sqlSessionFactory.openSession(true);
         Object mapper = sqlSession.getMapper(mapperName);
         return mapper;
     }
