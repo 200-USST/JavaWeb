@@ -79,6 +79,60 @@ public class DishDaoImpl implements DishDao {
         );
     }
 
+    @Override
+    public ArrayList<Dish> queryDishesByCanteen() {
+        var result = DbHelper.query(
+                "select * from dish order by dishesCanteen"
+        );
+        return (ArrayList<Dish>) makeResultList(result);
+    }
+
+    @Override
+    public ArrayList<Dish> queryDishesByPrice() {
+        var result = DbHelper.query(
+                "select * from dish order by dishesPrice"
+        );
+        for(var i : (ArrayList<Dish>) makeResultList(result)){
+            System.out.println(i.getDishName());
+        }
+        return (ArrayList<Dish>) makeResultList(result);
+    }
+
+    @Override
+    public ArrayList<Dish> queryDishByClass() {
+        var result = DbHelper.query(
+                "select * from dish order by dishesCuisine"
+        );
+        return (ArrayList<Dish>) makeResultList(result);
+    }
+
+    @Override
+    public ArrayList<Dish> queryDishByCanteen(Integer canteenId) {
+        var result = DbHelper.query(
+                "select * from dish where dishesCanteen = ?",
+                canteenId
+        );
+        return (ArrayList<Dish>) makeResultList(result);
+    }
+
+    @Override
+    public ArrayList<Dish> queryDishesByPrice(String dishPrice) {
+        var result = DbHelper.query(
+                "select * from dish where dishesPrice = ?",
+                Double.parseDouble(dishPrice)
+        );
+        return (ArrayList<Dish>) makeResultList(result);
+    }
+
+    @Override
+    public ArrayList<Dish> queryDishByClass(String dishClass) {
+        var result = DbHelper.query(
+                "select * from dish where dishesCuisine = ?",
+                dishClass
+        );
+        return (ArrayList<Dish>) makeResultList(result);
+    }
+
     private List<Dish> makeResultList(List<List<Object>> result) {
         List<Dish> list = new ArrayList<>();
         for (var row : result) {

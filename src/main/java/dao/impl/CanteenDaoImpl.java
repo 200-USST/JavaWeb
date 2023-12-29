@@ -168,4 +168,23 @@ public class CanteenDaoImpl implements CanteenDao {
                 canteenAbstract, id
         );
     }
+
+    @Override
+    public Integer findCanteenId(String canteenName) {
+        var canteen_id = (Integer) DbHelper.query(
+                "select canteenID from canteen where canteenName = ?",
+                canteenName
+        ).get(0).get(0);
+        return canteen_id;
+    }
+
+    public Map<Integer, String> getAllCanteenWithID() {
+        var canteens = queryAllCanteens();
+
+        Map<Integer, String> map = new HashMap<>();
+        for (var c : canteens) {
+            map.put(c.getCanteenId(), c.getCanteenName());
+        }
+        return map;
+    }
 }

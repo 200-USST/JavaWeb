@@ -23,11 +23,9 @@ public class RegisterServlet extends HttpServlet {
             String password = request.getParameter("userPassword");
             String passwordRe = request.getParameter("userPasswordRepeat");
             Info info = userService.register(userName,password,passwordRe);
+            request.getSession().setAttribute("info",info);
             System.out.println(info.getFlag()+" "+info.getDescription());
             response.sendRedirect("/200web/login.do");
-        }
-        else if(type.equals("manager")){//注册管理员用户
-
         }
     }
     @Override

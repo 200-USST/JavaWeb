@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ch">
 
@@ -7,10 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login-register.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shared.css">
     <title>登陆界面</title>
 </head>
 
 <body>
+
+<c:if test="${not empty info}">
+    <div id="message-box">
+        <p>${info.description}</p>
+    </div>
+</c:if>
 
 <div class="container" id="container">
     <div class="form-container sign-up">
@@ -61,6 +69,7 @@
 </div>
 
 <script src="${pageContext.request.contextPath}/js/login-register.js"></script>
+<script src="${pageContext.request.contextPath}/js/shared.js"></script>
 </body>
 
 </html>

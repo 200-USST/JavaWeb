@@ -1,5 +1,6 @@
 package servlet;
 
+import pojo.Info;
 import service.canteenAdmin.ManagerService;
 import service.canteenAdmin.ManagerServiceImpl;
 import service.util.SharedService;
@@ -22,6 +23,13 @@ public class LoginServlet extends HttpServlet {
     ManagerService managerService = new ManagerServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        var session = request.getSession();
+        var info = (Info) session.getAttribute("info");
+        if (info != null) {
+            session.removeAttribute("info");
+            request.setAttribute("info", info);
+        }
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login-register.jsp");
         dispatcher.forward(request, response);
     }
@@ -40,6 +48,8 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("/200web/dashboard");
         }
         else {
+            var info = new Info(false, "账号或密码错误");
+            request.getSession().setAttribute("info", info);
             response.sendRedirect("/200web/login.do");
         }
     }

@@ -19,10 +19,8 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
         if(request.getParameter("type").equals("deleteCanteen")){
-            String originalPath = getServletContext().getRealPath("/");
-            int targetIndex = originalPath.indexOf("target");
-            String basePath = originalPath.substring(0, targetIndex);
-            String realPath1 = basePath + "src\\main\\webapp\\data\\dish_pics";
+            String originalPath = getServletContext().getRealPath("");
+            String realPath1 = originalPath + "data/canteen_pics";
             String canteenId = request.getParameter("canteenId");
             String canteenPic = request.getParameter("canteenPic");
             Info info = adminService.deleteCanteen(canteenId,canteenPic,realPath1);
@@ -35,11 +33,11 @@ public class AdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().setAttribute("activeBar",request.getParameter("activeBar"));
         if(request.getParameter("type").equals("addCanteen")){
-            String originalPath = getServletContext().getRealPath("/");
-            int targetIndex = originalPath.indexOf("target");
-            String basePath = originalPath.substring(0, targetIndex);
-            String realPath1 = basePath + "src\\main\\webapp\\data\\canteen_pics";
-            String realPath2 = basePath + "src\\main\\webapp\\data\\canteen_picstmp";
+            String originalPath = getServletContext().getRealPath("");
+            System.out.println(getServletContext().getRealPath(""));
+            System.out.println(originalPath);
+            String realPath1 = originalPath + "data/canteen_pics";
+            String realPath2 = originalPath + "data/canteen_picstmp";
             Info info;
             try {
                 info = adminService.newCanteen(request,realPath1,realPath2);
@@ -50,11 +48,9 @@ public class AdminServlet extends HttpServlet {
             response.sendRedirect("/200web/dashboard");
         }
         else if(request.getParameter("type").equals("modifyCanteen")){
-            String originalPath = getServletContext().getRealPath("/");
-            int targetIndex = originalPath.indexOf("target");
-            String basePath = originalPath.substring(0, targetIndex);
-            String realPath1 = basePath + "src\\main\\webapp\\data\\dish_pics";
-            String realPath2 = basePath + "src\\main\\webapp\\data\\dish_picstmp";
+            String originalPath = getServletContext().getRealPath("");
+            String realPath1 = originalPath + "data/canteen_pics";
+            String realPath2 = originalPath + "data/canteen_picstmp";
             Info info;
             try {
                 info = adminService.modifyCanteen(request,realPath1,realPath2);
@@ -77,9 +73,8 @@ public class AdminServlet extends HttpServlet {
                 info = adminService.modifyProfile(user);
             } else if (request.getParameter("action").equals("delete")) {
                 String userId = request.getParameter("userId");
-
+                info = adminService.deleteUser(userId);
             }
-
             request.getSession().setAttribute("info",info);
             response.sendRedirect("/200web/dashboard");
         }

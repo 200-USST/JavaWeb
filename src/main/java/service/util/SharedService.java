@@ -13,5 +13,5 @@ public interface SharedService {
     public User login(String userName,String userPassword);
     public Info modifyPassword(User user, String oldPsw, String newPsw, String newPswRe);
     public Info modifyProfile(User user,String userName,String age,String gender);
-    public void updateAllInfo(ArrayList<User> users, ArrayList<Canteen> canteens, ArrayList<Dish> dishes, Map<String, Canteen> manager_canteen_pair, StringBuilder canteen_manager_json, Map<String, List<Dish>> canteen_dishes_dict);
+    public void updateAllInfo(ArrayList<User> users, ArrayList<Canteen> canteens, StringBuilder id_canteen, Map<String, Canteen> manager_canteen_pair, StringBuilder canteen_manager_json, Map<String, List<Dish>> canteen_dishes_dict, StringBuilder canteen_dishes_json);
 }
