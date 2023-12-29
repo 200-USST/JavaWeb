@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <typeAliases>
+        <package name="pojo"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!-- 连接信息 -->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <!--                <property name="url" value="jdbc:mysql://121.41.1.13:3306/SPM-9?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Shanghai&amp;autoReconnect=true"/>-->
+                <property name="url" value="jdbc:mysql://10.100.164.43:3306/JavaWeb?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Shanghai&amp;autoReconnect=true"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!-- SQL映射文件 -->
+        <!--        <mapper resource="com/fxxkyiwangchangxue/yiwangnochangxue/dao/mapper/UserMapper.xml"/>--> <!-- 加载单个mapper -->
+        <!-- Mapper代理方式导入mapper包 -->
+        <package name="dao.mapper"/>
+
+    </mappers>
+</configuration>

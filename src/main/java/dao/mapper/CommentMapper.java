@@ -1,12 +1,11 @@
-package dao;
+package dao.mapper;
 
 import pojo.Comment;
 
-import java.sql.SQLException;
 import java.util.List;
 
 
-public interface CommentDao {
+public interface CommentMapper {
     void insertComment(Comment comment);
 
 

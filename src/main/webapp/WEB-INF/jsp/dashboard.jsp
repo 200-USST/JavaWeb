@@ -15,7 +15,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shared.css">
     <title>Dashboard</title>
 </head>
 <body>
@@ -255,7 +254,7 @@
                             <button type="button" class="modify">修改</button>
                             <button type="submit" name="action" value="modify" class="submit" style="display: none;">提交修改</button>
                             <br><br>
-                            <button type="button" name="action" value="delete" class="delete" id="canteen" style="display: none;">确认删除</button>
+                            <button type="submit" name="action" value="delete" class="delete" id="canteen" style="display: none;">确认删除</button>
                         </div></div>
                     </div>
                     <input type="hidden" name="canteenId">
@@ -359,11 +358,6 @@
                             <h3>年龄</h3>
                             <input type="text" name="userAge" readonly>
                             </p>
-                            <p>
-                            <h3>管理食堂</h3>
-                            <input type="text" name="userManagement" class="cannot-modify" readonly>
-                            </p>
-
                         </div>
                         <div class="align-center"><div class="split">
                             <button type="button" class="modify">修改</button>
@@ -387,18 +381,28 @@
                             <input type="text" name="userName" placeholder="用户名">
                             </p>
                             <p>
-                            <h3>管理食堂</h3>
-                            <input type="text" name="canteenName" placeholder="管理食堂">
-                            </p>
-                        </div>
-                        <div class="split">
-                            <p>
                             <h3>用户密码</h3>
                             <input type="password" name="userPassword" placeholder="密码">
                             </p>
                             <h3>密码确认</h3>
                             <input type="password" name="userPasswordRepeat" placeholder="再次输入密码">
                             </p>
+                            <p>
+                            <h3>管理食堂</h3>
+                            <input type="text" name="canteenName" placeholder="管理食堂">
+                            </p>
+                        </div>
+                        <div class="split">
+
+                            <p>
+                            <h3>性别</h3>
+                            <input type="text" name="userGender" placeholder="性别">
+                            </p>
+                            <p>
+                            <h3>年龄</h3>
+                            <input type="text" name="userAge" placeholder="年龄">
+                            </p>
+
                         </div>
                         <div class="align-center"><div class="split">
                             <button type="submit" class="submit">添加</button>
@@ -429,7 +433,7 @@
                         <div class="split">
                             <h3>食堂照片</h3>
 <%--                            <input type="file" name="file" accept="image/*" class="img-upload" readonly disabled>--%>
-                            <img src="${pageContext.request.contextPath}/data/canteen_pics/${mcMap[user.userName].canteenPic}" alt="">
+                            <img src="${pageContext.request.contextPath}/img/profile-1.jpg" alt="">
                         </div>
                         <div class="align-center"><div class="split">
                             <button type="button" class="modify">修改</button>
@@ -557,27 +561,27 @@
         <main id="dishes-search-main">
             <h1>菜品检索</h1>
             <div class="function">
-                <form class="check" action="${pageContext.request.contextPath}/user?type=queryDishesByOrder&activeBar=dishes-search" method="post">
+                <form class="check" action="dishes-search">
                     <div class="three-split">
                         <div class="split">
                             <p>
                             <h3>检索框</h3>
-                            <input type="text" name="value">
+                            <input type="text" name="checkbox">
                             </p>
                         </div>
                         <div class="split">
                             <p>
                             <h3>按菜系/价格/食堂检索</h3>
-                            <input type="text" name="order">
+                            <input type="text" name="checkby">
                             </p>
                         </div>
                         <div class="align-center"><div class="split">
-                            <button type="submit" class="check-in">检索</button>
+                            <button type="button" class="check-in">检索</button>
                         </div></div>
                     </div>
                 </form>
                 <div class="user-list">
-<c:forEach items="${orderedDishesList}" var="dishes">
+<c:forEach items="${dishesList}" var="dishes">
                     <div class="user"
                          did="${dishes.dishId}"
                          dname="${dishes.dishName}"
@@ -607,8 +611,6 @@
                             <p class="input-like"></p>
                             <h3>简介</h3>
                             <p class="input-like"></p>
-                            <h3>售卖食堂</h3>
-                            <p class="input-like"></p>
                         </div>
                         <div class="split">
                             <h3>菜品图片</h3>
@@ -631,6 +633,25 @@
         <main id="canteen-search-main">
             <h1>食堂检索</h1>
             <div class="function">
+                <form class="check" action="canteen-search">
+                    <div class="three-split">
+                        <div class="split">
+                            <p>
+                            <h3>检索框</h3>
+                            <input type="text" name="checkbox">
+                            </p>
+                        </div>
+                        <div class="split">
+                            <p>
+                            <h3>按菜系/价格/食堂检索</h3>
+                            <input type="text" name="checkby">
+                            </p>
+                        </div>
+                        <div class="align-center"><div class="split">
+                            <button type="button" class="check-in">检索</button>
+                        </div></div>
+                    </div>
+                </form>
                 <div class="user-list">
 <c:forEach items="${canteenList}" var="canteen">
                     <div class="user"
@@ -663,10 +684,6 @@
                             <h3>食堂照片</h3>
                             <img src="" basesrc="${pageContext.request.contextPath}/data/canteen_pics/">
                         </div>
-                    </div>
-                    <div class="split">
-                        <h3>售卖菜品</h3>
-                        <p class="input-like"></p>
                     </div>
                 </div>
 
@@ -786,7 +803,6 @@
 </div>
 
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
-<script src="${pageContext.request.contextPath}/js/shared.js"></script>
 
 <%--刷新回到定位--%>
 <script>
