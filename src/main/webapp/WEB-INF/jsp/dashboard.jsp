@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shared.css">
     <title>Dashboard</title>
 </head>
 <body>
@@ -72,12 +73,7 @@
                     </span>
                 <h3>账号管理</h3>
             </a>
-            <a href="#" id="community-manage">
-                    <span class="material-icons-sharp">
-                        forum
-                    </span>
-                <h3>社区管理</h3>
-            </a>
+
 </c:if>
 <c:if test="${user.userIdentity == 'user'}">
             <a href="#" id="community-chat">
@@ -85,6 +81,12 @@
                         forum
                     </span>
                 <h3>交流社区</h3>
+            </a>
+            <a href="#" id="complaint">
+                    <span class="material-icons-sharp">
+                        forum
+                    </span>
+                <h3>投诉页面</h3>
             </a>
             <a href="#" id="canteen-search">
                     <span class="material-icons-sharp">
@@ -117,6 +119,12 @@
                         comment
                     </span>
                 <h3>食堂评价</h3>
+            </a>
+            <a href="#" id="community-manage">
+                            <span class="material-icons-sharp">
+                                forum
+                            </span>
+                <h3>社区管理</h3>
             </a>
 </c:if>
 
@@ -358,6 +366,11 @@
                             <h3>年龄</h3>
                             <input type="text" name="userAge" readonly>
                             </p>
+                            <p>
+                            <h3>管理食堂</h3>
+                            <input type="text" name="userManagement" class="cannot-modify" readonly>
+                            </p>
+
                         </div>
                         <div class="align-center"><div class="split">
                             <button type="button" class="modify">修改</button>
@@ -381,28 +394,18 @@
                             <input type="text" name="userName" placeholder="用户名">
                             </p>
                             <p>
+                            <h3>管理食堂</h3>
+                            <input type="text" name="canteenName" placeholder="管理食堂">
+                            </p>
+                        </div>
+                        <div class="split">
+                            <p>
                             <h3>用户密码</h3>
                             <input type="password" name="userPassword" placeholder="密码">
                             </p>
                             <h3>密码确认</h3>
                             <input type="password" name="userPasswordRepeat" placeholder="再次输入密码">
                             </p>
-                            <p>
-                            <h3>管理食堂</h3>
-                            <input type="text" name="canteenName" placeholder="管理食堂">
-                            </p>
-                        </div>
-                        <div class="split">
-
-                            <p>
-                            <h3>性别</h3>
-                            <input type="text" name="userGender" placeholder="性别">
-                            </p>
-                            <p>
-                            <h3>年龄</h3>
-                            <input type="text" name="userAge" placeholder="年龄">
-                            </p>
-
                         </div>
                         <div class="align-center"><div class="split">
                             <button type="submit" class="submit">添加</button>
@@ -433,7 +436,7 @@
                         <div class="split">
                             <h3>食堂照片</h3>
 <%--                            <input type="file" name="file" accept="image/*" class="img-upload" readonly disabled>--%>
-                            <img src="${pageContext.request.contextPath}/img/profile-1.jpg" alt="">
+                            <img src="${pageContext.request.contextPath}/data/canteen_pics/${mcMap[user.userName].canteenPic}" alt="">
                         </div>
                         <div class="align-center"><div class="split">
                             <button type="button" class="modify">修改</button>
@@ -561,27 +564,27 @@
         <main id="dishes-search-main">
             <h1>菜品检索</h1>
             <div class="function">
-                <form class="check" action="dishes-search">
+                <form class="check" action="${pageContext.request.contextPath}/user?type=queryDishesByOrder&activeBar=dishes-search" method="post">
                     <div class="three-split">
                         <div class="split">
                             <p>
                             <h3>检索框</h3>
-                            <input type="text" name="checkbox">
+                            <input type="text" name="value">
                             </p>
                         </div>
                         <div class="split">
                             <p>
                             <h3>按菜系/价格/食堂检索</h3>
-                            <input type="text" name="checkby">
+                            <input type="text" name="order">
                             </p>
                         </div>
                         <div class="align-center"><div class="split">
-                            <button type="button" class="check-in">检索</button>
+                            <button type="submit" class="check-in">检索</button>
                         </div></div>
                     </div>
                 </form>
                 <div class="user-list">
-<c:forEach items="${dishesList}" var="dishes">
+<c:forEach items="${orderedDishesList}" var="dishes">
                     <div class="user"
                          did="${dishes.dishId}"
                          dname="${dishes.dishName}"
@@ -611,6 +614,8 @@
                             <p class="input-like"></p>
                             <h3>简介</h3>
                             <p class="input-like"></p>
+                            <h3>售卖食堂</h3>
+                            <p class="input-like"></p>
                         </div>
                         <div class="split">
                             <h3>菜品图片</h3>
@@ -633,25 +638,6 @@
         <main id="canteen-search-main">
             <h1>食堂检索</h1>
             <div class="function">
-                <form class="check" action="canteen-search">
-                    <div class="three-split">
-                        <div class="split">
-                            <p>
-                            <h3>检索框</h3>
-                            <input type="text" name="checkbox">
-                            </p>
-                        </div>
-                        <div class="split">
-                            <p>
-                            <h3>按菜系/价格/食堂检索</h3>
-                            <input type="text" name="checkby">
-                            </p>
-                        </div>
-                        <div class="align-center"><div class="split">
-                            <button type="button" class="check-in">检索</button>
-                        </div></div>
-                    </div>
-                </form>
                 <div class="user-list">
 <c:forEach items="${canteenList}" var="canteen">
                     <div class="user"
@@ -685,6 +671,10 @@
                             <img src="" basesrc="${pageContext.request.contextPath}/data/canteen_pics/">
                         </div>
                     </div>
+                    <div class="split">
+                        <h3>售卖菜品</h3>
+                        <p class="input-like"></p>
+                    </div>
                 </div>
 
             <h2>评价</h2>
@@ -699,7 +689,186 @@
 
         </main>
 
+<%--新增交流和投诉功能--%>
+        <main id="community-chat-main">
+            <h1>交流社区</h1>
+            <div class="function">
+<%--                 定义 formatDate 方法，用于格式化日期--%>
+<%--                <%!--%>
+<%--                    private String formatDate(Date date) {--%>
+<%--                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");--%>
+<%--                        return dateFormat.format(date);--%>
+<%--                    }--%>
+<%--                %>--%>
+            <div class="split">
+                <c:forEach items="${sessionScope.discussionList}" var="discussion">
+                    <div class="user"
+                         disc-id="${discussion.discussionID}"
+                         disc-title="${discussion.title}"
+                         disc-userID="${discussion.userID}"
+                        disc-userName="${discussion.userName}"
+                        disc-content="${discussion.content}"
+                        disc-imagePath="${discussion.imagePath}"
+                        disc-dishID="${discussion.dishID}"
+                        disc-thumbs="${discussion.thumbs}" >
+                        <!-- 显示标题 -->
+                        <h3>${discussion.title}</h3>
+                        <!-- 显示发表人 -->
+                        <p>发表人：${discussion.userName}---------------------------------------------------------内容:<a>${discussion.content}</a></p>
+                        <!-- 显示发表时间 -->
+<%--                        <p>发表时间：${formatDate(discussion.time)}</p>--%>
+                        <!-- 显示内容 -->
+                        <p></p>
+
+                    </div>
+                    <br>
+                </c:forEach>
+            </div>
+                ........
+            </div>
+            <h2>发表留言</h2>
+            <div class="function">
+                <div class="split">
+                <form action="PostDiscussionServlet" method="post">
+                    <h3>标题</h3>
+                    <input name="title" type="text" id="input-13" placeholder=" " required="" />
+                    <h3>主题</h3>
+                    <input name="dishId" type="text" id="input-14" placeholder=" " required="" />
+                    <h3>内容</h3>
+                    <textarea name="content" placeholder="Your comment here..." required=""></textarea>
+                    <input type="submit" value="提交">
+                </form>
+                </div>
+            </div>
+
+
+        </main>
+
+        <main id="complaint-main">
+            <h1>投诉</h1>
+
+            <div class="function">
+                <div class="user">
+                    <form action="PostComplaintServlet" method="post">
+                        <h3>投诉摘要</h3>
+                        <input class="input__field input__field--chisato" name="title" type="text" id="input-17" placeholder=" " required="" />
+                        <h3>具体内容</h3>
+                        <textarea name="content" placeholder="Your complaint here..." required=""></textarea>
+                        <input type="submit" value="提交">
+                    </form>
+                </div>
+            </div>
+            <h2>投诉记录</h2>
+            <div class="function">
+                <c:forEach items="${sessionScope.complaintList}" var="complaint">
+                    <div class="user"
+                        comp-id="${complaint.complaintID}"
+                        comp-userID="${complaint.userID}"
+                        comp-title="${complaint.title}"
+                        comp-content="${complaint.content}"
+<%--                        comp-time="${complaint.time}"--%>
+                        comp-handleStatus="${complaint.handleStatus}" >
+                        <!-- 显示标题 -->
+                        <h3>投诉摘要：${complaint.title}</h3>
+                        <!-- 显示内容 -->
+                        <p>具体内容：${complaint.content}
+                            <c:if test="${complaint.handleStatus == false}">
+                        <p>处理结果： 未处理</p>
+                        </c:if>
+                        <c:if test="${complaint.handleStatus == true}">
+                            <p>处理结果： 已处理</p>
+                        </c:if>
+                        </p>
+                        <!-- 显示发表时间 -->
+<%--                        <p>发表时间：${formatDate(complaint.time)}</p>--%>
+                        <!-- 显示处理结果 -->
+
+                    </div>
+                    <br>
+                </c:forEach>
+                ........
+            </div>
+
+        </main>
+
+        <main id="community-chat-main-manager">
+            <h1>社区管理</h1>
+            <div class="function">
+                <div class="recent-orders">
+<%--                    <c:forEach items="${sessionScope.discussionList}" var="discussion">--%>
+<%--                        <div class="user">--%>
+<%--                            disc-id="${discussion.discussionID}"--%>
+<%--                            disc-title="${discussion.title}"--%>
+<%--                            disc-userID="${discussion.userID}"--%>
+<%--                            disc-userName="${discussion.userName}"--%>
+<%--                            disc-content="${discussion.content}"--%>
+<%--                            disc-imagePath="${discussion.imagePath}"--%>
+<%--                            disc-dishID="${discussion.dishID}"--%>
+<%--                            disc-thumbs="${discussion.thumbs}" >--%>
+<%--                            <!-- 显示标题 -->--%>
+<%--                            <h3>${discussion.title}</h3>--%>
+<%--                            <!-- 显示发表人 -->--%>
+<%--                            <p>发表人：${discussion.userName}</p>--%>
+<%--                            <!-- 显示发表时间 -->--%>
+<%--&lt;%&ndash;                            <p>发表时间：${formatDate(discussion.time)}</p>&ndash;%&gt;--%>
+<%--                            <!-- 显示内容 -->--%>
+<%--                            <p>${discussion.content}</p>--%>
+<%--                            <form action="" method="get" >--%>
+<%--                                <input type="hidden" name="discussionId" value=${discussion.discussionId}>--%>
+<%--                                <input type="submit" value="删除该留言">--%>
+<%--                            </form>--%>
+<%--                        </div>--%>
+<%--                    </c:forEach>--%>
+                </div>
+                ........
+            </div>
+
+
+        </main>
+
+        <main id="complaint-main-manager">
+            <h1>投诉处理</h1>
+            <div class="function">
+                <div class="recent-orders">
+<%--                    <c:forEach items="${sessionScope.complaintList}" var="complaint">--%>
+<%--                        <div class="user"--%>
+<%--                             comp-id="${complaint.complaintID}"--%>
+<%--                             comp-userID="${complaint.userID}"--%>
+<%--                             comp-title="${complaint.title}"--%>
+<%--                             comp-content="${complaint.content}"--%>
+<%--                             comp-time="${complaint.time}"--%>
+<%--                             comp-handleStatus="${complaint.handleStatus}" >--%>
+
+<%--                            <!-- 显示标题 -->--%>
+<%--                            <h3>${complaint.title}</h3>--%>
+<%--                            <!-- 显示内容 -->--%>
+<%--                            <p>${complaint.content}</p>--%>
+<%--                            <!-- 显示发表时间 -->--%>
+<%--                            <p>发表时间：${formatDate(complaint.time)}</p>--%>
+<%--                            <!-- 显示处理结果 -->--%>
+<%--                            <c:if test="${complaint.handleStatus == false}">--%>
+<%--                                <p>处理结果： 未处理</p>--%>
+<%--                                <form action="" method="get" >--%>
+<%--                                    <input type="hidden" name="complaintID" value=${complaint.complaintID}>--%>
+<%--                                    <input type="submit" value="确认收到并处理">--%>
+<%--                                </form>--%>
+<%--                            </c:if>--%>
+<%--                            <c:if test="${complaint.handleStatus == true}">--%>
+<%--                                <p>处理结果： 已处理</p>--%>
+<%--                            </c:if>--%>
+
+<%--                        </div>--%>
+<%--                    </c:forEach>--%>
+                </div>
+            </div>
+
+        </main>
+
     </div>
+
+
+
+
     <!-- End of Main Content -->
 
     <!-- Right Section -->
@@ -803,6 +972,7 @@
 </div>
 
 <script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
+<script src="${pageContext.request.contextPath}/js/shared.js"></script>
 
 <%--刷新回到定位--%>
 <script>
