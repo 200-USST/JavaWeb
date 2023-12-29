@@ -7,10 +7,7 @@ import dao.UserDao;
 import dao.impl.CanteenDaoImpl;
 import dao.impl.DishDaoImpl;
 import dao.impl.UserDaoImpl;
-import pojo.Canteen;
-import pojo.Dish;
-import pojo.Info;
-import pojo.User;
+import pojo.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +58,7 @@ public class SharedServiceImpl implements SharedService{
     }
 
     @Override
-    public void updateAllInfo(ArrayList<User> users, ArrayList<Canteen> canteens, ArrayList<Dish> dishes, Map<String, Canteen> manager_canteen_pair, StringBuilder canteen_manager_json, Map<String, List<Dish>> canteen_dishes_dict) {
+    public void updateAllInfo(ArrayList<User> users, ArrayList<Canteen> canteens, ArrayList<Dish> dishes, Map<String, Canteen> manager_canteen_pair, StringBuilder canteen_manager_json, Map<String, List<Dish>> canteen_dishes_dict ) {
         users.addAll(userDao.queryAllUsers());
         canteens.addAll(canteenDao.queryAllCanteens());
         dishes.addAll(dishDao.queryAllDishes());
@@ -73,5 +70,6 @@ public class SharedServiceImpl implements SharedService{
             e.printStackTrace();
         }
         canteen_dishes_dict.putAll(canteenDao.getAllCanteenWithDishes());
+
     }
 }

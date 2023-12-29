@@ -1,8 +1,6 @@
 package servlet;
 
 import com.google.gson.Gson;
-import dao.CommentDao;
-import dao.impl.CommentDaoImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -10,7 +8,6 @@ import pojo.Comment;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 
 @WebServlet(name = "CommentServlet", value = "/CommentServlet")
 public class CommentServlet extends HttpServlet {
@@ -33,8 +30,8 @@ public class CommentServlet extends HttpServlet {
 
         String message;
         Gson gson = new Gson();
-        CommentDaoImpl commentDao = new CommentDaoImpl();
-        commentDao.insertComment(comment);
+//        CommentDaoImpl commentDao = new CommentDaoImpl();
+//        commentDao.insertComment(comment);
         message = "评论成功";
         String messageJson = gson.toJson(message);
         pw.write(messageJson);

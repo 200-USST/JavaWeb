@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %><%--
   Created by IntelliJ IDEA.
   User: rlagofla
   Date: 12/19/23
@@ -20,7 +21,7 @@
 <body>
 
 <div id="storage"
-cmJson='${cmJson}'>
+     cmJson='${cmJson}'></div>
 
 <div class="container">
     <!-- Sidebar Section -->
@@ -64,12 +65,7 @@ cmJson='${cmJson}'>
                     </span>
                 <h3>账号管理</h3>
             </a>
-            <a href="#" id="community-manage">
-                    <span class="material-icons-sharp">
-                        forum
-                    </span>
-                <h3>社区管理</h3>
-            </a>
+
 </c:if>
 <c:if test="${user.userIdentity == 'user'}">
             <a href="#" id="community-chat">
@@ -77,6 +73,12 @@ cmJson='${cmJson}'>
                         forum
                     </span>
                 <h3>交流社区</h3>
+            </a>
+            <a href="#" id="complaint">
+                    <span class="material-icons-sharp">
+                        forum
+                    </span>
+                <h3>投诉页面</h3>
             </a>
             <a href="#" id="canteen-search">
                     <span class="material-icons-sharp">
@@ -109,6 +111,12 @@ cmJson='${cmJson}'>
                         comment
                     </span>
                 <h3>食堂评价</h3>
+            </a>
+            <a href="#" id="community-manage">
+                            <span class="material-icons-sharp">
+                                forum
+                            </span>
+                <h3>社区管理</h3>
             </a>
 </c:if>
 
@@ -582,6 +590,7 @@ cmJson='${cmJson}'>
                          dinfo="${dishes.dishInfo}"
                          dcanteen="${dishes.dishCanteenId}"
                          dpic="${dishes.dishPic}">
+
                         <img src="${pageContext.request.contextPath}/data/dish_pics/${dishes.dishPic}">
                         <h2>${dishes.dishName}</h2>
                         <p>${dishes.dishPrice} 元</p>
@@ -691,7 +700,186 @@ cmJson='${cmJson}'>
 
         </main>
 
+<%--新增交流和投诉功能--%>
+        <main id="community-chat-main">
+            <h1>交流社区</h1>
+            <div class="function">
+<%--                 定义 formatDate 方法，用于格式化日期--%>
+<%--                <%!--%>
+<%--                    private String formatDate(Date date) {--%>
+<%--                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");--%>
+<%--                        return dateFormat.format(date);--%>
+<%--                    }--%>
+<%--                %>--%>
+            <div class="split">
+                <c:forEach items="${sessionScope.discussionList}" var="discussion">
+                    <div class="user"
+                         disc-id="${discussion.discussionID}"
+                         disc-title="${discussion.title}"
+                         disc-userID="${discussion.userID}"
+                        disc-userName="${discussion.userName}"
+                        disc-content="${discussion.content}"
+                        disc-imagePath="${discussion.imagePath}"
+                        disc-dishID="${discussion.dishID}"
+                        disc-thumbs="${discussion.thumbs}" >
+                        <!-- 显示标题 -->
+                        <h3>${discussion.title}</h3>
+                        <!-- 显示发表人 -->
+                        <p>发表人：${discussion.userName}---------------------------------------------------------内容:<a>${discussion.content}</a></p>
+                        <!-- 显示发表时间 -->
+<%--                        <p>发表时间：${formatDate(discussion.time)}</p>--%>
+                        <!-- 显示内容 -->
+                        <p></p>
+
+                    </div>
+                    <br>
+                </c:forEach>
+            </div>
+                ........
+            </div>
+            <h2>发表留言</h2>
+            <div class="function">
+                <div class="split">
+                <form action="PostDiscussionServlet" method="post">
+                    <h3>标题</h3>
+                    <input name="title" type="text" id="input-13" placeholder=" " required="" />
+                    <h3>主题</h3>
+                    <input name="dishId" type="text" id="input-14" placeholder=" " required="" />
+                    <h3>内容</h3>
+                    <textarea name="content" placeholder="Your comment here..." required=""></textarea>
+                    <input type="submit" value="提交">
+                </form>
+                </div>
+            </div>
+
+
+        </main>
+
+        <main id="complaint-main">
+            <h1>投诉</h1>
+
+            <div class="function">
+                <div class="user">
+                    <form action="PostComplaintServlet" method="post">
+                        <h3>投诉摘要</h3>
+                        <input class="input__field input__field--chisato" name="title" type="text" id="input-17" placeholder=" " required="" />
+                        <h3>具体内容</h3>
+                        <textarea name="content" placeholder="Your complaint here..." required=""></textarea>
+                        <input type="submit" value="提交">
+                    </form>
+                </div>
+            </div>
+            <h2>投诉记录</h2>
+            <div class="function">
+                <c:forEach items="${sessionScope.complaintList}" var="complaint">
+                    <div class="user"
+                        comp-id="${complaint.complaintID}"
+                        comp-userID="${complaint.userID}"
+                        comp-title="${complaint.title}"
+                        comp-content="${complaint.content}"
+<%--                        comp-time="${complaint.time}"--%>
+                        comp-handleStatus="${complaint.handleStatus}" >
+                        <!-- 显示标题 -->
+                        <h3>投诉摘要：${complaint.title}</h3>
+                        <!-- 显示内容 -->
+                        <p>具体内容：${complaint.content}
+                            <c:if test="${complaint.handleStatus == false}">
+                        <p>处理结果： 未处理</p>
+                        </c:if>
+                        <c:if test="${complaint.handleStatus == true}">
+                            <p>处理结果： 已处理</p>
+                        </c:if>
+                        </p>
+                        <!-- 显示发表时间 -->
+<%--                        <p>发表时间：${formatDate(complaint.time)}</p>--%>
+                        <!-- 显示处理结果 -->
+
+                    </div>
+                    <br>
+                </c:forEach>
+                ........
+            </div>
+
+        </main>
+
+        <main id="community-chat-main-manager">
+            <h1>社区管理</h1>
+            <div class="function">
+                <div class="recent-orders">
+<%--                    <c:forEach items="${sessionScope.discussionList}" var="discussion">--%>
+<%--                        <div class="user">--%>
+<%--                            disc-id="${discussion.discussionID}"--%>
+<%--                            disc-title="${discussion.title}"--%>
+<%--                            disc-userID="${discussion.userID}"--%>
+<%--                            disc-userName="${discussion.userName}"--%>
+<%--                            disc-content="${discussion.content}"--%>
+<%--                            disc-imagePath="${discussion.imagePath}"--%>
+<%--                            disc-dishID="${discussion.dishID}"--%>
+<%--                            disc-thumbs="${discussion.thumbs}" >--%>
+<%--                            <!-- 显示标题 -->--%>
+<%--                            <h3>${discussion.title}</h3>--%>
+<%--                            <!-- 显示发表人 -->--%>
+<%--                            <p>发表人：${discussion.userName}</p>--%>
+<%--                            <!-- 显示发表时间 -->--%>
+<%--&lt;%&ndash;                            <p>发表时间：${formatDate(discussion.time)}</p>&ndash;%&gt;--%>
+<%--                            <!-- 显示内容 -->--%>
+<%--                            <p>${discussion.content}</p>--%>
+<%--                            <form action="" method="get" >--%>
+<%--                                <input type="hidden" name="discussionId" value=${discussion.discussionId}>--%>
+<%--                                <input type="submit" value="删除该留言">--%>
+<%--                            </form>--%>
+<%--                        </div>--%>
+<%--                    </c:forEach>--%>
+                </div>
+                ........
+            </div>
+
+
+        </main>
+
+        <main id="complaint-main-manager">
+            <h1>投诉处理</h1>
+            <div class="function">
+                <div class="recent-orders">
+<%--                    <c:forEach items="${sessionScope.complaintList}" var="complaint">--%>
+<%--                        <div class="user"--%>
+<%--                             comp-id="${complaint.complaintID}"--%>
+<%--                             comp-userID="${complaint.userID}"--%>
+<%--                             comp-title="${complaint.title}"--%>
+<%--                             comp-content="${complaint.content}"--%>
+<%--                             comp-time="${complaint.time}"--%>
+<%--                             comp-handleStatus="${complaint.handleStatus}" >--%>
+
+<%--                            <!-- 显示标题 -->--%>
+<%--                            <h3>${complaint.title}</h3>--%>
+<%--                            <!-- 显示内容 -->--%>
+<%--                            <p>${complaint.content}</p>--%>
+<%--                            <!-- 显示发表时间 -->--%>
+<%--                            <p>发表时间：${formatDate(complaint.time)}</p>--%>
+<%--                            <!-- 显示处理结果 -->--%>
+<%--                            <c:if test="${complaint.handleStatus == false}">--%>
+<%--                                <p>处理结果： 未处理</p>--%>
+<%--                                <form action="" method="get" >--%>
+<%--                                    <input type="hidden" name="complaintID" value=${complaint.complaintID}>--%>
+<%--                                    <input type="submit" value="确认收到并处理">--%>
+<%--                                </form>--%>
+<%--                            </c:if>--%>
+<%--                            <c:if test="${complaint.handleStatus == true}">--%>
+<%--                                <p>处理结果： 已处理</p>--%>
+<%--                            </c:if>--%>
+
+<%--                        </div>--%>
+<%--                    </c:forEach>--%>
+                </div>
+            </div>
+
+        </main>
+
     </div>
+
+
+
+
     <!-- End of Main Content -->
 
     <!-- Right Section -->

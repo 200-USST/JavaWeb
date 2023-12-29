@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.mapper.ComplaintMapper">
+
+
+    <insert id="insertNewComplaint">
+        insert into JavaWeb.complaints
+        values (#{complaintID},#{userID},#{title},#{content},#{time},#{handleStatus});
+    </insert>
+    <update id="updateStatusByID">
+        update JavaWeb.complaints set handleStatus=true
+        where complaintID=#{id};
+
+    </update>
+    <delete id="deleteById">
+        delete from JavaWeb.complaints
+        where userID=#{id};
+    </delete>
+    <select id="selectAll" resultType="pojo.Complaint">
+        select * from JavaWeb.complaints;
+    </select>
+    <select id="selectAllById" resultType="pojo.Complaint">
+        select * from JavaWeb.complaints
+        where userID=#{id};
+    </select>
+
+
+</mapper>
